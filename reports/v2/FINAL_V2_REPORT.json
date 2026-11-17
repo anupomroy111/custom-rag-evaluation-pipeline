@@ -1,0 +1,284 @@
+{
+  "timestamp": "2026-11-17 23:38:52",
+  "version": "v2-final",
+  "sources": {
+    "adversarial_deterministic": "adversarial_deterministic_none_20261117_233359.json",
+    "adversarial_semantic_live": "adversarial_semantic_live_20261117_233359.json",
+    "probes": "probes_20261117_233524.json",
+    "eval_v2_bm25": "eval_v2_20261117_233626.json",
+    "eval_v2_dense_partial": "eval_v2_20261117_233524.json"
+  },
+  "adversarial": {
+    "deterministic": {
+      "n_cases": 104,
+      "n_resolved": 104,
+      "evaluation_error_rate": 0.0,
+      "adversarial_detection_rate": 0.5833,
+      "false_acceptance_rate": 0.0,
+      "false_rejection_rate": 0.0,
+      "exact_status_accuracy": 0.3173,
+      "uncertain_rate": 0.5962,
+      "deterministic_semantic_disagreements": 0,
+      "contradiction_detection": {
+        "tp": 22,
+        "fp": 1,
+        "fn": 30,
+        "precision": 0.9565,
+        "recall": 0.4231,
+        "f1": 0.5867
+      },
+      "confusion": {
+        "matrix": {
+          "SUPPORTED": {
+            "SUPPORTED": 0,
+            "CONTRADICTED": 0,
+            "NOT_SUPPORTED": 0,
+            "UNCERTAIN": 32
+          },
+          "CONTRADICTED": {
+            "SUPPORTED": 0,
+            "CONTRADICTED": 22,
+            "NOT_SUPPORTED": 8,
+            "UNCERTAIN": 22
+          },
+          "NOT_SUPPORTED": {
+            "SUPPORTED": 0,
+            "CONTRADICTED": 1,
+            "NOT_SUPPORTED": 11,
+            "UNCERTAIN": 8
+          },
+          "UNCERTAIN": {
+            "SUPPORTED": 0,
+            "CONTRADICTED": 0,
+            "NOT_SUPPORTED": 0,
+            "UNCERTAIN": 0
+          }
+        },
+        "excluded_error_states": 0
+      },
+      "per_category": {
+        "context_injection": {
+          "n": 13,
+          "exact_match_accuracy": 0.1538,
+          "uncertain": 10
+        },
+        "entity_attribution": {
+          "n": 13,
+          "exact_match_accuracy": 0.0,
+          "uncertain": 9
+        },
+        "modality": {
+          "n": 13,
+          "exact_match_accuracy": 0.6154,
+          "uncertain": 5
+        },
+        "multi_hop": {
+          "n": 13,
+          "exact_match_accuracy": 0.2308,
+          "uncertain": 9
+        },
+        "negation_flip": {
+          "n": 13,
+          "exact_match_accuracy": 0.6923,
+          "uncertain": 3
+        },
+        "numerical": {
+          "n": 13,
+          "exact_match_accuracy": 0.5385,
+          "uncertain": 6
+        },
+        "role_reversal": {
+          "n": 13,
+          "exact_match_accuracy": 0.0769,
+          "uncertain": 12
+        },
+        "temporal": {
+          "n": 13,
+          "exact_match_accuracy": 0.2308,
+          "uncertain": 8
+        }
+      },
+      "injection_flagged": 13,
+      "injection_cases": 13
+    },
+    "semantic_live": {
+      "n_cases": 104,
+      "n_resolved": 103,
+      "evaluation_error_rate": 0.0096,
+      "adversarial_detection_rate": 0.9859,
+      "false_acceptance_rate": 0.0,
+      "false_rejection_rate": 0.0625,
+      "exact_status_accuracy": 0.9029,
+      "uncertain_rate": 0.0485,
+      "deterministic_semantic_disagreements": 5,
+      "contradiction_detection": {
+        "tp": 51,
+        "fp": 3,
+        "fn": 1,
+        "precision": 0.9444,
+        "recall": 0.9808,
+        "f1": 0.9623
+      },
+      "confusion": {
+        "matrix": {
+          "SUPPORTED": {
+            "SUPPORTED": 26,
+            "CONTRADICTED": 0,
+            "NOT_SUPPORTED": 2,
+            "UNCERTAIN": 4
+          },
+          "CONTRADICTED": {
+            "SUPPORTED": 0,
+            "CONTRADICTED": 51,
+            "NOT_SUPPORTED": 0,
+            "UNCERTAIN": 1
+          },
+          "NOT_SUPPORTED": {
+            "SUPPORTED": 0,
+            "CONTRADICTED": 3,
+            "NOT_SUPPORTED": 16,
+            "UNCERTAIN": 0
+          },
+          "UNCERTAIN": {
+            "SUPPORTED": 0,
+            "CONTRADICTED": 0,
+            "NOT_SUPPORTED": 0,
+            "UNCERTAIN": 0
+          }
+        },
+        "excluded_error_states": 0
+      },
+      "per_category": {
+        "context_injection": {
+          "n": 13,
+          "exact_match_accuracy": 1.0,
+          "uncertain": 0
+        },
+        "entity_attribution": {
+          "n": 13,
+          "exact_match_accuracy": 0.8462,
+          "uncertain": 1
+        },
+        "modality": {
+          "n": 13,
+          "exact_match_accuracy": 1.0,
+          "uncertain": 0
+        },
+        "multi_hop": {
+          "n": 13,
+          "exact_match_accuracy": 0.8462,
+          "uncertain": 0
+        },
+        "negation_flip": {
+          "n": 13,
+          "exact_match_accuracy": 1.0,
+          "uncertain": 0
+        },
+        "numerical": {
+          "n": 12,
+          "exact_match_accuracy": 1.0,
+          "uncertain": 0
+        },
+        "role_reversal": {
+          "n": 13,
+          "exact_match_accuracy": 0.7692,
+          "uncertain": 2
+        },
+        "temporal": {
+          "n": 13,
+          "exact_match_accuracy": 0.7692,
+          "uncertain": 2
+        }
+      },
+      "injection_flagged": 13,
+      "injection_cases": 13
+    }
+  },
+  "probes": {
+    "bm25": {
+      "n": 104,
+      "evidence_hit_rate_at_10": 0.9904,
+      "mrr": 0.7776,
+      "evidence_recall_at_4": 0.9231
+    },
+    "dense": {
+      "n": 104,
+      "evidence_hit_rate_at_10": 0.9904,
+      "mrr": 0.8067,
+      "evidence_recall_at_4": 0.9615
+    },
+    "hybrid": {
+      "n": 104,
+      "evidence_hit_rate_at_10": 0.9904,
+      "mrr": 0.8099,
+      "evidence_recall_at_4": 0.9423
+    }
+  },
+  "ablation_v2": {
+    "bm25": {
+      "status": "live-complete",
+      "n": 12,
+      "summary": {
+        "faithfulness": 1.0,
+        "hallucination_rate_answerable": 0.0,
+        "fabrication_rate_unanswerable": 0.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "refusal_accuracy": 1.0,
+        "over_refusal_rate": 0.0,
+        "citation_coverage": 1.0,
+        "citation_validity_rate": 1.0,
+        "claim_extraction_success_rate": 1.0,
+        "evaluation_error_rate": 0.0
+      }
+    },
+    "dense": {
+      "status": "live-partial-insufficient",
+      "n": 1,
+      "summary": {
+        "faithfulness": 1.0,
+        "hallucination_rate_answerable": 0.0,
+        "fabrication_rate_unanswerable": null,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "refusal_accuracy": null,
+        "over_refusal_rate": 0.0,
+        "citation_coverage": 1.0,
+        "citation_validity_rate": 1.0,
+        "claim_extraction_success_rate": 1.0,
+        "evaluation_error_rate": 0.0
+      }
+    },
+    "hybrid": {
+      "status": "not-run-quota",
+      "n": 0,
+      "summary": null
+    },
+    "hybrid+rerank": {
+      "status": "not-run-quota",
+      "n": 0,
+      "summary": null
+    }
+  },
+  "quota_incident": {
+    "model": "gemini-3.5-flash-lite",
+    "daily_free_limit": 500,
+    "exhausted_during": "evaluate-v2 dense variant, question 2",
+    "reset_delay_s_at_failure": 50239,
+    "consequence": "hybrid and hybrid+rerank end-to-end V2 variants not run live; no mocked substitutes presented as benchmarks"
+  },
+  "verifier_bug_incident": {
+    "id": "B16",
+    "description": "deterministic checks flagged different numbers/negations in multi-fact contexts as contradictions, overriding semantic SUPPORTED verdicts",
+    "effect": "interim bm25 faithfulness 0.838 was a verifier artifact, not model hallucination",
+    "fix": "support-aware contradiction flags (conflict AND no supporting sentence); clause-scoped negation; tightened injection regex",
+    "regression_tests": [
+      "test_multifact_context_no_false_numerical_contradiction",
+      "test_clause_scoped_negation_no_false_flag",
+      "test_benign_override_not_injection"
+    ],
+    "final_bm25_faithfulness": 1.0
+  }
+}

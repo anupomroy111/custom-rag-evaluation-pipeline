@@ -16,6 +16,8 @@ class Settings:
     embed_model: str = field(default_factory=lambda: os.environ.get("RAG_EMBED_MODEL", "gemini-embedding-001"))
     embed_dim: int = field(default_factory=lambda: int(os.environ.get("RAG_EMBED_DIM", "768")))
     requests_per_minute: int = field(default_factory=lambda: int(os.environ.get("RAG_RPM", "10")))
+    embed_rpm: int = field(default_factory=lambda: int(os.environ.get("RAG_EMBED_RPM", "100")))
+    llm_cache: bool = field(default_factory=lambda: os.environ.get("RAG_LLM_CACHE", "1") != "0")
 
     docs_dir: Path = PROJECT_ROOT / "data" / "docs"
     index_dir: Path = PROJECT_ROOT / "index"

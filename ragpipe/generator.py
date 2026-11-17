@@ -22,6 +22,7 @@ class Answer:
     text: str
     cited_ids: list[str] = field(default_factory=list)
     refused: bool = False
+    invalid_citations: list[str] = field(default_factory=list)
 
 
 REFUSAL_MARKER = "cannot answer this from the provided documents"
@@ -38,6 +39,17 @@ def extract_citations(text: str, valid_ids: set[str]) -> list[str]:
     return list(dict.fromkeys(cited))
 
 
+def citation_attempts(text: str) -> list[str]:
+    """All citation-like tokens, including invalid ones (for validity metrics)."""
+    attempts: list[str] = []
+    for bracket in re.findall(r"\[([^\]]*)\]", text):
+        for token in re.split(r"[,\s]+", bracket):
+            token = token.strip().removeprefix("id:")
+            if re.fullmatch(r"[a-f0-9]{6,}", token):
+                attempts.append(token)
+    return list(dict.fromkeys(attempts))
+
+
 def generate_answer(query: str, contexts: list[RetrievedChunk], client: GeminiClient) -> Answer:
     passages = "\n\n".join(
         f"[id: {c.chunk.id}] (source: {c.chunk.doc})\n{c.chunk.text}" for c in contexts
@@ -47,5 +59,7 @@ def generate_answer(query: str, contexts: list[RetrievedChunk], client: GeminiCl
 
     valid_ids = {c.chunk.id for c in contexts}
     cited = extract_citations(text, valid_ids)
+    attempts = citation_attempts(text)
+    invalid = [t for t in attempts if t not in valid_ids]
     refused = REFUSAL_MARKER in text.lower()
-    return Answer(text=text, cited_ids=cited, refused=refused)
+    return Answer(text=text, cited_ids=cited, refused=refused, invalid_citations=invalid)

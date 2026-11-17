@@ -66,6 +66,7 @@ class EvalRunner:
         if answerable and not answer.refused:
             faith = metrics.faithfulness(answer.text, context_texts, self.client)
             record["faithfulness"] = faith.score
+            record["faithfulness_status"] = faith.status
             record["hallucination_rate"] = faith.hallucination_rate
             record["claim_verdicts"] = faith.verdicts
             recall = metrics.context_recall(item["ground_truth"], context_texts, self.client)
@@ -74,13 +75,16 @@ class EvalRunner:
         elif answerable and answer.refused:
             # Over-refusal: answer exists in docs but model declined.
             record["faithfulness"] = None
-            record["hallucination_rate"] = 0.0
+            record["faithfulness_status"] = "OVER_REFUSAL"
+            record["hallucination_rate"] = None
+            record["over_refusal"] = True
             record["context_recall"] = 0.0
             record["claim_verdicts"] = []
         else:
             # Unanswerable question: fabricating anything is a hallucination.
             record["faithfulness"] = None
-            record["hallucination_rate"] = 0.0 if answer.refused else 1.0
+            record["hallucination_rate"] = None
+            record["fabricated"] = not answer.refused
             record["context_recall"] = None
             record["claim_verdicts"] = []
 
@@ -146,7 +150,13 @@ def summarize(records: list[dict]) -> dict:
     unanswerable = [r for r in records if not r["answerable"]]
     return {
         "faithfulness": _mean([r.get("faithfulness") for r in answerable]),
-        "hallucination_rate": _mean([r.get("hallucination_rate") for r in records]),
+        # Incompatible populations are reported separately, never averaged together.
+        "hallucination_rate_answerable": _mean(
+            [r.get("hallucination_rate") for r in answerable]),
+        "fabrication_rate_unanswerable": (
+            round(sum(1 for r in unanswerable if r.get("fabricated")) / len(unanswerable), 4)
+            if unanswerable else None
+        ),
         "answer_relevancy": _mean([r.get("answer_relevancy") for r in records]),
         "context_precision": _mean([r.get("context_precision") for r in answerable]),
         "context_recall": _mean([r.get("context_recall") for r in answerable]),

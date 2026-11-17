@@ -41,12 +41,37 @@ def test_faithfulness_half_supported():
 
 
 def test_faithfulness_no_claims():
+    """V2 fix (audit B1/B15): empty extraction is an explicit state, never 1.0."""
     class NoClaims:
         def generate_json(self, prompt, system=None, temperature=0.0):
             return {"claims": []}
 
     result = faithfulness("I cannot answer.", ["ctx"], NoClaims())
-    assert result.score == 1.0
+    assert result.score is None
+    assert result.status == "NO_CLAIMS"
+    assert result.hallucination_rate is None
+
+
+def test_faithfulness_extraction_failure_is_not_success():
+    class Malformed:
+        def generate_json(self, prompt, system=None, temperature=0.0):
+            return {"unexpected": "shape"}
+
+    result = faithfulness("some answer", ["ctx"], Malformed())
+    assert result.score is None
+    assert result.status == "EXTRACTION_FAILED"
+
+
+def test_faithfulness_missing_verdict_is_uncertain():
+    class Partial:
+        def generate_json(self, prompt, system=None, temperature=0.0):
+            if "atomic factual claims" in system:
+                return {"claims": ["a", "b"]}
+            return {"verdicts": [{"claim": "a", "supported": True}]}
+
+    result = faithfulness("answer", ["ctx"], Partial())
+    assert result.verdicts[1]["status"] == "UNCERTAIN"
+    assert result.score == 1.0  # only resolved verdicts enter the score
 
 
 def test_context_precision_from_grades():

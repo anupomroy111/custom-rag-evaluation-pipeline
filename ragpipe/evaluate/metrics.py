@@ -49,48 +49,76 @@ RECALL_SYSTEM = (
 
 @dataclass
 class FaithfulnessResult:
-    score: float
+    score: float | None
     claims: list[str] = field(default_factory=list)
     verdicts: list[dict] = field(default_factory=list)
+    status: str = "OK"
 
     @property
-    def hallucination_rate(self) -> float:
-        return 1.0 - self.score
+    def hallucination_rate(self) -> float | None:
+        return None if self.score is None else 1.0 - self.score
 
 
 def extract_claims(answer_text: str, client: GeminiClient) -> list[str]:
     data = client.generate_json(f"Answer:\n{answer_text}", system=CLAIM_EXTRACT_SYSTEM)
-    claims = data.get("claims", []) if isinstance(data, dict) else []
-    return [str(c) for c in claims if str(c).strip()]
+    if not isinstance(data, dict) or "claims" not in data:
+        raise ValueError(f"Malformed claim extraction response: {str(data)[:200]!r}")
+    return [str(c) for c in data["claims"] if str(c).strip()]
 
 
 def faithfulness(answer_text: str, context_texts: list[str],
                  client: GeminiClient) -> FaithfulnessResult:
-    claims = extract_claims(answer_text, client)
+    try:
+        claims = extract_claims(answer_text, client)
+    except (ValueError, RuntimeError) as e:
+        return FaithfulnessResult(score=None, status="EXTRACTION_FAILED",
+                                  verdicts=[{"error": str(e)}])
     if not claims:
-        return FaithfulnessResult(score=1.0)
+        # Fail-closed: no claims is an explicit state, never an automatic 1.0.
+        return FaithfulnessResult(score=None, status="NO_CLAIMS")
     context = "\n\n---\n\n".join(context_texts)
     prompt = f"Context:\n{context}\n\nClaims:\n" + "\n".join(
         f"{i + 1}. {c}" for i, c in enumerate(claims)
     )
-    data = client.generate_json(prompt, system=CLAIM_VERIFY_SYSTEM)
+    try:
+        data = client.generate_json(prompt, system=CLAIM_VERIFY_SYSTEM)
+    except (ValueError, RuntimeError) as e:
+        return FaithfulnessResult(score=None, claims=claims,
+                                  status="EVALUATION_ERROR",
+                                  verdicts=[{"error": str(e)}])
     raw = data.get("verdicts", []) if isinstance(data, dict) else []
     verdicts = []
     for i, claim in enumerate(claims):
-        v = raw[i] if i < len(raw) and isinstance(raw[i], dict) else {}
-        verdicts.append({
-            "claim": claim,
-            "supported": bool(v.get("supported", False)),
-            "reason": str(v.get("reason", "")),
-        })
-    supported = sum(1 for v in verdicts if v["supported"])
-    return FaithfulnessResult(score=supported / len(verdicts), claims=claims, verdicts=verdicts)
+        v = raw[i] if i < len(raw) and isinstance(raw[i], dict) else None
+        if v is None or "supported" not in v:
+            verdicts.append({"claim": claim, "supported": None,
+                             "status": "UNCERTAIN", "reason": "verdict missing"})
+        else:
+            supported = bool(v["supported"])
+            verdicts.append({
+                "claim": claim,
+                "supported": supported,
+                "status": "SUPPORTED" if supported else "NOT_SUPPORTED",
+                "reason": str(v.get("reason", "")),
+            })
+    resolved = [v for v in verdicts if v["supported"] is not None]
+    if not resolved:
+        return FaithfulnessResult(score=None, claims=claims, verdicts=verdicts,
+                                  status="UNCERTAIN")
+    supported = sum(1 for v in resolved if v["supported"])
+    return FaithfulnessResult(score=supported / len(resolved), claims=claims,
+                              verdicts=verdicts)
 
 
 def answer_relevancy(question: str, answer_text: str, client: GeminiClient) -> dict:
     prompt = f"Question: {question}\n\nAnswer:\n{answer_text}"
-    data = client.generate_json(prompt, system=RELEVANCY_SYSTEM)
-    score = float(data.get("score", 0.0)) if isinstance(data, dict) else 0.0
+    try:
+        data = client.generate_json(prompt, system=RELEVANCY_SYSTEM)
+        score = float(data.get("score", 0.0)) if isinstance(data, dict) else None
+    except (ValueError, RuntimeError, TypeError):
+        score = None
+    if score is None:
+        return {"score": None, "reason": "relevancy judge failed", "status": "EVALUATION_ERROR"}
     return {"score": max(0.0, min(1.0, score)),
             "reason": str(data.get("reason", "")) if isinstance(data, dict) else ""}
 
@@ -118,7 +146,10 @@ def context_precision(question: str, context_texts: list[str],
         relevant = [False] * len(context_texts)
         for v in raw:
             if isinstance(v, dict):
-                idx = int(v.get("index", 0)) - 1
+                try:
+                    idx = int(v.get("index", 0)) - 1
+                except (TypeError, ValueError):
+                    continue
                 if 0 <= idx < len(relevant):
                     relevant[idx] = bool(v.get("relevant", False))
 
@@ -143,6 +174,6 @@ def context_recall(ground_truth: str, context_texts: list[str],
                  "attributed": bool(v.get("attributed", False))}
                 for v in raw if isinstance(v, dict)]
     if not verdicts:
-        return {"score": 0.0, "verdicts": []}
+        return {"score": None, "verdicts": [], "status": "EVALUATION_ERROR"}
     score = sum(1 for v in verdicts if v["attributed"]) / len(verdicts)
     return {"score": score, "verdicts": verdicts}

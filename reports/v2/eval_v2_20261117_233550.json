@@ -1,0 +1,182 @@
+{
+  "timestamp": "2026-11-17 23:35:50",
+  "version": "v2",
+  "llm_model": "gemini-3.5-flash-lite",
+  "embed_model": "gemini-embedding-001",
+  "num_questions": 1,
+  "variants": {
+    "bm25": {
+      "summary": {
+        "faithfulness": 1.0,
+        "hallucination_rate_answerable": 0.0,
+        "fabrication_rate_unanswerable": null,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "refusal_accuracy": null,
+        "over_refusal_rate": 0.0,
+        "citation_coverage": 1.0,
+        "citation_validity_rate": 1.0,
+        "claim_extraction_success_rate": 1.0,
+        "evaluation_error_rate": 0.0
+      },
+      "results": [
+        {
+          "id": "q01",
+          "question": "What is the default build timeout in Nimbus, and what is the maximum it can be raised to?",
+          "answerable": true,
+          "answer": "The default build timeout is 15 minutes, and it can be raised to a maximum of 60 minutes [id: edb247c866fb, id: 47a24a581f87].",
+          "refused": false,
+          "cited_ids": [
+            "edb247c866fb",
+            "47a24a581f87"
+          ],
+          "invalid_citations": [],
+          "context_ids": [
+            "edb247c866fb",
+            "47a24a581f87",
+            "fe9ff33182dc",
+            "20d33b1109dd"
+          ],
+          "context_docs": [
+            "architecture.md",
+            "troubleshooting.md",
+            "cli-reference.md",
+            "overview.md"
+          ],
+          "retrieved_ids": [
+            "edb247c866fb",
+            "47a24a581f87",
+            "fe9ff33182dc",
+            "20d33b1109dd",
+            "e093939b41b5",
+            "b0674607de24",
+            "f87cdc7ff8b9",
+            "216eb262431a",
+            "8cc2417628b9",
+            "6eba104bded6"
+          ],
+          "answer_state": "OK",
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim_id": "c1",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "The evidence explicitly states: 'The default build timeout is 15 minutes'.",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "edb247c866fb",
+                "47a24a581f87"
+              ]
+            },
+            {
+              "claim_id": "c2",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "The evidence explicitly states: 'and can be raised to a maximum of 60 minutes via build.timeout in nimbus.yaml'.",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "edb247c866fb",
+                "47a24a581f87"
+              ]
+            }
+          ],
+          "claim_analyses": [
+            {
+              "claim_id": "c1",
+              "original_claim": "The default build timeout is 15 minutes.",
+              "normalized_claim": "The default build timeout is 15 minutes.",
+              "subject": "build timeout",
+              "predicate": "is",
+              "object": "15 minutes",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "definite",
+              "entities": [
+                "The"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "15 minutes",
+                  "value": 900.0,
+                  "unit": "minutes",
+                  "dimension": "time_s"
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "edb247c866fb",
+                "47a24a581f87"
+              ]
+            },
+            {
+              "claim_id": "c2",
+              "original_claim": "The build timeout can be raised to a maximum of 60 minutes.",
+              "normalized_claim": "The build timeout can be raised to a maximum of 60 minutes.",
+              "subject": "build timeout",
+              "predicate": "can be raised to maximum",
+              "object": "60 minutes",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "definite",
+              "entities": [
+                "The"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "60 minutes",
+                  "value": 3600.0,
+                  "unit": "minutes",
+                  "dimension": "time_s"
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "edb247c866fb",
+                "47a24a581f87"
+              ]
+            }
+          ],
+          "verification_errors": [],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "The default build timeout is 15 minutes.",
+              "attributed": true
+            },
+            {
+              "sentence": "It can be raised to a maximum of 60 minutes via build.timeout in nimbus.yaml.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "precision_judge": "independent",
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately addresses the question based on the provided text, stating both the default build timeout and the maximum limit."
+        }
+      ]
+    }
+  },
+  "api_stats": {
+    "generate_requests": 0,
+    "embed_requests": 0,
+    "cache_hits": 6,
+    "prompt_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.0,
+    "retries": 0,
+    "errors": 0
+  }
+}

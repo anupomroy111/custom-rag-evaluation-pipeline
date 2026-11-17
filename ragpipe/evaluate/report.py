@@ -1,6 +1,7 @@
 METRIC_LABELS = [
     ("faithfulness", "Faithfulness"),
-    ("hallucination_rate", "Hallucination rate"),
+    ("hallucination_rate_answerable", "Hallucination rate (answerable)"),
+    ("fabrication_rate_unanswerable", "Fabrication rate (unanswerable)"),
     ("answer_relevancy", "Answer relevancy"),
     ("context_precision", "Context precision"),
     ("context_recall", "Context recall"),
@@ -34,13 +35,15 @@ def write_markdown_report(report: dict) -> str:
 
     for name, variant in report["variants"].items():
         lines += ["", f"## Details: `{name}`", "",
-                  "| # | Question | Faithful | Halluc. | Relevancy | Ctx Prec | Ctx Recall | Refused |",
+                  "| # | Question | Faithful | Halluc./Fabr. | Relevancy | Ctx Prec | Ctx Recall | Refused |",
                   "|---|---|---|---|---|---|---|---|"]
         for i, r in enumerate(variant["results"], 1):
             q = r["question"][:60] + ("..." if len(r["question"]) > 60 else "")
+            halluc = (r.get("hallucination_rate") if r["answerable"]
+                      else (1.0 if r.get("fabricated") else 0.0))
             lines.append(
                 f"| {i} | {q} | {_fmt(r.get('faithfulness'))} | "
-                f"{_fmt(r.get('hallucination_rate'))} | {_fmt(r.get('answer_relevancy'))} | "
+                f"{_fmt(halluc)} | {_fmt(r.get('answer_relevancy'))} | "
                 f"{_fmt(r.get('context_precision'))} | {_fmt(r.get('context_recall'))} | "
                 f"{'yes' if r['refused'] else 'no'} |"
             )
@@ -61,7 +64,8 @@ def write_markdown_report(report: dict) -> str:
     lines += [
         "", "## Metric definitions", "",
         "- **Faithfulness** — fraction of atomic answer claims supported by retrieved context (claim extraction + per-claim LLM verification).",
-        "- **Hallucination rate** — `1 - faithfulness` for answerable questions; for unanswerable questions, 1 if the model fabricated an answer instead of refusing.",
+        "- **Hallucination rate (answerable)** — `1 - faithfulness` over resolved claim verdicts; None when extraction/verification failed (fail-closed).",
+        "- **Fabrication rate (unanswerable)** — fraction of unanswerable questions where the model fabricated an answer instead of refusing. Reported separately from the answerable population.",
         "- **Answer relevancy** — LLM-judged alignment of the answer with the question (0–1).",
         "- **Context precision** — rank-weighted (average-precision style) relevance of retrieved passages; uses reranker grades when available.",
         "- **Context recall** — fraction of reference-answer sentences attributable to retrieved context.",

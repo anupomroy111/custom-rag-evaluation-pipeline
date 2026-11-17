@@ -1,0 +1,2952 @@
+{
+  "timestamp": "2026-11-17 23:22:56",
+  "kind": "retrieval-probes",
+  "judge": "deterministic (no LLM relevance judge)",
+  "n_cases": 104,
+  "variants": {
+    "bm25": {
+      "n": 104,
+      "evidence_hit_rate_at_10": 0.9904,
+      "mrr": 0.7776,
+      "evidence_recall_at_4": 0.9231,
+      "per_case": [
+        {
+          "id": "NEG-001",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-002",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-003",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-004",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-005",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-006",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-007",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-008",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-009",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-010",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-011",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 6,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "NEG-012",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-013",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-001",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-002",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-003",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-004",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-005",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-006",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-007",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 4,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-008",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-009",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-010",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-011",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-012",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-013",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-001",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 6,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "ENT-002",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-003",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-004",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-005",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-006",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-007",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-008",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 5,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "ENT-009",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 6,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "ENT-010",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 9,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "ENT-011",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-012",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-013",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-001",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-002",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-003",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-004",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-005",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-006",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-007",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-008",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 4,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-009",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-010",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-011",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-012",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-013",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-001",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-002",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-003",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-004",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-005",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-006",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-007",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-008",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-009",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-010",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-011",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-012",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-013",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-001",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-002",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-003",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-004",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-005",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-006",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-007",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-008",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-009",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-010",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-011",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-012",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-013",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-001",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-002",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-003",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-004",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 9,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "HOP-005",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-006",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-007",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-008",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-009",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-010",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-011",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-012",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-013",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-001",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-002",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-003",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-004",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-005",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-006",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-007",
+          "category": "context_injection",
+          "hit": false,
+          "first_gold_rank": null,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "INJ-008",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-009",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-010",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 4,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-011",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 5,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "INJ-012",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-013",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        }
+      ]
+    },
+    "dense": {
+      "n": 104,
+      "evidence_hit_rate_at_10": 0.9904,
+      "mrr": 0.8067,
+      "evidence_recall_at_4": 0.9615,
+      "per_case": [
+        {
+          "id": "NEG-001",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-002",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-003",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-004",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-005",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-006",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-007",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-008",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-009",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-010",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-011",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-012",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-013",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-001",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-002",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-003",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-004",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-005",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-006",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-007",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-008",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-009",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-010",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-011",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-012",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-013",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 4,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-001",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 6,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "ENT-002",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-003",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-004",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-005",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-006",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-007",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-008",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 4,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-009",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 5,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "ENT-010",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 4,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-011",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-012",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-013",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 4,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-001",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-002",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-003",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-004",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-005",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-006",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-007",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-008",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-009",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-010",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-011",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-012",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-013",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-001",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-002",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-003",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-004",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-005",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-006",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-007",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-008",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-009",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-010",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-011",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-012",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-013",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-001",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-002",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-003",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-004",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-005",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-006",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-007",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-008",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-009",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-010",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-011",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-012",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-013",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-001",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-002",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-003",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-004",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-005",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-006",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-007",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-008",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-009",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-010",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-011",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-012",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-013",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-001",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-002",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-003",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-004",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-005",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-006",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 4,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-007",
+          "category": "context_injection",
+          "hit": false,
+          "first_gold_rank": null,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "INJ-008",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-009",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-010",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 4,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-011",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 5,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "INJ-012",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-013",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        }
+      ]
+    },
+    "hybrid": {
+      "n": 104,
+      "evidence_hit_rate_at_10": 0.9904,
+      "mrr": 0.8099,
+      "evidence_recall_at_4": 0.9423,
+      "per_case": [
+        {
+          "id": "NEG-001",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-002",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-003",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-004",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-005",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-006",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-007",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-008",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-009",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-010",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-011",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-012",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-013",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-001",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-002",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-003",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-004",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-005",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-006",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-007",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-008",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-009",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-010",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-011",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-012",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-013",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 4,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-001",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 6,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "ENT-002",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-003",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-004",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-005",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-006",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-007",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-008",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 5,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "ENT-009",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 6,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "ENT-010",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 9,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "ENT-011",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-012",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-013",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-001",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-002",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-003",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-004",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-005",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-006",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-007",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-008",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-009",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-010",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-011",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-012",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-013",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-001",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-002",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-003",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-004",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-005",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-006",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-007",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-008",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-009",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-010",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-011",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-012",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-013",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-001",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-002",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-003",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-004",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-005",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-006",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-007",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-008",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-009",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-010",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-011",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-012",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-013",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-001",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-002",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-003",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-004",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-005",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-006",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-007",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-008",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-009",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-010",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-011",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-012",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-013",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-001",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-002",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-003",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-004",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-005",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-006",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-007",
+          "category": "context_injection",
+          "hit": false,
+          "first_gold_rank": null,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "INJ-008",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-009",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-010",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-011",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 6,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "INJ-012",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-013",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        }
+      ]
+    },
+    "hybrid+rerank": {
+      "n": 104,
+      "evidence_hit_rate_at_10": 0.9904,
+      "mrr": 0.8099,
+      "evidence_recall_at_4": 0.9423,
+      "per_case": [
+        {
+          "id": "NEG-001",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-002",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-003",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-004",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-005",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-006",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-007",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-008",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-009",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-010",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-011",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-012",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NEG-013",
+          "category": "negation_flip",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-001",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-002",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-003",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-004",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-005",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-006",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-007",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-008",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-009",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-010",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-011",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-012",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ROLE-013",
+          "category": "role_reversal",
+          "hit": true,
+          "first_gold_rank": 4,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-001",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 6,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "ENT-002",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-003",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-004",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-005",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-006",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-007",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-008",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 5,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "ENT-009",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 6,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "ENT-010",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 9,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "ENT-011",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-012",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "ENT-013",
+          "category": "entity_attribution",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-001",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-002",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-003",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-004",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-005",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-006",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-007",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-008",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-009",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-010",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-011",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-012",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "NUM-013",
+          "category": "numerical",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-001",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-002",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-003",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-004",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-005",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-006",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-007",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-008",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-009",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-010",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-011",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-012",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "TEMP-013",
+          "category": "temporal",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-001",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-002",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-003",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-004",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-005",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-006",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-007",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-008",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-009",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-010",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-011",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-012",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "MOD-013",
+          "category": "modality",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-001",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-002",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-003",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-004",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-005",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-006",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-007",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-008",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-009",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-010",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-011",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-012",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "HOP-013",
+          "category": "multi_hop",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-001",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-002",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-003",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-004",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-005",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-006",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-007",
+          "category": "context_injection",
+          "hit": false,
+          "first_gold_rank": null,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "INJ-008",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-009",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 2,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-010",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 3,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-011",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 6,
+          "evidence_recall_at_4": 0.0
+        },
+        {
+          "id": "INJ-012",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        },
+        {
+          "id": "INJ-013",
+          "category": "context_injection",
+          "hit": true,
+          "first_gold_rank": 1,
+          "evidence_recall_at_4": 1.0
+        }
+      ]
+    }
+  }
+}

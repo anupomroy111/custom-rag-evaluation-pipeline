@@ -1,0 +1,1923 @@
+{
+  "timestamp": "2026-11-17 23:36:26",
+  "version": "v2",
+  "llm_model": "gemini-3.5-flash-lite",
+  "embed_model": "gemini-embedding-001",
+  "num_questions": 12,
+  "variants": {
+    "bm25": {
+      "summary": {
+        "faithfulness": 1.0,
+        "hallucination_rate_answerable": 0.0,
+        "fabrication_rate_unanswerable": 0.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "refusal_accuracy": 1.0,
+        "over_refusal_rate": 0.0,
+        "citation_coverage": 1.0,
+        "citation_validity_rate": 1.0,
+        "claim_extraction_success_rate": 1.0,
+        "evaluation_error_rate": 0.0
+      },
+      "results": [
+        {
+          "id": "q01",
+          "question": "What is the default build timeout in Nimbus, and what is the maximum it can be raised to?",
+          "answerable": true,
+          "answer": "The default build timeout is 15 minutes, and it can be raised to a maximum of 60 minutes [id: edb247c866fb, id: 47a24a581f87].",
+          "refused": false,
+          "cited_ids": [
+            "edb247c866fb",
+            "47a24a581f87"
+          ],
+          "invalid_citations": [],
+          "context_ids": [
+            "edb247c866fb",
+            "47a24a581f87",
+            "fe9ff33182dc",
+            "20d33b1109dd"
+          ],
+          "context_docs": [
+            "architecture.md",
+            "troubleshooting.md",
+            "cli-reference.md",
+            "overview.md"
+          ],
+          "retrieved_ids": [
+            "edb247c866fb",
+            "47a24a581f87",
+            "fe9ff33182dc",
+            "20d33b1109dd",
+            "e093939b41b5",
+            "b0674607de24",
+            "f87cdc7ff8b9",
+            "216eb262431a",
+            "8cc2417628b9",
+            "6eba104bded6"
+          ],
+          "answer_state": "OK",
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim_id": "c1",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "The evidence explicitly states: 'The default build timeout is 15 minutes'.",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "edb247c866fb",
+                "47a24a581f87"
+              ]
+            },
+            {
+              "claim_id": "c2",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "The evidence explicitly states: 'and can be raised to a maximum of 60 minutes via build.timeout in nimbus.yaml'.",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "edb247c866fb",
+                "47a24a581f87"
+              ]
+            }
+          ],
+          "claim_analyses": [
+            {
+              "claim_id": "c1",
+              "original_claim": "The default build timeout is 15 minutes.",
+              "normalized_claim": "The default build timeout is 15 minutes.",
+              "subject": "build timeout",
+              "predicate": "is",
+              "object": "15 minutes",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "definite",
+              "entities": [
+                "The"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "15 minutes",
+                  "value": 900.0,
+                  "unit": "minutes",
+                  "dimension": "time_s"
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "edb247c866fb",
+                "47a24a581f87"
+              ]
+            },
+            {
+              "claim_id": "c2",
+              "original_claim": "The build timeout can be raised to a maximum of 60 minutes.",
+              "normalized_claim": "The build timeout can be raised to a maximum of 60 minutes.",
+              "subject": "build timeout",
+              "predicate": "can be raised to maximum",
+              "object": "60 minutes",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "definite",
+              "entities": [
+                "The"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "60 minutes",
+                  "value": 3600.0,
+                  "unit": "minutes",
+                  "dimension": "time_s"
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "edb247c866fb",
+                "47a24a581f87"
+              ]
+            }
+          ],
+          "verification_errors": [],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "The default build timeout is 15 minutes.",
+              "attributed": true
+            },
+            {
+              "sentence": "It can be raised to a maximum of 60 minutes via build.timeout in nimbus.yaml.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "precision_judge": "independent",
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately addresses the question based on the provided text, stating both the default build timeout and the maximum limit."
+        },
+        {
+          "id": "q02",
+          "question": "How much RAM does a free tier service instance get, and what happens when it has no traffic?",
+          "answerable": true,
+          "answer": "A free tier service instance gets 512 MB RAM [id: 8d68734bcd2c]. When it has no traffic for 15 minutes, it sleeps and cold-starts in roughly 3 seconds [id: 8d68734bcd2c].",
+          "refused": false,
+          "cited_ids": [
+            "8d68734bcd2c"
+          ],
+          "invalid_citations": [],
+          "context_ids": [
+            "8d68734bcd2c",
+            "47a24a581f87",
+            "fe9ff33182dc",
+            "20d33b1109dd"
+          ],
+          "context_docs": [
+            "quotas-and-pricing.md",
+            "troubleshooting.md",
+            "cli-reference.md",
+            "overview.md"
+          ],
+          "retrieved_ids": [
+            "8d68734bcd2c",
+            "47a24a581f87",
+            "fe9ff33182dc",
+            "20d33b1109dd",
+            "ef09d7a8a48f",
+            "981c8e1cb938",
+            "f87cdc7ff8b9",
+            "216eb262431a",
+            "6eba104bded6",
+            "edb247c866fb"
+          ],
+          "answer_state": "OK",
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim_id": "c1",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "The evidence explicitly states under the Free tier section: '512 MB RAM and 0.5 vCPU per service instance.'",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "8d68734bcd2c",
+                "47a24a581f87"
+              ]
+            },
+            {
+              "claim_id": "c2",
+              "status": "UNCERTAIN",
+              "confidence": 1.0,
+              "explanation": "The evidence states: 'Services on the free tier sleep after 15 minutes without traffic and cold-start in roughly 3 seconds.'",
+              "deterministic_flags": [
+                "entity: 'When' absent from evidence"
+              ],
+              "semantic_status": "SUPPORTED",
+              "disagreement": true,
+              "citation_ids": [
+                "8d68734bcd2c",
+                "20d33b1109dd"
+              ]
+            },
+            {
+              "claim_id": "c3",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "The evidence states: 'Services on the free tier sleep after 15 minutes without traffic and cold-start in roughly 3 seconds.'",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "8d68734bcd2c",
+                "47a24a581f87"
+              ]
+            }
+          ],
+          "claim_analyses": [
+            {
+              "claim_id": "c1",
+              "original_claim": "A free tier service instance gets 512 MB RAM.",
+              "normalized_claim": "A free tier service instance gets 512 MB RAM.",
+              "subject": "free tier service instance",
+              "predicate": "gets",
+              "object": "512 MB RAM",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "MB RAM"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "512 MB",
+                  "value": 512.0,
+                  "unit": "mb",
+                  "dimension": "data_mb"
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "8d68734bcd2c",
+                "47a24a581f87"
+              ]
+            },
+            {
+              "claim_id": "c2",
+              "original_claim": "When it has no traffic for 15 minutes, it sleeps.",
+              "normalized_claim": "When it has no traffic for 15 minutes, it sleeps.",
+              "subject": "free tier service instance",
+              "predicate": "sleeps after",
+              "object": "15 minutes without traffic",
+              "negation": true,
+              "negation_cues": [
+                "no"
+              ],
+              "modality": "assertive",
+              "entities": [
+                "When"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "15 minutes",
+                  "value": 900.0,
+                  "unit": "minutes",
+                  "dimension": "time_s"
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "8d68734bcd2c",
+                "20d33b1109dd"
+              ]
+            },
+            {
+              "claim_id": "c3",
+              "original_claim": "It cold-starts in roughly 3 seconds.",
+              "normalized_claim": "It cold-starts in roughly 3 seconds.",
+              "subject": "free tier service instance",
+              "predicate": "cold-starts in",
+              "object": "roughly 3 seconds",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "It"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "3 seconds",
+                  "value": 3.0,
+                  "unit": "seconds",
+                  "dimension": "time_s"
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "8d68734bcd2c",
+                "47a24a581f87"
+              ]
+            }
+          ],
+          "verification_errors": [],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Free tier instances get 512 MB RAM.",
+              "attributed": true
+            },
+            {
+              "sentence": "They sleep after 15 minutes without traffic and cold-start in roughly 3 seconds.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "precision_judge": "independent",
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer accurately and completely addresses both parts of the question (amount of RAM and what happens during no traffic) using the provided reference."
+        },
+        {
+          "id": "q03",
+          "question": "Which role is allowed to deploy to prod and manage secrets?",
+          "answerable": true,
+          "answer": "Only `admin` can deploy to `prod` or manage secrets [id: 8cc2417628b9].",
+          "refused": false,
+          "cited_ids": [
+            "8cc2417628b9"
+          ],
+          "invalid_citations": [],
+          "context_ids": [
+            "8cc2417628b9",
+            "6eba104bded6",
+            "fe9ff33182dc",
+            "f87cdc7ff8b9"
+          ],
+          "context_docs": [
+            "security.md",
+            "security.md",
+            "cli-reference.md",
+            "cli-reference.md"
+          ],
+          "retrieved_ids": [
+            "8cc2417628b9",
+            "6eba104bded6",
+            "fe9ff33182dc",
+            "f87cdc7ff8b9",
+            "20d33b1109dd",
+            "ef09d7a8a48f",
+            "981c8e1cb938",
+            "edb247c866fb",
+            "47a24a581f87",
+            "e093939b41b5"
+          ],
+          "answer_state": "OK",
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim_id": "c1",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "The security policy explicitly states: 'Only admin can deploy to prod or manage secrets.'",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "8cc2417628b9",
+                "fe9ff33182dc"
+              ]
+            },
+            {
+              "claim_id": "c2",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "The security policy explicitly states: 'Only admin can deploy to prod or manage secrets.'",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "8cc2417628b9",
+                "f87cdc7ff8b9"
+              ]
+            }
+          ],
+          "claim_analyses": [
+            {
+              "claim_id": "c1",
+              "original_claim": "Only admin can deploy to prod",
+              "normalized_claim": "Only admin can deploy to prod",
+              "subject": "admin",
+              "predicate": "can deploy",
+              "object": "prod",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "Only",
+                "admin",
+                "prod"
+              ],
+              "numerical_values": [],
+              "temporal_references": [],
+              "citation_ids": [
+                "8cc2417628b9",
+                "fe9ff33182dc"
+              ]
+            },
+            {
+              "claim_id": "c2",
+              "original_claim": "Only admin can manage secrets",
+              "normalized_claim": "Only admin can manage secrets",
+              "subject": "admin",
+              "predicate": "can manage",
+              "object": "secrets",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "Only",
+                "admin"
+              ],
+              "numerical_values": [],
+              "temporal_references": [],
+              "citation_ids": [
+                "8cc2417628b9",
+                "f87cdc7ff8b9"
+              ]
+            }
+          ],
+          "verification_errors": [],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Only the admin role can deploy to prod or manage secrets.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "precision_judge": "independent",
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately addresses the question based on the provided text."
+        },
+        {
+          "id": "q04",
+          "question": "How does the Gateway handle retries on 5xx responses?",
+          "answerable": true,
+          "answer": "The Gateway performs up to 2 automatic retries on 5xx responses with a 250 ms backoff [id: 981c8e1cb938].",
+          "refused": false,
+          "cited_ids": [
+            "981c8e1cb938"
+          ],
+          "invalid_citations": [],
+          "context_ids": [
+            "981c8e1cb938",
+            "20d33b1109dd",
+            "8cc2417628b9",
+            "47a24a581f87"
+          ],
+          "context_docs": [
+            "architecture.md",
+            "overview.md",
+            "security.md",
+            "troubleshooting.md"
+          ],
+          "retrieved_ids": [
+            "981c8e1cb938",
+            "20d33b1109dd",
+            "8cc2417628b9",
+            "47a24a581f87",
+            "6eba104bded6",
+            "b0674607de24",
+            "edb247c866fb",
+            "8d68734bcd2c",
+            "e093939b41b5",
+            "fe9ff33182dc"
+          ],
+          "answer_state": "OK",
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim_id": "c1",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "The evidence states: 'The Gateway performs automatic retries: up to 2 retries on 5xx responses with a 250 ms backoff'.",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "981c8e1cb938",
+                "20d33b1109dd"
+              ]
+            },
+            {
+              "claim_id": "c2",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "The evidence explicitly mentions 'up to 2 retries on 5xx responses with a 250 ms backoff'.",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "981c8e1cb938",
+                "20d33b1109dd"
+              ]
+            }
+          ],
+          "claim_analyses": [
+            {
+              "claim_id": "c1",
+              "original_claim": "The Gateway performs up to 2 automatic retries on 5xx responses",
+              "normalized_claim": "The Gateway performs up to 2 automatic retries on 5xx responses.",
+              "subject": "Gateway",
+              "predicate": "performs",
+              "object": "up to 2 automatic retries on 5xx responses",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "Gateway"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "2",
+                  "value": 2.0,
+                  "unit": null,
+                  "dimension": null
+                },
+                {
+                  "raw": "5",
+                  "value": 5.0,
+                  "unit": null,
+                  "dimension": null
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "981c8e1cb938",
+                "20d33b1109dd"
+              ]
+            },
+            {
+              "claim_id": "c2",
+              "original_claim": "The Gateway uses a 250 ms backoff for automatic retries",
+              "normalized_claim": "The Gateway uses a 250 ms backoff for automatic retries.",
+              "subject": "Gateway",
+              "predicate": "uses",
+              "object": "a 250 ms backoff for automatic retries",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "Gateway"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "250 ms",
+                  "value": 0.25,
+                  "unit": "ms",
+                  "dimension": "time_s"
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "981c8e1cb938",
+                "20d33b1109dd"
+              ]
+            }
+          ],
+          "verification_errors": [],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "The Gateway retries up to 2 times on 5xx responses with a 250 ms backoff.",
+              "attributed": true
+            },
+            {
+              "sentence": "It never retries non-idempotent methods like POST and PATCH.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "precision_judge": "independent",
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately addresses the question using the provided context."
+        },
+        {
+          "id": "q05",
+          "question": "What command rolls back a prod service to a specific revision, and how many revisions are kept?",
+          "answerable": true,
+          "answer": "To roll back a service to a specific revision, use the command `nimbus rollback --env prod --to <revision>` [id: fe9ff33182dc]. Rollbacks keep the last 10 revisions [id: fe9ff33182dc].",
+          "refused": false,
+          "cited_ids": [
+            "fe9ff33182dc"
+          ],
+          "invalid_citations": [],
+          "context_ids": [
+            "fe9ff33182dc",
+            "f87cdc7ff8b9",
+            "20d33b1109dd",
+            "ef09d7a8a48f"
+          ],
+          "context_docs": [
+            "cli-reference.md",
+            "cli-reference.md",
+            "overview.md",
+            "troubleshooting.md"
+          ],
+          "retrieved_ids": [
+            "fe9ff33182dc",
+            "f87cdc7ff8b9",
+            "20d33b1109dd",
+            "ef09d7a8a48f",
+            "8cc2417628b9",
+            "6eba104bded6",
+            "47a24a581f87",
+            "981c8e1cb938",
+            "216eb262431a",
+            "8d68734bcd2c"
+          ],
+          "answer_state": "OK",
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim_id": "c1",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "The evidence explicitly states: 'nimbus rollback --env prod --to <revision> rolls back to a specific revision.'",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "fe9ff33182dc",
+                "f87cdc7ff8b9"
+              ]
+            },
+            {
+              "claim_id": "c2",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "The evidence explicitly states: 'Rollbacks keep the last 10 revisions; older revisions are garbage-collected.'",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "fe9ff33182dc",
+                "f87cdc7ff8b9"
+              ]
+            }
+          ],
+          "claim_analyses": [
+            {
+              "claim_id": "c1",
+              "original_claim": "To roll back a service to a specific revision, use the command nimbus rollback --env prod --to <revision>",
+              "normalized_claim": "To roll back a service to a specific revision, use the command nimbus rollback --env prod --to <revision>.",
+              "subject": "nimbus rollback --env prod --to <revision>",
+              "predicate": "rolls back",
+              "object": "service to a specific revision",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "To",
+                "nimbus"
+              ],
+              "numerical_values": [],
+              "temporal_references": [],
+              "citation_ids": [
+                "fe9ff33182dc",
+                "f87cdc7ff8b9"
+              ]
+            },
+            {
+              "claim_id": "c2",
+              "original_claim": "Rollbacks keep the last 10 revisions",
+              "normalized_claim": "Rollbacks keep the last 10 revisions.",
+              "subject": "Rollbacks",
+              "predicate": "keep",
+              "object": "the last 10 revisions",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "Rollbacks"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "10 revisions",
+                  "value": 10.0,
+                  "unit": "revisions",
+                  "dimension": "count:revision"
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "fe9ff33182dc",
+                "f87cdc7ff8b9"
+              ]
+            }
+          ],
+          "verification_errors": [],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Use nimbus rollback --env prod --to <revision>.",
+              "attributed": true
+            },
+            {
+              "sentence": "The platform keeps the last 10 revisions.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "precision_judge": "independent",
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately provides the command to roll back a prod service to a specific revision and states how many revisions are kept, based on the provided text."
+        },
+        {
+          "id": "q06",
+          "question": "How long are audit logs retained, and where can they be exported?",
+          "answerable": true,
+          "answer": "Audit logs are retained for 90 days and can be exported to S3 [id: 6eba104bded6].",
+          "refused": false,
+          "cited_ids": [
+            "6eba104bded6"
+          ],
+          "invalid_citations": [],
+          "context_ids": [
+            "6eba104bded6",
+            "e093939b41b5",
+            "8cc2417628b9",
+            "edb247c866fb"
+          ],
+          "context_docs": [
+            "security.md",
+            "release-notes.md",
+            "security.md",
+            "architecture.md"
+          ],
+          "retrieved_ids": [
+            "6eba104bded6",
+            "e093939b41b5",
+            "8cc2417628b9",
+            "edb247c866fb",
+            "20d33b1109dd",
+            "f87cdc7ff8b9",
+            "fe9ff33182dc",
+            "ef09d7a8a48f",
+            "8d68734bcd2c",
+            "47a24a581f87"
+          ],
+          "answer_state": "OK",
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim_id": "c1",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "The evidence explicitly states that audit logs are retained for 90 days.",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "6eba104bded6",
+                "edb247c866fb"
+              ]
+            },
+            {
+              "claim_id": "c2",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "The evidence explicitly states that audit logs are exportable to S3.",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "e093939b41b5",
+                "8cc2417628b9"
+              ]
+            }
+          ],
+          "claim_analyses": [
+            {
+              "claim_id": "c1",
+              "original_claim": "Audit logs are retained for 90 days",
+              "normalized_claim": "Audit logs are retained for 90 days",
+              "subject": "Audit logs",
+              "predicate": "are retained for",
+              "object": "90 days",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "Audit"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "90 days",
+                  "value": 7776000.0,
+                  "unit": "days",
+                  "dimension": "time_s"
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "6eba104bded6",
+                "edb247c866fb"
+              ]
+            },
+            {
+              "claim_id": "c2",
+              "original_claim": "Audit logs can be exported to S3",
+              "normalized_claim": "Audit logs can be exported to S3",
+              "subject": "Audit logs",
+              "predicate": "can be exported to",
+              "object": "S3",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "Audit",
+                "S3"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "3",
+                  "value": 3.0,
+                  "unit": null,
+                  "dimension": null
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "e093939b41b5",
+                "8cc2417628b9"
+              ]
+            }
+          ],
+          "verification_errors": [],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Audit logs are retained for 90 days.",
+              "attributed": true
+            },
+            {
+              "sentence": "They can be exported to S3.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "precision_judge": "independent",
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately addresses both parts of the question (retention period and export destination) based on the provided text."
+        },
+        {
+          "id": "q07",
+          "question": "What changed in release v2.4.0 regarding build nodes and canary deployments?",
+          "answerable": true,
+          "answer": "In release v2.4.0:\n- ARM64 build nodes became available in all regions (selectable with `build.arch: arm64`) [id: e093939b41b5].\n- Canary deployments became generally available (routing 10% traffic for 5 minutes) [id: e093939b41b5].",
+          "refused": false,
+          "cited_ids": [
+            "e093939b41b5"
+          ],
+          "invalid_citations": [],
+          "context_ids": [
+            "e093939b41b5",
+            "edb247c866fb",
+            "8d68734bcd2c",
+            "981c8e1cb938"
+          ],
+          "context_docs": [
+            "release-notes.md",
+            "architecture.md",
+            "quotas-and-pricing.md",
+            "architecture.md"
+          ],
+          "retrieved_ids": [
+            "e093939b41b5",
+            "edb247c866fb",
+            "8d68734bcd2c",
+            "981c8e1cb938",
+            "ef09d7a8a48f",
+            "47a24a581f87",
+            "20d33b1109dd",
+            "f87cdc7ff8b9",
+            "b0674607de24",
+            "8cc2417628b9"
+          ],
+          "answer_state": "OK",
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim_id": "c1",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "The release notes for v2.4.0 explicitly state that ARM64 build nodes are now available in all regions.",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "e093939b41b5",
+                "edb247c866fb"
+              ]
+            },
+            {
+              "claim_id": "c2",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "The v2.4.0 release notes state to select ARM64 build nodes with `build.arch: arm64`.",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "e093939b41b5",
+                "edb247c866fb"
+              ]
+            },
+            {
+              "claim_id": "c3",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "The v2.4.0 release notes state that canary deployments are generally available.",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "e093939b41b5",
+                "981c8e1cb938"
+              ]
+            },
+            {
+              "claim_id": "c4",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "Both the v2.4.0 release notes and the Scheduler architecture section state that canary deployments use 10% traffic for 5 minutes.",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "edb247c866fb",
+                "e093939b41b5"
+              ]
+            }
+          ],
+          "claim_analyses": [
+            {
+              "claim_id": "c1",
+              "original_claim": "Release v2.4.0 made ARM64 build nodes available in all regions.",
+              "normalized_claim": "Release v2.4.0 made ARM64 build nodes available in all regions.",
+              "subject": "Release v2.4.0",
+              "predicate": "made available",
+              "object": "ARM64 build nodes in all regions",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "Release",
+                "ARM64",
+                "v2.4.0"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "2.4",
+                  "value": 2.4,
+                  "unit": null,
+                  "dimension": null
+                },
+                {
+                  "raw": "0",
+                  "value": 0.0,
+                  "unit": null,
+                  "dimension": null
+                },
+                {
+                  "raw": "64 build",
+                  "value": 64.0,
+                  "unit": "build",
+                  "dimension": "count:build"
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "e093939b41b5",
+                "edb247c866fb"
+              ]
+            },
+            {
+              "claim_id": "c2",
+              "original_claim": "ARM64 build nodes are selectable with build.arch: arm64.",
+              "normalized_claim": "ARM64 build nodes are selectable with build.arch: arm64.",
+              "subject": "ARM64 build nodes",
+              "predicate": "are selectable with",
+              "object": "build.arch: arm64",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "ARM64",
+                "build.arch: arm64"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "64 build",
+                  "value": 64.0,
+                  "unit": "build",
+                  "dimension": "count:build"
+                },
+                {
+                  "raw": "64",
+                  "value": 64.0,
+                  "unit": null,
+                  "dimension": null
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "e093939b41b5",
+                "edb247c866fb"
+              ]
+            },
+            {
+              "claim_id": "c3",
+              "original_claim": "Canary deployments became generally available in release v2.4.0.",
+              "normalized_claim": "Canary deployments became generally available in release v2.4.0.",
+              "subject": "Canary deployments",
+              "predicate": "became generally available in",
+              "object": "release v2.4.0",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "Canary",
+                "v2.4.0"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "2.4",
+                  "value": 2.4,
+                  "unit": null,
+                  "dimension": null
+                },
+                {
+                  "raw": "0",
+                  "value": 0.0,
+                  "unit": null,
+                  "dimension": null
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "e093939b41b5",
+                "981c8e1cb938"
+              ]
+            },
+            {
+              "claim_id": "c4",
+              "original_claim": "Canary deployments route 10% traffic for 5 minutes.",
+              "normalized_claim": "Canary deployments route 10% traffic for 5 minutes.",
+              "subject": "Canary deployments",
+              "predicate": "route",
+              "object": "10% traffic for 5 minutes",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "Canary"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "10%",
+                  "value": 10.0,
+                  "unit": "%",
+                  "dimension": "percent"
+                },
+                {
+                  "raw": "5 minutes",
+                  "value": 300.0,
+                  "unit": "minutes",
+                  "dimension": "time_s"
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "edb247c866fb",
+                "e093939b41b5"
+              ]
+            }
+          ],
+          "verification_errors": [],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "In v2.4.0, ARM64 build nodes became available in all regions, selectable with build.arch: arm64.",
+              "attributed": true
+            },
+            {
+              "sentence": "Canary deployments became generally available with 10% traffic for 5 minutes.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "precision_judge": "independent",
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer accurately states the changes in release v2.4.0 regarding ARM64 build nodes and canary deployments, matching the provided details."
+        },
+        {
+          "id": "q08",
+          "question": "My service returns 502 after deploy and my build times out. What should I check and which setting helps the build?",
+          "answerable": true,
+          "answer": "To address a 502 error after deployment, check the following:\n1. Ensure the service listens on the port declared in `nimbus.yaml` (the default is 8080) [id: 47a24a581f87].\n2. Verify that health checks pass (the Scheduler probes `/healthz` every 10 seconds and restarts after 3 consecutive failures) [id: 47a24a581f87].\n3. Check that the instance is not out of memory, noting that free tier instances only have 512 MB RAM [id: 47a24a581f87].\n\nTo help with a build that times out:\n- The default build timeout of 15 minutes can be raised up to a maximum of 60 minutes using `build.timeout` in `nimbus.yaml` [id: 47a24a581f87].\n- Large monorepos should enable the shared layer cache by setting `build.cache: true` [id: 47a24a581f87].",
+          "refused": false,
+          "cited_ids": [
+            "47a24a581f87"
+          ],
+          "invalid_citations": [],
+          "context_ids": [
+            "47a24a581f87",
+            "edb247c866fb",
+            "e093939b41b5",
+            "fe9ff33182dc"
+          ],
+          "context_docs": [
+            "troubleshooting.md",
+            "architecture.md",
+            "release-notes.md",
+            "cli-reference.md"
+          ],
+          "retrieved_ids": [
+            "47a24a581f87",
+            "edb247c866fb",
+            "e093939b41b5",
+            "fe9ff33182dc",
+            "b0674607de24",
+            "8d68734bcd2c",
+            "216eb262431a",
+            "ef09d7a8a48f",
+            "20d33b1109dd",
+            "981c8e1cb938"
+          ],
+          "answer_state": "OK",
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim_id": "c1",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "Evidence states: 'The service listens on the port declared in nimbus.yaml'.",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "47a24a581f87",
+                "fe9ff33182dc"
+              ]
+            },
+            {
+              "claim_id": "c2",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "Evidence states: 'port, default 8080'.",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "47a24a581f87",
+                "fe9ff33182dc"
+              ]
+            },
+            {
+              "claim_id": "c3",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "Evidence states: 'the Scheduler probes /healthz every 10 seconds'.",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "47a24a581f87"
+              ]
+            },
+            {
+              "claim_id": "c4",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "Evidence states: 'restarts after 3 consecutive failures'.",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "47a24a581f87"
+              ]
+            },
+            {
+              "claim_id": "c5",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "Evidence states: 'free tier instances only have 512 MB RAM'.",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "47a24a581f87"
+              ]
+            },
+            {
+              "claim_id": "c6",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "Evidence states: 'The default build timeout is 15 minutes'.",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "edb247c866fb",
+                "47a24a581f87"
+              ]
+            },
+            {
+              "claim_id": "c7",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "Evidence states: 'Raise it with build.timeout in nimbus.yaml (maximum 60 minutes)'.",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "edb247c866fb",
+                "47a24a581f87"
+              ]
+            },
+            {
+              "claim_id": "c8",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "Evidence states: 'Large monorepos should enable the shared layer cache by setting build.cache: true'.",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "47a24a581f87",
+                "edb247c866fb"
+              ]
+            }
+          ],
+          "claim_analyses": [
+            {
+              "claim_id": "c1",
+              "original_claim": "The service must listen on the port declared in nimbus.yaml.",
+              "normalized_claim": "The service listens on the port declared in nimbus.yaml.",
+              "subject": "service",
+              "predicate": "listen on",
+              "object": "port declared in nimbus.yaml",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "The",
+                "nimbus.yaml"
+              ],
+              "numerical_values": [],
+              "temporal_references": [],
+              "citation_ids": [
+                "47a24a581f87",
+                "fe9ff33182dc"
+              ]
+            },
+            {
+              "claim_id": "c2",
+              "original_claim": "The default port for the service is 8080.",
+              "normalized_claim": "The default port for the service is 8080.",
+              "subject": "service port",
+              "predicate": "is",
+              "object": "8080",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "The"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "8080",
+                  "value": 8080.0,
+                  "unit": null,
+                  "dimension": null
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "47a24a581f87",
+                "fe9ff33182dc"
+              ]
+            },
+            {
+              "claim_id": "c3",
+              "original_claim": "The Scheduler probes /healthz every 10 seconds.",
+              "normalized_claim": "The Scheduler probes /healthz every 10 seconds.",
+              "subject": "Scheduler",
+              "predicate": "probes",
+              "object": "/healthz every 10 seconds",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "Scheduler",
+                "/healthz"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "10 seconds",
+                  "value": 10.0,
+                  "unit": "seconds",
+                  "dimension": "time_s"
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "47a24a581f87"
+              ]
+            },
+            {
+              "claim_id": "c4",
+              "original_claim": "The Scheduler restarts the service after 3 consecutive health check failures.",
+              "normalized_claim": "The Scheduler restarts the service after 3 consecutive health check failures.",
+              "subject": "Scheduler",
+              "predicate": "restarts",
+              "object": "service after 3 consecutive failures",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "Scheduler"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "3",
+                  "value": 3.0,
+                  "unit": null,
+                  "dimension": null
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "47a24a581f87"
+              ]
+            },
+            {
+              "claim_id": "c5",
+              "original_claim": "Free tier instances have 512 MB RAM.",
+              "normalized_claim": "Free tier instances have 512 MB RAM.",
+              "subject": "free tier instances",
+              "predicate": "have",
+              "object": "512 MB RAM",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "Free",
+                "MB RAM"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "512 MB",
+                  "value": 512.0,
+                  "unit": "mb",
+                  "dimension": "data_mb"
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "47a24a581f87"
+              ]
+            },
+            {
+              "claim_id": "c6",
+              "original_claim": "The default build timeout is 15 minutes.",
+              "normalized_claim": "The default build timeout is 15 minutes.",
+              "subject": "default build timeout",
+              "predicate": "is",
+              "object": "15 minutes",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "The"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "15 minutes",
+                  "value": 900.0,
+                  "unit": "minutes",
+                  "dimension": "time_s"
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "edb247c866fb",
+                "47a24a581f87"
+              ]
+            },
+            {
+              "claim_id": "c7",
+              "original_claim": "The build timeout can be raised up to a maximum of 60 minutes using build.timeout in nimbus.yaml.",
+              "normalized_claim": "The build timeout can be raised up to a maximum of 60 minutes using build.timeout in nimbus.yaml.",
+              "subject": "build timeout",
+              "predicate": "can be raised to",
+              "object": "maximum of 60 minutes via build.timeout in nimbus.yaml",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "possible",
+              "entities": [
+                "The",
+                "nimbus.yaml"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "60 minutes",
+                  "value": 3600.0,
+                  "unit": "minutes",
+                  "dimension": "time_s"
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "edb247c866fb",
+                "47a24a581f87"
+              ]
+            },
+            {
+              "claim_id": "c8",
+              "original_claim": "Large monorepos should enable the shared layer cache by setting build.cache: true.",
+              "normalized_claim": "Large monorepos should enable the shared layer cache by setting build.cache: true.",
+              "subject": "Large monorepos",
+              "predicate": "should enable",
+              "object": "shared layer cache by setting build.cache: true",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "probable",
+              "entities": [
+                "Large"
+              ],
+              "numerical_values": [],
+              "temporal_references": [],
+              "citation_ids": [
+                "47a24a581f87",
+                "edb247c866fb"
+              ]
+            }
+          ],
+          "verification_errors": [],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "For 502 errors, check that the service listens on the declared port (default 8080), that /healthz health checks pass, and that the instance is not out of memory.",
+              "attributed": true
+            },
+            {
+              "sentence": "For build timeouts, raise build.timeout in nimbus.yaml, up to 60 minutes.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "precision_judge": "independent",
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly addresses both parts of the question, providing things to check for the 502 error and specific settings to help with build timeouts."
+        },
+        {
+          "id": "q09",
+          "question": "How much does the Pro tier cost and how many builds per month does it include?",
+          "answerable": true,
+          "answer": "The Pro tier costs $29 per user per month and includes 2,000 builds per month [id: 8d68734bcd2c].",
+          "refused": false,
+          "cited_ids": [
+            "8d68734bcd2c"
+          ],
+          "invalid_citations": [],
+          "context_ids": [
+            "8d68734bcd2c",
+            "ef09d7a8a48f",
+            "b0674607de24",
+            "47a24a581f87"
+          ],
+          "context_docs": [
+            "quotas-and-pricing.md",
+            "troubleshooting.md",
+            "quotas-and-pricing.md",
+            "troubleshooting.md"
+          ],
+          "retrieved_ids": [
+            "8d68734bcd2c",
+            "ef09d7a8a48f",
+            "b0674607de24",
+            "47a24a581f87",
+            "f87cdc7ff8b9",
+            "edb247c866fb",
+            "fe9ff33182dc",
+            "6eba104bded6",
+            "e093939b41b5",
+            "8cc2417628b9"
+          ],
+          "answer_state": "OK",
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim_id": "c1",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "The evidence explicitly states under 'Pro tier — $29 per user per month' that the cost is $29 per user per month.",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "8d68734bcd2c",
+                "ef09d7a8a48f"
+              ]
+            },
+            {
+              "claim_id": "c2",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "The evidence explicitly states under the Pro tier section: '2,000 builds per month, then $0.01 per additional build.'",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "8d68734bcd2c"
+              ]
+            }
+          ],
+          "claim_analyses": [
+            {
+              "claim_id": "c1",
+              "original_claim": "The Pro tier costs $29 per user per month.",
+              "normalized_claim": "The Pro tier costs $29 per user per month.",
+              "subject": "Pro tier",
+              "predicate": "costs",
+              "object": "$29 per user per month",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "Pro",
+                "Pro tier"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "29",
+                  "value": 29.0,
+                  "unit": null,
+                  "dimension": null
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "8d68734bcd2c",
+                "ef09d7a8a48f"
+              ]
+            },
+            {
+              "claim_id": "c2",
+              "original_claim": "The Pro tier includes 2,000 builds per month.",
+              "normalized_claim": "The Pro tier includes 2,000 builds per month.",
+              "subject": "Pro tier",
+              "predicate": "includes",
+              "object": "2,000 builds per month",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "Pro",
+                "Pro tier"
+              ],
+              "numerical_values": [
+                {
+                  "raw": "2",
+                  "value": 2.0,
+                  "unit": null,
+                  "dimension": null
+                },
+                {
+                  "raw": "000 builds",
+                  "value": 0.0,
+                  "unit": "builds",
+                  "dimension": "count:build"
+                }
+              ],
+              "temporal_references": [],
+              "citation_ids": [
+                "8d68734bcd2c"
+              ]
+            }
+          ],
+          "verification_errors": [],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Pro costs $29 per user per month.",
+              "attributed": true
+            },
+            {
+              "sentence": "It includes 2,000 builds per month, then $0.01 per additional build.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "precision_judge": "independent",
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately addresses both parts of the question (cost and builds per month for the Pro tier) based on the provided reference."
+        },
+        {
+          "id": "q10",
+          "question": "Where are application secrets stored, and what must happen for a rotated secret to take effect?",
+          "answerable": true,
+          "answer": "Application secrets are stored in HashiCorp Vault [id: 8cc2417628b9]. Rotating a secret requires a redeploy to take effect [id: 8cc2417628b9].",
+          "refused": false,
+          "cited_ids": [
+            "8cc2417628b9"
+          ],
+          "invalid_citations": [],
+          "context_ids": [
+            "8cc2417628b9",
+            "6eba104bded6",
+            "f87cdc7ff8b9",
+            "ef09d7a8a48f"
+          ],
+          "context_docs": [
+            "security.md",
+            "security.md",
+            "cli-reference.md",
+            "troubleshooting.md"
+          ],
+          "retrieved_ids": [
+            "8cc2417628b9",
+            "6eba104bded6",
+            "f87cdc7ff8b9",
+            "ef09d7a8a48f",
+            "e093939b41b5",
+            "edb247c866fb",
+            "fe9ff33182dc",
+            "20d33b1109dd",
+            "981c8e1cb938",
+            "216eb262431a"
+          ],
+          "answer_state": "OK",
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim_id": "c1",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "The evidence explicitly states under Secrets management that 'Application secrets are stored in HashiCorp Vault'.",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "8cc2417628b9"
+              ]
+            },
+            {
+              "claim_id": "c2",
+              "status": "SUPPORTED",
+              "confidence": 1.0,
+              "explanation": "The evidence explicitly states under Secrets management that 'Rotating a secret requires a redeploy to take effect'.",
+              "deterministic_flags": [],
+              "semantic_status": "SUPPORTED",
+              "disagreement": false,
+              "citation_ids": [
+                "8cc2417628b9",
+                "ef09d7a8a48f"
+              ]
+            }
+          ],
+          "claim_analyses": [
+            {
+              "claim_id": "c1",
+              "original_claim": "Application secrets are stored in HashiCorp Vault.",
+              "normalized_claim": "Application secrets are stored in HashiCorp Vault.",
+              "subject": "Application secrets",
+              "predicate": "are stored in",
+              "object": "HashiCorp Vault",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "Application",
+                "HashiCorp Vault"
+              ],
+              "numerical_values": [],
+              "temporal_references": [],
+              "citation_ids": [
+                "8cc2417628b9"
+              ]
+            },
+            {
+              "claim_id": "c2",
+              "original_claim": "Rotating a secret requires a redeploy to take effect.",
+              "normalized_claim": "Rotating a secret requires a redeploy to take effect.",
+              "subject": "Rotating a secret",
+              "predicate": "requires",
+              "object": "a redeploy to take effect",
+              "negation": false,
+              "negation_cues": [],
+              "modality": "assertive",
+              "entities": [
+                "Rotating"
+              ],
+              "numerical_values": [],
+              "temporal_references": [],
+              "citation_ids": [
+                "8cc2417628b9",
+                "ef09d7a8a48f"
+              ]
+            }
+          ],
+          "verification_errors": [],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Secrets are stored in HashiCorp Vault and injected as environment variables at container startup.",
+              "attributed": true
+            },
+            {
+              "sentence": "Rotating a secret requires a redeploy to take effect.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "precision_judge": "independent",
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately addresses both parts of the question based on the provided text."
+        },
+        {
+          "id": "q11",
+          "question": "Who is the CEO of Nimbus Deploy and what is their background?",
+          "answerable": false,
+          "answer": "I cannot answer this from the provided documents.",
+          "refused": true,
+          "cited_ids": [],
+          "invalid_citations": [],
+          "context_ids": [
+            "8cc2417628b9",
+            "216eb262431a",
+            "20d33b1109dd",
+            "47a24a581f87"
+          ],
+          "context_docs": [
+            "security.md",
+            "overview.md",
+            "overview.md",
+            "troubleshooting.md"
+          ],
+          "retrieved_ids": [
+            "8cc2417628b9",
+            "216eb262431a",
+            "20d33b1109dd",
+            "47a24a581f87",
+            "edb247c866fb",
+            "981c8e1cb938",
+            "f87cdc7ff8b9",
+            "fe9ff33182dc",
+            "ef09d7a8a48f",
+            "e093939b41b5"
+          ],
+          "answer_state": "REFUSED",
+          "faithfulness": null,
+          "hallucination_rate": null,
+          "claim_verdicts": [],
+          "claim_analyses": [],
+          "verification_errors": [],
+          "fabricated": false,
+          "context_recall": null,
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer correctly states that the information cannot be found in the provided documents."
+        },
+        {
+          "id": "q12",
+          "question": "Does Nimbus offer GPU instances for machine learning workloads, and what GPU models are available?",
+          "answerable": false,
+          "answer": "I cannot answer this from the provided documents.",
+          "refused": true,
+          "cited_ids": [],
+          "invalid_citations": [],
+          "context_ids": [
+            "981c8e1cb938",
+            "e093939b41b5",
+            "6eba104bded6",
+            "216eb262431a"
+          ],
+          "context_docs": [
+            "architecture.md",
+            "release-notes.md",
+            "security.md",
+            "overview.md"
+          ],
+          "retrieved_ids": [
+            "981c8e1cb938",
+            "e093939b41b5",
+            "6eba104bded6",
+            "216eb262431a",
+            "ef09d7a8a48f",
+            "47a24a581f87",
+            "fe9ff33182dc",
+            "20d33b1109dd",
+            "8cc2417628b9",
+            "edb247c866fb"
+          ],
+          "answer_state": "REFUSED",
+          "faithfulness": null,
+          "hallucination_rate": null,
+          "claim_verdicts": [],
+          "claim_analyses": [],
+          "verification_errors": [],
+          "fabricated": false,
+          "context_recall": null,
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer correctly states that the information cannot be found in the provided documents."
+        }
+      ]
+    }
+  },
+  "api_stats": {
+    "generate_requests": 0,
+    "embed_requests": 0,
+    "cache_hits": 64,
+    "prompt_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.0,
+    "retries": 0,
+    "errors": 0
+  }
+}

@@ -6,6 +6,18 @@ citation-grounded generation, and an automated evaluation pipeline measuring
 **Faithfulness, Hallucination rate, Answer Relevancy, Context Precision/Recall** —
 with a per-claim audit trail for debugging.
 
+**V2 — Adversarial & Semantic Faithfulness Testing:** a fail-closed claim
+verification engine (explicit SUPPORTED / CONTRADICTED / NOT_SUPPORTED /
+UNCERTAIN / EXTRACTION_FAILED / EVALUATION_ERROR states), deterministic evidence
+checks (negation, roles, entities, numbers, temporal, modality), prompt-injection
+resistance, and a 104-case adversarial benchmark with confusion matrices and
+detection / false-acceptance / false-rejection rates. See
+[docs/V2_AUDIT_REPORT.md](docs/V2_AUDIT_REPORT.md),
+[docs/ARCHITECTURE_V2.md](docs/ARCHITECTURE_V2.md),
+[docs/ADVERSARIAL_BENCHMARK.md](docs/ADVERSARIAL_BENCHMARK.md),
+[docs/EVALUATION_METHODOLOGY.md](docs/EVALUATION_METHODOLOGY.md) and
+[docs/MIGRATION_V2.md](docs/MIGRATION_V2.md).
+
 Built with pure-Python retrieval (no native dependencies) and the Gemini API for
 embeddings, generation, and LLM-as-judge evaluation.
 
@@ -25,6 +37,15 @@ Key findings: dense-only retrieval admits less-relevant passages on keyword-heav
 questions (precision 0.908); RRF fusion recovers it to 1.0. All variants refuse
 both unanswerable questions correctly — zero fabricated answers. Full audit trail:
 [reports/eval_ablation_comparison.md](reports/eval_ablation_comparison.md).
+
+## V2 results (adversarial & semantic faithfulness)
+
+104 synthetic adversarial fixtures (8 categories), live Gemini judge:
+**adversarial detection 0.986, false acceptance 0.000**, contradiction F1 0.962,
+injection flags 13/13; deterministic LLM-free floor: detection 0.583 with
+false acceptance/rejection 0.000 (fail-closed). Consolidated report incl.
+retrieval probes, end-to-end ablation status and two documented incidents
+(quota cap, verifier bug B16): [reports/v2/FINAL_V2_REPORT.md](reports/v2/FINAL_V2_REPORT.md).
 
 ## Architecture
 
@@ -88,6 +109,16 @@ python -m ragpipe.cli evaluate --variants bm25,dense,hybrid,hybrid+rerank
 
 # Quick smoke run (first 3 questions only)
 python -m ragpipe.cli evaluate --limit 3
+
+# V2: adversarial verification benchmark (deterministic = zero API calls)
+python -m ragpipe.cli adversarial --mode deterministic
+python -m ragpipe.cli adversarial --mode semantic          # live LLM judge
+
+# V2: retrieval-variant probes on adversarial evidence (no LLM judge)
+python -m ragpipe.cli probes-v2
+
+# V2: end-to-end ablation with engine verification + independent precision judge
+python -m ragpipe.cli evaluate-v2 --variants bm25,dense,hybrid,hybrid+rerank
 ```
 
 Reports land in `reports/` as JSON (full audit trail) and Markdown (comparison
@@ -142,11 +173,13 @@ dataset.
 ## Tests
 
 ```bash
-python -m pytest tests/ -q    # 31 tests, no API calls needed
+python -m pytest tests/ -q    # 95 tests, no API calls needed
 ```
 
 Covers chunking, BM25, RRF fusion math, reranker grade handling, citation
-filtering, refusal detection, metric math, and report rendering.
+filtering, refusal detection, metric math, report rendering, deterministic
+adversarial checks, engine fail-closed states, schema validation, API
+failure/retry/cache behavior, and mocked-judge integration paths.
 
 ## Project layout
 
@@ -161,12 +194,25 @@ ragpipe/
   generator.py     # grounded answers with citations
   pipeline.py      # end-to-end orchestration
   evaluate/
-    metrics.py     # faithfulness, relevancy, precision, recall judges
-    runner.py      # dataset runner, variants, aggregation
+    metrics.py     # faithfulness, relevancy, precision, recall judges (fail-closed)
+    runner.py      # V1 dataset runner, variants, aggregation
+    runner_v2.py   # V2 runner: engine verification + independent precision judge
     report.py      # Markdown report with claim audit
-  cli.py           # ingest / ask / evaluate
+  verify/
+    schemas.py     # Pydantic claim/verdict models + explicit states
+    checks.py      # deterministic evidence checks (LLM-free)
+    engine.py      # multi-stage fail-closed verification engine
+  adversarial/
+    dataset.py     # 104-case synthetic fixture loader/validation
+    benchmark.py   # deterministic / semantic / mocked benchmark modes
+    metrics.py     # confusion matrices, detection/FAR/FRR, PRF
+    probes.py      # retrieval-variant evidence probes
+  cli.py           # ingest / ask / evaluate / evaluate-v2 / adversarial / probes-v2
 data/docs/         # sample corpus
 data/golden_dataset.json
+data/adversarial_golden_dataset.json
+docs/              # V2 audit, architecture, methodology, benchmark, migration
 tests/
-reports/           # generated evaluation reports
+reports/           # V1 evaluation reports (immutable history)
+reports/v2/        # V2 benchmark reports
 ```

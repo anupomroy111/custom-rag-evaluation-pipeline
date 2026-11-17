@@ -7,4 +7,6 @@ index/
 reports/checkpoint.json
 eval_run.log
 eval_ablation.log
+eval_v2.log
+reports/v2/checkpoint_v2.json
 assets/

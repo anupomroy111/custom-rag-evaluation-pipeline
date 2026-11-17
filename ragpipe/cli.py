@@ -43,6 +43,49 @@ def cmd_evaluate(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_evaluate_v2(args: argparse.Namespace) -> int:
+    from .evaluate.runner import Variant, load_golden
+    from .evaluate.runner_v2 import EvalRunnerV2
+
+    variants = [Variant.parse(v) for v in args.variants.split(",")]
+    items = load_golden(Path(args.golden) if args.golden else None)
+    if args.limit:
+        items = items[:args.limit]
+    runner = EvalRunnerV2(RAGPipeline())
+    report = runner.run(items, variants)
+    json_path, md_path = runner.save(report)
+    print(f"\nReports written:\n  {json_path}\n  {md_path}")
+    return 0
+
+
+def cmd_adversarial(args: argparse.Namespace) -> int:
+    from .adversarial import AdversarialBenchmark, load_adversarial
+
+    cases = load_adversarial()
+    if args.category:
+        cases = [c for c in cases if c.category == args.category]
+    if args.limit:
+        cases = cases[:args.limit]
+    client = GeminiClient() if args.mode == "semantic" else None
+    bench = AdversarialBenchmark(client=client, mode=args.mode)
+    report = bench.run(cases)
+    json_path, md_path = bench.save(report)
+    print(f"\nReports written:\n  {json_path}\n  {md_path}")
+    return 0
+
+
+def cmd_probes_v2(args: argparse.Namespace) -> int:
+    from .adversarial import load_adversarial, run_probes, save_probes
+
+    cases = load_adversarial()
+    if args.limit:
+        cases = cases[:args.limit]
+    report = run_probes(cases, GeminiClient())
+    json_path, md_path = save_probes(report)
+    print(f"\nReports written:\n  {json_path}\n  {md_path}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="ragpipe",
@@ -67,6 +110,22 @@ def main(argv: list[str] | None = None) -> int:
     p_eval.add_argument("--limit", type=int, default=None, help="Evaluate only the first N questions")
     p_eval.add_argument("--golden", help="Path to golden dataset JSON")
     p_eval.set_defaults(func=cmd_evaluate)
+
+    p_eval2 = sub.add_parser("evaluate-v2", help="V2 end-to-end eval (engine verification)")
+    p_eval2.add_argument("--variants", default="hybrid+rerank")
+    p_eval2.add_argument("--limit", type=int, default=None)
+    p_eval2.add_argument("--golden", help="Path to golden dataset JSON")
+    p_eval2.set_defaults(func=cmd_evaluate_v2)
+
+    p_adv = sub.add_parser("adversarial", help="Adversarial verification benchmark")
+    p_adv.add_argument("--mode", choices=["deterministic", "semantic"], default="deterministic")
+    p_adv.add_argument("--category", help="Restrict to one category")
+    p_adv.add_argument("--limit", type=int, default=None)
+    p_adv.set_defaults(func=cmd_adversarial)
+
+    p_probes = sub.add_parser("probes-v2", help="Retrieval-variant probes on adversarial evidence")
+    p_probes.add_argument("--limit", type=int, default=None)
+    p_probes.set_defaults(func=cmd_probes_v2)
 
     args = parser.parse_args(argv)
     try:

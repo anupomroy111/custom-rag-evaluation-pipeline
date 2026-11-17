@@ -1,0 +1,99 @@
+{
+  "timestamp": "2026-11-17 23:07:05",
+  "mode": "semantic",
+  "judge": "live",
+  "llm_model": "gemini-3.5-flash-lite",
+  "provenance": "synthetic-author-reviewed fixtures; no independent human validation",
+  "n_cases": 2,
+  "summary": {
+    "n_cases": 2,
+    "n_resolved": 2,
+    "evaluation_error_rate": 0.0,
+    "adversarial_detection_rate": 1.0,
+    "false_acceptance_rate": 0.0,
+    "false_rejection_rate": null,
+    "exact_status_accuracy": 1.0,
+    "uncertain_rate": 0.0,
+    "deterministic_semantic_disagreements": 0,
+    "contradiction_detection": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "confusion": {
+      "matrix": {
+        "SUPPORTED": {
+          "SUPPORTED": 0,
+          "CONTRADICTED": 0,
+          "NOT_SUPPORTED": 0,
+          "UNCERTAIN": 0
+        },
+        "CONTRADICTED": {
+          "SUPPORTED": 0,
+          "CONTRADICTED": 2,
+          "NOT_SUPPORTED": 0,
+          "UNCERTAIN": 0
+        },
+        "NOT_SUPPORTED": {
+          "SUPPORTED": 0,
+          "CONTRADICTED": 0,
+          "NOT_SUPPORTED": 0,
+          "UNCERTAIN": 0
+        },
+        "UNCERTAIN": {
+          "SUPPORTED": 0,
+          "CONTRADICTED": 0,
+          "NOT_SUPPORTED": 0,
+          "UNCERTAIN": 0
+        }
+      },
+      "excluded_error_states": 0
+    },
+    "per_category": {
+      "negation_flip": {
+        "n": 2,
+        "exact_match_accuracy": 1.0,
+        "uncertain": 0
+      }
+    },
+    "injection_flagged": 0,
+    "injection_cases": 0
+  },
+  "records": [
+    {
+      "id": "NEG-001",
+      "claim_index": 0,
+      "category": "negation_flip",
+      "difficulty": "hard",
+      "claim": "Company A acquired Company B.",
+      "expected": "CONTRADICTED",
+      "predicted": "CONTRADICTED",
+      "match": true,
+      "deterministic_flags": [],
+      "disagreement": false,
+      "explanation": "The evidence explicitly states that Company A did not acquire Company B, directly contradicting the claim.",
+      "injection_detected": false,
+      "errors": []
+    },
+    {
+      "id": "NEG-002",
+      "claim_index": 0,
+      "category": "negation_flip",
+      "difficulty": "easy",
+      "claim": "The gateway does not retry failed requests.",
+      "expected": "CONTRADICTED",
+      "predicted": "CONTRADICTED",
+      "match": true,
+      "deterministic_flags": [
+        "negation: claim polarity differs from similar sentence 'The gateway retries failed requests.'"
+      ],
+      "disagreement": false,
+      "explanation": "The evidence states that 'The gateway retries failed requests.', which directly contradicts the claim's assertion that it does not retry them.",
+      "injection_detected": false,
+      "errors": []
+    }
+  ]
+}
