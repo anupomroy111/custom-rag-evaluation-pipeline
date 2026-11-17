@@ -152,3 +152,18 @@ zero scores instead of reporting errors, and it has never been tested against
 adversarial evidence. V2 must make every evaluation outcome explicit and auditable
 before adding adversarial benchmarks — otherwise new benchmarks would inherit the
 same silent-failure pathology.
+
+## 10. Addendum — bug found during V2 implementation (B16)
+
+Mid-run inspection of the first live V2 ablation showed bm25 faithfulness 0.838
+where V1 measured 1.0. Root cause: the new deterministic checks flagged a claim's
+number against a *different* number in another sentence of the same multi-fact
+context (and negation cues in unrelated clauses), and the disagreement rule let
+those flags override correct semantic SUPPORTED verdicts. Fix: support-aware
+contradiction flags (conflict AND no supporting sentence), clause-scoped negation,
+support-aware modality/temporal/role checks, tightened injection regex (benign
+"override the project default" no longer flagged). Three regression tests added
+(`test_multifact_context_no_false_numerical_contradiction`,
+`test_clause_scoped_negation_no_false_flag`, `test_benign_override_not_injection`).
+All V2 reports were regenerated with the fixed code via the response cache;
+final bm25 faithfulness 1.0. Interim pre-fix numbers are invalid and superseded.

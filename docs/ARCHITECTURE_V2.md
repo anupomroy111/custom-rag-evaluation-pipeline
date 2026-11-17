@@ -37,8 +37,12 @@ V2 evaluation layer
    retrieved passage ids only — the LLM never invents citations.
 4. **Deterministic evidence checks** on injection-cleaned evidence:
    numerical contradiction, negation flip, modality overstatement, temporal
-   reversal, role reversal (SPO order), entity absence. Injection sentences are
-   excluded from evidence but recorded as security flags over the FULL context.
+   reversal, role reversal (SPO order), entity absence. All checks are
+   **support-aware**: a conflict flag requires that no similar sentence
+   supports the claim (multi-fact contexts do not self-contradict); negation
+   polarity is compared within the best-matching clause. Injection sentences
+   are excluded from evidence but recorded as security flags over the FULL
+   context.
 5. **Resolution rules**:
    - deterministic mode: flags map to CONTRADICTED / NOT_SUPPORTED; no flag →
      UNCERTAIN (never a guessed SUPPORTED).

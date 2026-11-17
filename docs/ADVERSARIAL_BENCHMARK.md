@@ -45,22 +45,22 @@ python -m ragpipe.cli probes-v2                              # retrieval variant
 
 | Metric | Value |
 |---|---|
-| Adversarial detection rate | 0.528 |
+| Adversarial detection rate | 0.583 |
 | False acceptance rate | **0.000** |
 | False rejection rate | **0.000** |
-| Exact status accuracy | 0.279 |
-| Uncertain rate | 0.635 |
+| Exact status accuracy | 0.317 |
+| Uncertain rate | 0.596 |
 | Evaluation error rate | 0.000 |
 | Injection cases flagged | 13/13 |
 
 Interpretation: the deterministic battery is **fail-closed** — it never accepts
-an adversarial claim and never rejects a true one, but it can only resolve ~28%
+an adversarial claim and never rejects a true one, but it can only resolve ~32%
 of cases exactly; role reversal, entity attribution and multi-hop composition
 require semantic SPO analysis (hence UNCERTAIN, not a guess). This is the honest
 floor, not a headline score.
 
-Per-category exact accuracy (deterministic): negation 0.462, numerical 0.538,
-modality 0.615, temporal 0.231, multi_hop 0.154, injection 0.154,
+Per-category exact accuracy (deterministic): negation 0.692, modality 0.615,
+numerical 0.538, temporal 0.231, multi_hop 0.231, injection 0.154,
 role_reversal 0.077, entity_attribution 0.000.
 
 Live semantic results are reported separately in

@@ -30,7 +30,7 @@ detection / false-acceptance / false-rejection rates. See
 Built with pure-Python retrieval (no native dependencies) and the Gemini API for
 embeddings, generation, and LLM-as-judge evaluation.
 
-## Results (live run, 12-question golden dataset)
+## V1 results (live run, 12-question golden dataset)
 
 | Metric | bm25 | dense | hybrid | hybrid+rerank |
 |---|---|---|---|---|
@@ -79,15 +79,23 @@ LLM re-ranker (listwise relevance grades 0–3) ──► top-4 passages
 Grounded generation (cite [id:xxx], refuse if unsupported)
    │
    ▼
-Evaluation pipeline (LLM-as-judge + deterministic checks)
-   ├─ Faithfulness: claim extraction → per-claim verification vs context
-   ├─ Hallucination rate: 1 − faithfulness; fabrication on unanswerable questions
-   ├─ Answer relevancy: judge score 0–1
-   ├─ Context precision: rank-weighted (AP-style) passage relevance
-   ├─ Context recall: reference sentences attributable to context
-   └─ Refusal accuracy / over-refusal / citation coverage
+V2 verification engine (fail-closed, ragpipe/verify/)
+   ├─ deterministic analysis: negation, modality, entities, numbers, dates
+   ├─ semantic stage: SPO + entailment (one structured judge call)
+   ├─ support-aware evidence checks + injection screening (untrusted data)
+   └─ explicit states: SUPPORTED / CONTRADICTED / NOT_SUPPORTED /
+      UNCERTAIN / EXTRACTION_FAILED / EVALUATION_ERROR
+   │
    ▼
-reports/eval_<timestamp>.json + .md  (variant comparison + claim audit)
+Evaluation pipeline (LLM-as-judge + deterministic checks)
+   ├─ Faithfulness: supported / resolved claim verdicts (None on failure)
+   ├─ Hallucination rate (answerable) / fabrication rate (unanswerable), separate
+   ├─ Answer relevancy: judge score 0–1
+   ├─ Context precision: AP-style; V2 uses an independent judge (not reranker grades)
+   ├─ Context recall: reference sentences attributable to context
+   └─ Refusal accuracy / over-refusal / citation coverage + validity
+   ▼
+reports/ (V1) and reports/v2/ (V2 benchmarks, probes, FINAL_V2_REPORT)
 ```
 
 ## Setup
@@ -138,14 +146,21 @@ tables + unsupported-claim listing). A real 4-variant run is included:
 
 | Metric | How it is computed |
 |---|---|
-| Faithfulness | Extract atomic claims from the answer, verify each against retrieved context (2-step LLM judge). Score = supported / total. |
-| Hallucination rate | `1 − faithfulness`; for unanswerable questions, 1 if the model fabricated instead of refusing. |
+| Faithfulness | Atomic claims verified against context; V2 score = SUPPORTED / resolved verdicts (CONTRADICTED + NOT_SUPPORTED count against). `None` on extraction/evaluation failure — never a manufactured 1.0. |
+| Hallucination rate (answerable) | `1 − faithfulness` over answerable questions only. |
+| Fabrication rate (unanswerable) | Fraction of unanswerable questions answered instead of refused. Reported separately, never averaged with the above. |
 | Answer relevancy | LLM judge, 0–1 rubric; correct refusals count as relevant. |
-| Context precision | Average-precision-style rank weighting over relevant passages; uses reranker grades (≥2) when available. |
+| Context precision | Average-precision-style rank weighting; V1 may use reranker grades, V2 always an independent relevance judge. |
 | Context recall | Fraction of reference-answer sentences attributable to retrieved context. |
-| Refusal accuracy | Correct refusals on unanswerable questions (hallucination resistance). |
-| Over-refusal rate | Wrong refusals on answerable questions. |
-| Citation coverage | Fraction of answers carrying valid passage citations. |
+| Refusal accuracy / over-refusal | Correct refusals on unanswerable / wrong refusals on answerable questions. |
+| Citation coverage / validity | Answers carrying ≥1 valid citation; 1 − invalid attempts / all attempts. |
+| Claim extraction success / evaluation error rate | Fraction of answered items in OK / EVALUATION_ERROR state (fail-closed health). |
+
+V2 adversarial metrics (fixture benchmark): confusion matrix over the four
+verdict states, adversarial detection rate, false acceptance / false rejection
+rates, contradiction precision/recall/F1 with TP/FP/FN counts, per-category
+exact-match accuracy with sample counts, and injection-flag coverage.
+Retrieval probes add evidence hit@10, MRR and evidence recall@4 with no LLM judge.
 
 Every judge returns structured JSON, so each score is auditable down to the
 individual claim verdict — the Markdown report lists every unsupported claim
@@ -171,18 +186,29 @@ dataset.
   need calibration against each other.
 - **Embedding cache** keyed by chunk id + model + dimension — re-ingesting only
   embeds new/changed chunks.
-- **Rate limiting & retries** — client-side pacing (`RAG_RPM`) plus exponential
-  backoff on 429/5xx, so evaluation runs survive free-tier quotas.
+- **Rate limiting & retries** — client-side pacing (`RAG_RPM`, separate
+  `RAG_EMBED_RPM`) plus exponential backoff on 429/5xx and transport failures;
+  explicit 120 s timeouts; empty/blocked completions raise instead of scoring.
+- **Response cache** — judge responses cached on disk keyed by model+prompt;
+  benchmark replays are quota-free and reproducible (`RAG_LLM_CACHE=0` disables).
+- **Fail-closed evaluation** — every failure mode yields an explicit state and
+  `None`, never a silent perfect score; incompatible metric populations are
+  reported separately.
+- **Support-aware deterministic checks** — a contradiction flag requires a
+  conflict AND no supporting sentence (multi-fact contexts don't self-contradict);
+  negation is clause-scoped; injection sentences are excluded from evidence.
 - **Model choice** — defaults to `gemini-3.5-flash-lite`: older `gemini-2.5-flash`
-  free tier allows only 20 requests/day (an eval run needs ~80) and is closed to
-  new API keys. Override with `RAG_LLM_MODEL` if you have a paid quota.
+  free tier allows only 20 requests/day and is closed to new API keys. The
+  flash-lite free tier caps at 500 generate requests/day; long ablations may
+  need a second day (documented in FINAL_V2_REPORT.md). Override with
+  `RAG_LLM_MODEL` if you have a paid quota.
 - **Ablation-first evaluation** — the same runner scores `bm25`, `dense`,
   `hybrid`, and `+rerank` variants, making retrieval regressions visible.
 
 ## Tests
 
 ```bash
-python -m pytest tests/ -q    # 95 tests, no API calls needed
+python -m pytest tests/ -q    # 98 tests, no API calls needed
 ```
 
 Covers chunking, BM25, RRF fusion math, reranker grade handling, citation
@@ -224,4 +250,9 @@ docs/              # V2 audit, architecture, methodology, benchmark, migration
 tests/
 reports/           # V1 evaluation reports (immutable history)
 reports/v2/        # V2 benchmark reports
+scripts/           # report consolidation utilities
 ```
+
+## License
+
+MIT — see [LICENSE](LICENSE).
