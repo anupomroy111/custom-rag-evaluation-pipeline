@@ -1,5 +1,14 @@
 # Custom RAG & Evaluation Pipeline
 
+<p>
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
+  <img src="https://img.shields.io/badge/Gemini_API-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white" alt="Gemini API" />
+  <img src="https://img.shields.io/badge/Faithfulness-1.000-34d399?style=for-the-badge" alt="Faithfulness 1.000" />
+  <img src="https://img.shields.io/badge/Hallucination-0.000-22d3ee?style=for-the-badge" alt="Hallucination 0.000" />
+  <img src="https://img.shields.io/badge/License-MIT-f5b83d?style=for-the-badge" alt="MIT License" />
+</p>
+
+
 A document-grounded RAG system that **evaluates its own answers**. Hybrid retrieval
 (BM25 + dense embeddings, fused with Reciprocal Rank Fusion), LLM re-ranking,
 citation-grounded generation, and an automated evaluation pipeline measuring
