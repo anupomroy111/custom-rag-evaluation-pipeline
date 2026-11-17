@@ -6,4 +6,5 @@ __pycache__/
 index/
 reports/checkpoint.json
 eval_run.log
-eval_ablation.logassets/
+eval_ablation.log
+assets/
