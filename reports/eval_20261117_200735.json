@@ -1,0 +1,2450 @@
+{
+  "timestamp": "2026-11-17 19:33:50",
+  "llm_model": "gemini-3.5-flash-lite",
+  "embed_model": "gemini-embedding-001",
+  "num_questions": 12,
+  "variants": {
+    "bm25": {
+      "summary": {
+        "faithfulness": 1.0,
+        "hallucination_rate": 0.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "refusal_accuracy": 1.0,
+        "over_refusal_rate": 0.0,
+        "citation_coverage": 1.0
+      },
+      "results": [
+        {
+          "id": "q01",
+          "question": "What is the default build timeout in Nimbus, and what is the maximum it can be raised to?",
+          "answerable": true,
+          "answer": "The default build timeout is 15 minutes, and it can be raised to a maximum of 60 minutes [edb247c866fb, 47a24a581f87].",
+          "refused": false,
+          "cited_ids": [
+            "edb247c866fb",
+            "47a24a581f87"
+          ],
+          "context_ids": [
+            "edb247c866fb",
+            "47a24a581f87",
+            "fe9ff33182dc",
+            "20d33b1109dd"
+          ],
+          "context_docs": [
+            "architecture.md",
+            "troubleshooting.md",
+            "cli-reference.md",
+            "overview.md"
+          ],
+          "retrieved_ids": [
+            "edb247c866fb",
+            "47a24a581f87",
+            "fe9ff33182dc",
+            "20d33b1109dd",
+            "e093939b41b5",
+            "b0674607de24",
+            "f87cdc7ff8b9",
+            "216eb262431a",
+            "8cc2417628b9",
+            "6eba104bded6"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "The default build timeout is 15 minutes",
+              "supported": true,
+              "reason": "The context explicitly states that the default build timeout is 15 minutes."
+            },
+            {
+              "claim": "The build timeout can be raised to a maximum of 60 minutes",
+              "supported": true,
+              "reason": "The context explicitly states that the build timeout can be raised to a maximum of 60 minutes via `build.timeout` in `nimbus.yaml`."
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "The default build timeout is 15 minutes.",
+              "attributed": true
+            },
+            {
+              "sentence": "It can be raised to a maximum of 60 minutes via build.timeout in nimbus.yaml.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately addresses the question using the provided knowledge, specifying both the default and maximum build timeouts in Nimbus."
+        },
+        {
+          "id": "q02",
+          "question": "How much RAM does a free tier service instance get, and what happens when it has no traffic?",
+          "answerable": true,
+          "answer": "A free tier service instance gets 512 MB RAM [id: 8d68734bcd2c]. When it has no traffic for 15 minutes, it sleeps and cold-starts in roughly 3 seconds [id: 8d68734bcd2c].",
+          "refused": false,
+          "cited_ids": [
+            "8d68734bcd2c"
+          ],
+          "context_ids": [
+            "8d68734bcd2c",
+            "47a24a581f87",
+            "fe9ff33182dc",
+            "20d33b1109dd"
+          ],
+          "context_docs": [
+            "quotas-and-pricing.md",
+            "troubleshooting.md",
+            "cli-reference.md",
+            "overview.md"
+          ],
+          "retrieved_ids": [
+            "8d68734bcd2c",
+            "47a24a581f87",
+            "fe9ff33182dc",
+            "20d33b1109dd",
+            "ef09d7a8a48f",
+            "981c8e1cb938",
+            "f87cdc7ff8b9",
+            "216eb262431a",
+            "6eba104bded6",
+            "edb247c866fb"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "A free tier service instance gets 512 MB RAM",
+              "supported": true,
+              "reason": "The context states '512 MB RAM and 0.5 vCPU per service instance' under the Free tier."
+            },
+            {
+              "claim": "When it has no traffic for 15 minutes, it sleeps",
+              "supported": true,
+              "reason": "The context states 'Services on the free tier sleep after 15 minutes without traffic' under the Free tier."
+            },
+            {
+              "claim": "It cold-starts in roughly 3 seconds",
+              "supported": true,
+              "reason": "The context states that free tier services 'cold-start in roughly 3 seconds'."
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Free tier instances get 512 MB RAM.",
+              "attributed": true
+            },
+            {
+              "sentence": "They sleep after 15 minutes without traffic and cold-start in roughly 3 seconds.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately addresses both parts of the question based on the provided text."
+        },
+        {
+          "id": "q03",
+          "question": "Which role is allowed to deploy to prod and manage secrets?",
+          "answerable": true,
+          "answer": "Only the `admin` role is allowed to deploy to `prod` or manage secrets [id: 8cc2417628b9].",
+          "refused": false,
+          "cited_ids": [
+            "8cc2417628b9"
+          ],
+          "context_ids": [
+            "8cc2417628b9",
+            "6eba104bded6",
+            "fe9ff33182dc",
+            "f87cdc7ff8b9"
+          ],
+          "context_docs": [
+            "security.md",
+            "security.md",
+            "cli-reference.md",
+            "cli-reference.md"
+          ],
+          "retrieved_ids": [
+            "8cc2417628b9",
+            "6eba104bded6",
+            "fe9ff33182dc",
+            "f87cdc7ff8b9",
+            "20d33b1109dd",
+            "ef09d7a8a48f",
+            "981c8e1cb938",
+            "edb247c866fb",
+            "47a24a581f87",
+            "e093939b41b5"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "Only the admin role is allowed to deploy to prod",
+              "supported": true,
+              "reason": "The context states: Only `admin` can deploy to `prod` or manage secrets."
+            },
+            {
+              "claim": "Only the admin role is allowed to manage secrets",
+              "supported": true,
+              "reason": "The context states: Only `admin` can deploy to `prod` or manage secrets."
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Only the admin role can deploy to prod or manage secrets.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately addresses the question based on the provided text."
+        },
+        {
+          "id": "q04",
+          "question": "How does the Gateway handle retries on 5xx responses?",
+          "answerable": true,
+          "answer": "The Gateway performs automatic retries of up to 2 retries on 5xx responses with a 250 ms backoff [id: 981c8e1cb938].",
+          "refused": false,
+          "cited_ids": [
+            "981c8e1cb938"
+          ],
+          "context_ids": [
+            "981c8e1cb938",
+            "20d33b1109dd",
+            "8cc2417628b9",
+            "47a24a581f87"
+          ],
+          "context_docs": [
+            "architecture.md",
+            "overview.md",
+            "security.md",
+            "troubleshooting.md"
+          ],
+          "retrieved_ids": [
+            "981c8e1cb938",
+            "20d33b1109dd",
+            "8cc2417628b9",
+            "47a24a581f87",
+            "6eba104bded6",
+            "b0674607de24",
+            "edb247c866fb",
+            "8d68734bcd2c",
+            "e093939b41b5",
+            "fe9ff33182dc"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "The Gateway performs automatic retries of up to 2 retries on 5xx responses with a 250 ms backoff",
+              "supported": true,
+              "reason": "The context explicitly states that the Gateway performs automatic retries: up to 2 retries on 5xx responses with a 250 ms backoff."
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "The Gateway retries up to 2 times on 5xx responses with a 250 ms backoff.",
+              "attributed": true
+            },
+            {
+              "sentence": "It never retries non-idempotent methods like POST and PATCH.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately addresses how the Gateway handles retries on 5xx responses using the provided information."
+        },
+        {
+          "id": "q05",
+          "question": "What command rolls back a prod service to a specific revision, and how many revisions are kept?",
+          "answerable": true,
+          "answer": "The command is `nimbus rollback --env prod --to <revision>` [id: fe9ff33182dc]. Rollbacks keep the last 10 revisions [id: fe9ff33182dc].",
+          "refused": false,
+          "cited_ids": [
+            "fe9ff33182dc"
+          ],
+          "context_ids": [
+            "fe9ff33182dc",
+            "f87cdc7ff8b9",
+            "20d33b1109dd",
+            "ef09d7a8a48f"
+          ],
+          "context_docs": [
+            "cli-reference.md",
+            "cli-reference.md",
+            "overview.md",
+            "troubleshooting.md"
+          ],
+          "retrieved_ids": [
+            "fe9ff33182dc",
+            "f87cdc7ff8b9",
+            "20d33b1109dd",
+            "ef09d7a8a48f",
+            "8cc2417628b9",
+            "6eba104bded6",
+            "47a24a581f87",
+            "981c8e1cb938",
+            "216eb262431a",
+            "8d68734bcd2c"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "The command is nimbus rollback --env prod --to <revision>",
+              "supported": true,
+              "reason": "The context explicitly states 'nimbus rollback --env prod --to <revision> rolls back to a specific revision.'"
+            },
+            {
+              "claim": "Rollbacks keep the last 10 revisions",
+              "supported": true,
+              "reason": "The context states 'Rollbacks keep the last 10 revisions; older revisions are garbage-collected.'"
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Use nimbus rollback --env prod --to <revision>.",
+              "attributed": true
+            },
+            {
+              "sentence": "The platform keeps the last 10 revisions.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer accurately provides the rollback command for a production service based on the document and states that the last 10 revisions are kept."
+        },
+        {
+          "id": "q06",
+          "question": "How long are audit logs retained, and where can they be exported?",
+          "answerable": true,
+          "answer": "Audit logs are retained for 90 days and can be exported to S3 [id: 6eba104bded6].",
+          "refused": false,
+          "cited_ids": [
+            "6eba104bded6"
+          ],
+          "context_ids": [
+            "6eba104bded6",
+            "e093939b41b5",
+            "8cc2417628b9",
+            "edb247c866fb"
+          ],
+          "context_docs": [
+            "security.md",
+            "release-notes.md",
+            "security.md",
+            "architecture.md"
+          ],
+          "retrieved_ids": [
+            "6eba104bded6",
+            "e093939b41b5",
+            "8cc2417628b9",
+            "edb247c866fb",
+            "20d33b1109dd",
+            "f87cdc7ff8b9",
+            "fe9ff33182dc",
+            "ef09d7a8a48f",
+            "8d68734bcd2c",
+            "47a24a581f87"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "Audit logs are retained for 90 days",
+              "supported": true,
+              "reason": "The context explicitly states 'Audit logs are retained for 90 days'."
+            },
+            {
+              "claim": "Audit logs can be exported to S3",
+              "supported": true,
+              "reason": "The context explicitly states that audit logs are 'exportable to S3'."
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Audit logs are retained for 90 days.",
+              "attributed": true
+            },
+            {
+              "sentence": "They can be exported to S3.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately addresses both parts of the question (retention period and export destination) based on the provided text."
+        },
+        {
+          "id": "q07",
+          "question": "What changed in release v2.4.0 regarding build nodes and canary deployments?",
+          "answerable": true,
+          "answer": "In release v2.4.0:\n- ARM64 build nodes are now available in all regions (selected with `build.arch: arm64`) [id: e093939b41b5].\n- Canary deployments are generally available (10% traffic for 5 minutes) [id: e093939b41b5].",
+          "refused": false,
+          "cited_ids": [
+            "e093939b41b5"
+          ],
+          "context_ids": [
+            "e093939b41b5",
+            "edb247c866fb",
+            "8d68734bcd2c",
+            "981c8e1cb938"
+          ],
+          "context_docs": [
+            "release-notes.md",
+            "architecture.md",
+            "quotas-and-pricing.md",
+            "architecture.md"
+          ],
+          "retrieved_ids": [
+            "e093939b41b5",
+            "edb247c866fb",
+            "8d68734bcd2c",
+            "981c8e1cb938",
+            "ef09d7a8a48f",
+            "47a24a581f87",
+            "20d33b1109dd",
+            "f87cdc7ff8b9",
+            "b0674607de24",
+            "8cc2417628b9"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "Release v2.4.0 is mentioned.",
+              "supported": true,
+              "reason": "Release v2.4.0 is listed under Release Notes in the context."
+            },
+            {
+              "claim": "ARM64 build nodes are now available in all regions.",
+              "supported": true,
+              "reason": "The context states 'ARM64 build nodes are now available in all regions' under v2.4.0."
+            },
+            {
+              "claim": "ARM64 build nodes are selected with `build.arch: arm64`.",
+              "supported": true,
+              "reason": "The context states to select with `build.arch: arm64` under v2.4.0."
+            },
+            {
+              "claim": "Canary deployments are generally available.",
+              "supported": true,
+              "reason": "The context states 'Canary deployments are generally available' under v2.4.0."
+            },
+            {
+              "claim": "Canary deployments route 10% traffic for 5 minutes.",
+              "supported": true,
+              "reason": "The context specifies '(10% traffic for 5 minutes)' for canary deployments under v2.4.0 and in the Scheduler section."
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "In v2.4.0, ARM64 build nodes became available in all regions, selectable with build.arch: arm64.",
+              "attributed": true
+            },
+            {
+              "sentence": "Canary deployments became generally available with 10% traffic for 5 minutes.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer accurately states the changes in release v2.4.0 regarding ARM64 build nodes and canary deployments, matching the provided information."
+        },
+        {
+          "id": "q08",
+          "question": "My service returns 502 after deploy and my build times out. What should I check and which setting helps the build?",
+          "answerable": true,
+          "answer": "To address a service returning 502 after deploy, you should check the following:\n1. Ensure the service listens on the port declared in `nimbus.yaml` (the default is 8080) [id: 47a24a581f87].\n2. Verify that health checks pass (the Scheduler probes `/healthz` every 10 seconds and restarts after 3 consecutive failures) [id: 47a24a581f87].\n3. Check that the instance is not out of memory, as free tier instances only have 512 MB of RAM [id: 47a24a581f87].\n\nTo help with build timeouts, the default build timeout is 15 minutes, which can be raised to a maximum of 60 minutes using `build.timeout` in `nimbus.yaml` [id: 47a24a581f87, edb247c866fb]. Additionally, large monorepos should enable the shared layer cache by setting `build.cache: true` [id: 47a24a581f87].",
+          "refused": false,
+          "cited_ids": [
+            "47a24a581f87",
+            "edb247c866fb"
+          ],
+          "context_ids": [
+            "47a24a581f87",
+            "edb247c866fb",
+            "e093939b41b5",
+            "fe9ff33182dc"
+          ],
+          "context_docs": [
+            "troubleshooting.md",
+            "architecture.md",
+            "release-notes.md",
+            "cli-reference.md"
+          ],
+          "retrieved_ids": [
+            "47a24a581f87",
+            "edb247c866fb",
+            "e093939b41b5",
+            "fe9ff33182dc",
+            "b0674607de24",
+            "8d68734bcd2c",
+            "216eb262431a",
+            "ef09d7a8a48f",
+            "20d33b1109dd",
+            "981c8e1cb938"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "A service returning 502 after deploy may be caused by not listening on the port declared in nimbus.yaml.",
+              "supported": true,
+              "reason": "The guide states to check that the service listens on the port declared in nimbus.yaml when a service returns 502 after deploy."
+            },
+            {
+              "claim": "The default port in nimbus.yaml is 8080.",
+              "supported": true,
+              "reason": "The text explicitly states `port`, default 8080 in the troubleshooting section for 502 errors."
+            },
+            {
+              "claim": "The Scheduler probes /healthz every 10 seconds.",
+              "supported": true,
+              "reason": "The text states that the Scheduler probes `/healthz` every 10 seconds."
+            },
+            {
+              "claim": "The Scheduler restarts the service after 3 consecutive health check failures.",
+              "supported": true,
+              "reason": "The text states it restarts after 3 consecutive failures."
+            },
+            {
+              "claim": "Free tier instances have 512 MB of RAM.",
+              "supported": true,
+              "reason": "The text explicitly states that free tier instances only have 512 MB RAM."
+            },
+            {
+              "claim": "The default build timeout is 15 minutes.",
+              "supported": true,
+              "reason": "The text states that the default build timeout is 15 minutes in multiple places."
+            },
+            {
+              "claim": "The build timeout can be raised to a maximum of 60 minutes using build.timeout in nimbus.yaml.",
+              "supported": true,
+              "reason": "The text states it can be raised with `build.timeout` in `nimbus.yaml` (maximum 60 minutes)."
+            },
+            {
+              "claim": "Large monorepos should enable the shared layer cache by setting build.cache: true in nimbus.yaml.",
+              "supported": true,
+              "reason": "The text states large monorepos should enable the shared layer cache by setting `build.cache: true`."
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "For 502 errors, check that the service listens on the declared port (default 8080), that /healthz health checks pass, and that the instance is not out of memory.",
+              "attributed": true
+            },
+            {
+              "sentence": "For build timeouts, raise build.timeout in nimbus.yaml, up to 60 minutes.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly addresses both parts of the question: what to check for 502 errors and which settings help with build timeouts, referencing the correct configuration options and behaviors."
+        },
+        {
+          "id": "q09",
+          "question": "How much does the Pro tier cost and how many builds per month does it include?",
+          "answerable": true,
+          "answer": "The Pro tier costs $29 per user per month and includes 2,000 builds per month [id: 8d68734bcd2c].",
+          "refused": false,
+          "cited_ids": [
+            "8d68734bcd2c"
+          ],
+          "context_ids": [
+            "8d68734bcd2c",
+            "ef09d7a8a48f",
+            "b0674607de24",
+            "47a24a581f87"
+          ],
+          "context_docs": [
+            "quotas-and-pricing.md",
+            "troubleshooting.md",
+            "quotas-and-pricing.md",
+            "troubleshooting.md"
+          ],
+          "retrieved_ids": [
+            "8d68734bcd2c",
+            "ef09d7a8a48f",
+            "b0674607de24",
+            "47a24a581f87",
+            "f87cdc7ff8b9",
+            "edb247c866fb",
+            "fe9ff33182dc",
+            "6eba104bded6",
+            "e093939b41b5",
+            "8cc2417628b9"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "The Pro tier costs $29 per user per month",
+              "supported": true,
+              "reason": "The context explicitly states 'Pro tier — $29 per user per month'."
+            },
+            {
+              "claim": "The Pro tier includes 2,000 builds per month",
+              "supported": true,
+              "reason": "The context states under Pro tier '2,000 builds per month, then $0.01 per additional build.'"
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Pro costs $29 per user per month.",
+              "attributed": true
+            },
+            {
+              "sentence": "It includes 2,000 builds per month, then $0.01 per additional build.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately addresses both parts of the question (cost and builds per month) based on the provided text."
+        },
+        {
+          "id": "q10",
+          "question": "Where are application secrets stored, and what must happen for a rotated secret to take effect?",
+          "answerable": true,
+          "answer": "Application secrets are stored in HashiCorp Vault [id: 8cc2417628b9]. Rotating a secret requires a redeploy to take effect [id: 8cc2417628b9].",
+          "refused": false,
+          "cited_ids": [
+            "8cc2417628b9"
+          ],
+          "context_ids": [
+            "8cc2417628b9",
+            "6eba104bded6",
+            "f87cdc7ff8b9",
+            "ef09d7a8a48f"
+          ],
+          "context_docs": [
+            "security.md",
+            "security.md",
+            "cli-reference.md",
+            "troubleshooting.md"
+          ],
+          "retrieved_ids": [
+            "8cc2417628b9",
+            "6eba104bded6",
+            "f87cdc7ff8b9",
+            "ef09d7a8a48f",
+            "e093939b41b5",
+            "edb247c866fb",
+            "fe9ff33182dc",
+            "20d33b1109dd",
+            "981c8e1cb938",
+            "216eb262431a"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "Application secrets are stored in HashiCorp Vault",
+              "supported": true,
+              "reason": "The context explicitly states that application secrets are stored in HashiCorp Vault."
+            },
+            {
+              "claim": "Rotating a secret requires a redeploy to take effect",
+              "supported": true,
+              "reason": "The context explicitly states that rotating a secret requires a redeploy to take effect."
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Secrets are stored in HashiCorp Vault and injected as environment variables at container startup.",
+              "attributed": true
+            },
+            {
+              "sentence": "Rotating a secret requires a redeploy to take effect.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately addresses where application secrets are stored and what is required for a rotated secret to take effect based on the provided reference."
+        },
+        {
+          "id": "q11",
+          "question": "Who is the CEO of Nimbus Deploy and what is their background?",
+          "answerable": false,
+          "answer": "I cannot answer this from the provided documents.",
+          "refused": true,
+          "cited_ids": [],
+          "context_ids": [
+            "8cc2417628b9",
+            "216eb262431a",
+            "20d33b1109dd",
+            "47a24a581f87"
+          ],
+          "context_docs": [
+            "security.md",
+            "overview.md",
+            "overview.md",
+            "troubleshooting.md"
+          ],
+          "retrieved_ids": [
+            "8cc2417628b9",
+            "216eb262431a",
+            "20d33b1109dd",
+            "47a24a581f87",
+            "edb247c866fb",
+            "981c8e1cb938",
+            "f87cdc7ff8b9",
+            "fe9ff33182dc",
+            "ef09d7a8a48f",
+            "e093939b41b5"
+          ],
+          "faithfulness": null,
+          "hallucination_rate": 0.0,
+          "context_recall": null,
+          "claim_verdicts": [],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer correctly states that the information cannot be found in the provided documents."
+        },
+        {
+          "id": "q12",
+          "question": "Does Nimbus offer GPU instances for machine learning workloads, and what GPU models are available?",
+          "answerable": false,
+          "answer": "I cannot answer this from the provided documents.",
+          "refused": true,
+          "cited_ids": [],
+          "context_ids": [
+            "981c8e1cb938",
+            "e093939b41b5",
+            "6eba104bded6",
+            "216eb262431a"
+          ],
+          "context_docs": [
+            "architecture.md",
+            "release-notes.md",
+            "security.md",
+            "overview.md"
+          ],
+          "retrieved_ids": [
+            "981c8e1cb938",
+            "e093939b41b5",
+            "6eba104bded6",
+            "216eb262431a",
+            "ef09d7a8a48f",
+            "47a24a581f87",
+            "fe9ff33182dc",
+            "20d33b1109dd",
+            "8cc2417628b9",
+            "edb247c866fb"
+          ],
+          "faithfulness": null,
+          "hallucination_rate": 0.0,
+          "context_recall": null,
+          "claim_verdicts": [],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer correctly states that the information cannot be answered from the provided documents, which is the expected behavior when context is lacking."
+        }
+      ]
+    },
+    "dense": {
+      "summary": {
+        "faithfulness": 1.0,
+        "hallucination_rate": 0.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.9083,
+        "context_recall": 1.0,
+        "refusal_accuracy": 1.0,
+        "over_refusal_rate": 0.0,
+        "citation_coverage": 1.0
+      },
+      "results": [
+        {
+          "id": "q01",
+          "question": "What is the default build timeout in Nimbus, and what is the maximum it can be raised to?",
+          "answerable": true,
+          "answer": "The default build timeout is 15 minutes, and it can be raised to a maximum of 60 minutes [id: 47a24a581f87, id: edb247c866fb].",
+          "refused": false,
+          "cited_ids": [
+            "47a24a581f87",
+            "edb247c866fb"
+          ],
+          "context_ids": [
+            "47a24a581f87",
+            "edb247c866fb",
+            "981c8e1cb938",
+            "f87cdc7ff8b9"
+          ],
+          "context_docs": [
+            "troubleshooting.md",
+            "architecture.md",
+            "architecture.md",
+            "cli-reference.md"
+          ],
+          "retrieved_ids": [
+            "47a24a581f87",
+            "edb247c866fb",
+            "981c8e1cb938",
+            "f87cdc7ff8b9",
+            "216eb262431a",
+            "fe9ff33182dc",
+            "e093939b41b5",
+            "20d33b1109dd",
+            "ef09d7a8a48f",
+            "b0674607de24"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "The default build timeout is 15 minutes.",
+              "supported": true,
+              "reason": "The context explicitly states that the default build timeout is 15 minutes."
+            },
+            {
+              "claim": "The build timeout can be raised to a maximum of 60 minutes.",
+              "supported": true,
+              "reason": "The context states it can be raised to a maximum of 60 minutes via build.timeout in nimbus.yaml."
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "The default build timeout is 15 minutes.",
+              "attributed": true
+            },
+            {
+              "sentence": "It can be raised to a maximum of 60 minutes via build.timeout in nimbus.yaml.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately addresses the question using the provided text."
+        },
+        {
+          "id": "q02",
+          "question": "How much RAM does a free tier service instance get, and what happens when it has no traffic?",
+          "answerable": true,
+          "answer": "A free tier service instance gets 512 MB RAM [id: 8d68734bcd2c]. When it has no traffic for 15 minutes, it sleeps [id: 8d68734bcd2c].",
+          "refused": false,
+          "cited_ids": [
+            "8d68734bcd2c"
+          ],
+          "context_ids": [
+            "8d68734bcd2c",
+            "ef09d7a8a48f",
+            "b0674607de24",
+            "47a24a581f87"
+          ],
+          "context_docs": [
+            "quotas-and-pricing.md",
+            "troubleshooting.md",
+            "quotas-and-pricing.md",
+            "troubleshooting.md"
+          ],
+          "retrieved_ids": [
+            "8d68734bcd2c",
+            "ef09d7a8a48f",
+            "b0674607de24",
+            "47a24a581f87",
+            "20d33b1109dd",
+            "981c8e1cb938",
+            "edb247c866fb",
+            "6eba104bded6",
+            "e093939b41b5",
+            "216eb262431a"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "A free tier service instance gets 512 MB RAM",
+              "supported": true,
+              "reason": "The context states '512 MB RAM and 0.5 vCPU per service instance' under the Free tier section."
+            },
+            {
+              "claim": "When it has no traffic for 15 minutes, it sleeps",
+              "supported": true,
+              "reason": "The context states 'Services on the free tier sleep after 15 minutes without traffic' under the Free tier section."
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Free tier instances get 512 MB RAM.",
+              "attributed": true
+            },
+            {
+              "sentence": "They sleep after 15 minutes without traffic and cold-start in roughly 3 seconds.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 0.9166666666666666,
+          "context_relevant_flags": [
+            true,
+            true,
+            false,
+            true
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer accurately and directly addresses both parts of the question using information from the provided source."
+        },
+        {
+          "id": "q03",
+          "question": "Which role is allowed to deploy to prod and manage secrets?",
+          "answerable": true,
+          "answer": "Only the `admin` role is allowed to deploy to `prod` or manage secrets [id: 6eba104bded6, id: 8cc2417628b9].",
+          "refused": false,
+          "cited_ids": [
+            "6eba104bded6",
+            "8cc2417628b9"
+          ],
+          "context_ids": [
+            "6eba104bded6",
+            "8cc2417628b9",
+            "f87cdc7ff8b9",
+            "ef09d7a8a48f"
+          ],
+          "context_docs": [
+            "security.md",
+            "security.md",
+            "cli-reference.md",
+            "troubleshooting.md"
+          ],
+          "retrieved_ids": [
+            "6eba104bded6",
+            "8cc2417628b9",
+            "f87cdc7ff8b9",
+            "ef09d7a8a48f",
+            "e093939b41b5",
+            "20d33b1109dd",
+            "216eb262431a",
+            "edb247c866fb",
+            "fe9ff33182dc",
+            "b0674607de24"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "Only the admin role is allowed to deploy to prod",
+              "supported": true,
+              "reason": "The context states: 'Only admin can deploy to prod or manage secrets.'"
+            },
+            {
+              "claim": "Only the admin role is allowed to manage secrets",
+              "supported": true,
+              "reason": "The context states: 'Only admin can deploy to prod or manage secrets.'"
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Only the admin role can deploy to prod or manage secrets.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 0.5,
+          "context_relevant_flags": [
+            false,
+            true,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly addresses the question and provides the correct role allowed to deploy to prod and manage secrets based on the context."
+        },
+        {
+          "id": "q04",
+          "question": "How does the Gateway handle retries on 5xx responses?",
+          "answerable": true,
+          "answer": "The Gateway performs automatic retries up to 2 times on 5xx responses with a 250 ms backoff, but never retries non-idempotent methods (POST, PATCH) [id: 981c8e1cb938].",
+          "refused": false,
+          "cited_ids": [
+            "981c8e1cb938"
+          ],
+          "context_ids": [
+            "981c8e1cb938",
+            "47a24a581f87",
+            "ef09d7a8a48f",
+            "8cc2417628b9"
+          ],
+          "context_docs": [
+            "architecture.md",
+            "troubleshooting.md",
+            "troubleshooting.md",
+            "security.md"
+          ],
+          "retrieved_ids": [
+            "981c8e1cb938",
+            "47a24a581f87",
+            "ef09d7a8a48f",
+            "8cc2417628b9",
+            "b0674607de24",
+            "edb247c866fb",
+            "e093939b41b5",
+            "8d68734bcd2c",
+            "20d33b1109dd",
+            "f87cdc7ff8b9"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "The Gateway performs automatic retries up to 2 times on 5xx responses",
+              "supported": true,
+              "reason": "The context states: 'up to 2 retries on 5xx responses'."
+            },
+            {
+              "claim": "The Gateway uses a 250 ms backoff for retries",
+              "supported": true,
+              "reason": "The context states: 'with a 250 ms backoff'."
+            },
+            {
+              "claim": "The Gateway never retries non-idempotent methods",
+              "supported": true,
+              "reason": "The context states: 'never retries non-idempotent methods'."
+            },
+            {
+              "claim": "POST and PATCH are considered non-idempotent methods by the Gateway",
+              "supported": true,
+              "reason": "The context states: 'non-idempotent methods (POST, PATCH)'."
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "The Gateway retries up to 2 times on 5xx responses with a 250 ms backoff.",
+              "attributed": true
+            },
+            {
+              "sentence": "It never retries non-idempotent methods like POST and PATCH.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately addresses how the Gateway handles retries on 5xx responses using the provided context."
+        },
+        {
+          "id": "q05",
+          "question": "What command rolls back a prod service to a specific revision, and how many revisions are kept?",
+          "answerable": true,
+          "answer": "The command is `nimbus rollback --env prod --to <revision>` [id: fe9ff33182dc]. Rollbacks keep the last 10 revisions [id: f87cdc7ff8b9, fe9ff33182dc].",
+          "refused": false,
+          "cited_ids": [
+            "fe9ff33182dc",
+            "f87cdc7ff8b9"
+          ],
+          "context_ids": [
+            "f87cdc7ff8b9",
+            "fe9ff33182dc",
+            "ef09d7a8a48f",
+            "edb247c866fb"
+          ],
+          "context_docs": [
+            "cli-reference.md",
+            "cli-reference.md",
+            "troubleshooting.md",
+            "architecture.md"
+          ],
+          "retrieved_ids": [
+            "f87cdc7ff8b9",
+            "fe9ff33182dc",
+            "ef09d7a8a48f",
+            "edb247c866fb",
+            "e093939b41b5",
+            "6eba104bded6",
+            "b0674607de24",
+            "8d68734bcd2c",
+            "20d33b1109dd",
+            "981c8e1cb938"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "The rollback command is `nimbus rollback --env prod --to <revision>`",
+              "supported": true,
+              "reason": "The context explicitly lists `nimbus rollback --env prod --to <revision>` as a command to roll back to a specific revision."
+            },
+            {
+              "claim": "Rollbacks keep the last 10 revisions",
+              "supported": true,
+              "reason": "The context states: 'Rollbacks keep the last 10 revisions; older revisions are garbage-collected.'"
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Use nimbus rollback --env prod --to <revision>.",
+              "attributed": true
+            },
+            {
+              "sentence": "The platform keeps the last 10 revisions.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer accurately provides the rollback command for a production service and the number of revisions kept, based on the provided text."
+        },
+        {
+          "id": "q06",
+          "question": "How long are audit logs retained, and where can they be exported?",
+          "answerable": true,
+          "answer": "Audit logs are retained for 90 days and are exportable to S3 [id: 6eba104bded6].",
+          "refused": false,
+          "cited_ids": [
+            "6eba104bded6"
+          ],
+          "context_ids": [
+            "6eba104bded6",
+            "8cc2417628b9",
+            "f87cdc7ff8b9",
+            "edb247c866fb"
+          ],
+          "context_docs": [
+            "security.md",
+            "security.md",
+            "cli-reference.md",
+            "architecture.md"
+          ],
+          "retrieved_ids": [
+            "6eba104bded6",
+            "8cc2417628b9",
+            "f87cdc7ff8b9",
+            "edb247c866fb",
+            "e093939b41b5",
+            "fe9ff33182dc",
+            "20d33b1109dd",
+            "ef09d7a8a48f",
+            "8d68734bcd2c",
+            "b0674607de24"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "Audit logs are retained for 90 days",
+              "supported": true,
+              "reason": "The context states that audit logs are retained for 90 days."
+            },
+            {
+              "claim": "Audit logs are exportable to S3",
+              "supported": true,
+              "reason": "The context states that audit logs are exportable to S3."
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Audit logs are retained for 90 days.",
+              "attributed": true
+            },
+            {
+              "sentence": "They can be exported to S3.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly addresses both parts of the question: retention duration (90 days) and export location (S3), supported by a reference citation."
+        },
+        {
+          "id": "q07",
+          "question": "What changed in release v2.4.0 regarding build nodes and canary deployments?",
+          "answerable": true,
+          "answer": "In release v2.4.0:\n- ARM64 build nodes are now available in all regions (selected with `build.arch: arm64`) [id: e093939b41b5].\n- Canary deployments are generally available (routing 10% traffic for 5 minutes) [id: e093939b41b5].",
+          "refused": false,
+          "cited_ids": [
+            "e093939b41b5"
+          ],
+          "context_ids": [
+            "e093939b41b5",
+            "edb247c866fb",
+            "981c8e1cb938",
+            "47a24a581f87"
+          ],
+          "context_docs": [
+            "release-notes.md",
+            "architecture.md",
+            "architecture.md",
+            "troubleshooting.md"
+          ],
+          "retrieved_ids": [
+            "e093939b41b5",
+            "edb247c866fb",
+            "981c8e1cb938",
+            "47a24a581f87",
+            "b0674607de24",
+            "ef09d7a8a48f",
+            "216eb262431a",
+            "8d68734bcd2c",
+            "6eba104bded6",
+            "20d33b1109dd"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "Release v2.4.0 makes ARM64 build nodes available in all regions.",
+              "supported": true,
+              "reason": "The release notes for v2.4.0 state that ARM64 build nodes are now available in all regions."
+            },
+            {
+              "claim": "ARM64 build nodes are selected with build.arch: arm64.",
+              "supported": true,
+              "reason": "The release notes for v2.4.0 specify selecting them with `build.arch: arm64`."
+            },
+            {
+              "claim": "Canary deployments are generally available in release v2.4.0.",
+              "supported": true,
+              "reason": "The release notes for v2.4.0 state that canary deployments are generally available."
+            },
+            {
+              "claim": "Canary deployments route 10% traffic for 5 minutes.",
+              "supported": true,
+              "reason": "The release notes for v2.4.0 (and the architecture section) state (10% traffic for 5 minutes)."
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "In v2.4.0, ARM64 build nodes became available in all regions, selectable with build.arch: arm64.",
+              "attributed": true
+            },
+            {
+              "sentence": "Canary deployments became generally available with 10% traffic for 5 minutes.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer accurately and completely addresses the question regarding build nodes and canary deployments in release v2.4.0 based on the provided context."
+        },
+        {
+          "id": "q08",
+          "question": "My service returns 502 after deploy and my build times out. What should I check and which setting helps the build?",
+          "answerable": true,
+          "answer": "To troubleshoot a 502 error after deployment, check the following:\n1. Ensure the service listens on the port declared in `nimbus.yaml` (the default is 8080) [id: 47a24a581f87].\n2. Verify that health checks pass (the Scheduler probes `/healthz` every 10 seconds and restarts after 3 consecutive failures) [id: 47a24a581f87].\n3. Check that the instance is not out of memory, as free tier instances only have 512 MB RAM [id: 47a24a581f87].\n\nTo help with a build timeout:\n- The default build timeout is 15 minutes and can be raised to a maximum of 60 minutes using `build.timeout` in `nimbus.yaml` [id: 47a24a581f87, id: edb247c866fb].\n- Large monorepos should enable the shared layer cache by setting `build.cache: true` [id: 47a24a581f87].",
+          "refused": false,
+          "cited_ids": [
+            "47a24a581f87",
+            "edb247c866fb"
+          ],
+          "context_ids": [
+            "47a24a581f87",
+            "ef09d7a8a48f",
+            "edb247c866fb",
+            "b0674607de24"
+          ],
+          "context_docs": [
+            "troubleshooting.md",
+            "troubleshooting.md",
+            "architecture.md",
+            "quotas-and-pricing.md"
+          ],
+          "retrieved_ids": [
+            "47a24a581f87",
+            "ef09d7a8a48f",
+            "edb247c866fb",
+            "b0674607de24",
+            "981c8e1cb938",
+            "8d68734bcd2c",
+            "20d33b1109dd",
+            "f87cdc7ff8b9",
+            "e093939b41b5",
+            "216eb262431a"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "The service must listen on the port declared in nimbus.yaml.",
+              "supported": true,
+              "reason": "The context states: 'The service listens on the port declared in nimbus.yaml'."
+            },
+            {
+              "claim": "The default port is 8080.",
+              "supported": true,
+              "reason": "The context states: '(`port`, default 8080)'."
+            },
+            {
+              "claim": "The Scheduler probes /healthz every 10 seconds.",
+              "supported": true,
+              "reason": "The context states: 'Health checks pass: the Scheduler probes /healthz every 10 seconds'."
+            },
+            {
+              "claim": "The Scheduler restarts the service after 3 consecutive failures.",
+              "supported": true,
+              "reason": "The context states: 'and restarts after 3 consecutive failures.'"
+            },
+            {
+              "claim": "Free tier instances have 512 MB RAM.",
+              "supported": true,
+              "reason": "The context states: 'free tier instances only have 512 MB RAM.'"
+            },
+            {
+              "claim": "The default build timeout is 15 minutes.",
+              "supported": true,
+              "reason": "The context states: 'The default build timeout is 15 minutes.'"
+            },
+            {
+              "claim": "The build timeout can be raised to a maximum of 60 minutes using build.timeout in nimbus.yaml.",
+              "supported": true,
+              "reason": "The context states: 'Raise it with build.timeout in nimbus.yaml (maximum 60 minutes).'"
+            },
+            {
+              "claim": "Large monorepos should enable the shared layer cache by setting build.cache: true.",
+              "supported": true,
+              "reason": "The context states: 'Large monorepos should enable the shared layer cache by setting build.cache: true.'"
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "For 502 errors, check that the service listens on the declared port (default 8080), that /healthz health checks pass, and that the instance is not out of memory.",
+              "attributed": true
+            },
+            {
+              "sentence": "For build timeouts, raise build.timeout in nimbus.yaml, up to 60 minutes.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 0.8333333333333333,
+          "context_relevant_flags": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly addresses both parts of the question by listing what to check for the 502 error and identifying the specific settings (`build.timeout` and `build.cache`) that help with build timeouts."
+        },
+        {
+          "id": "q09",
+          "question": "How much does the Pro tier cost and how many builds per month does it include?",
+          "answerable": true,
+          "answer": "The Pro tier costs $29 per user per month and includes 2,000 builds per month [id: 8d68734bcd2c].",
+          "refused": false,
+          "cited_ids": [
+            "8d68734bcd2c"
+          ],
+          "context_ids": [
+            "8d68734bcd2c",
+            "b0674607de24",
+            "e093939b41b5",
+            "ef09d7a8a48f"
+          ],
+          "context_docs": [
+            "quotas-and-pricing.md",
+            "quotas-and-pricing.md",
+            "release-notes.md",
+            "troubleshooting.md"
+          ],
+          "retrieved_ids": [
+            "8d68734bcd2c",
+            "b0674607de24",
+            "e093939b41b5",
+            "ef09d7a8a48f",
+            "6eba104bded6",
+            "47a24a581f87",
+            "edb247c866fb",
+            "20d33b1109dd",
+            "216eb262431a",
+            "981c8e1cb938"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "The Pro tier costs $29 per user per month.",
+              "supported": true,
+              "reason": "The context explicitly states 'Pro tier — $29 per user per month'."
+            },
+            {
+              "claim": "The Pro tier includes 2,000 builds per month.",
+              "supported": true,
+              "reason": "The context explicitly states '2,000 builds per month' under the Pro tier section."
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Pro costs $29 per user per month.",
+              "attributed": true
+            },
+            {
+              "sentence": "It includes 2,000 builds per month, then $0.01 per additional build.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately addresses both parts of the question (cost and builds per month for the Pro tier) based on the provided reference."
+        },
+        {
+          "id": "q10",
+          "question": "Where are application secrets stored, and what must happen for a rotated secret to take effect?",
+          "answerable": true,
+          "answer": "Application secrets are stored in HashiCorp Vault [id: 8cc2417628b9]. Rotating a secret requires a redeploy to take effect [id: 8cc2417628b9].",
+          "refused": false,
+          "cited_ids": [
+            "8cc2417628b9"
+          ],
+          "context_ids": [
+            "8cc2417628b9",
+            "6eba104bded6",
+            "f87cdc7ff8b9",
+            "edb247c866fb"
+          ],
+          "context_docs": [
+            "security.md",
+            "security.md",
+            "cli-reference.md",
+            "architecture.md"
+          ],
+          "retrieved_ids": [
+            "8cc2417628b9",
+            "6eba104bded6",
+            "f87cdc7ff8b9",
+            "edb247c866fb",
+            "ef09d7a8a48f",
+            "981c8e1cb938",
+            "20d33b1109dd",
+            "fe9ff33182dc",
+            "216eb262431a",
+            "e093939b41b5"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "Application secrets are stored in HashiCorp Vault.",
+              "supported": true,
+              "reason": "The context explicitly states that application secrets are stored in HashiCorp Vault."
+            },
+            {
+              "claim": "Rotating a secret requires a redeploy to take effect.",
+              "supported": true,
+              "reason": "The context explicitly states that rotating a secret requires a redeploy to take effect."
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Secrets are stored in HashiCorp Vault and injected as environment variables at container startup.",
+              "attributed": true
+            },
+            {
+              "sentence": "Rotating a secret requires a redeploy to take effect.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 0.8333333333333333,
+          "context_relevant_flags": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer accurately states where application secrets are stored (HashiCorp Vault) and what must happen for a rotated secret to take effect (a redeploy), based on the provided text."
+        },
+        {
+          "id": "q11",
+          "question": "Who is the CEO of Nimbus Deploy and what is their background?",
+          "answerable": false,
+          "answer": "I cannot answer this from the provided documents.",
+          "refused": true,
+          "cited_ids": [],
+          "context_ids": [
+            "216eb262431a",
+            "fe9ff33182dc",
+            "981c8e1cb938",
+            "20d33b1109dd"
+          ],
+          "context_docs": [
+            "overview.md",
+            "cli-reference.md",
+            "architecture.md",
+            "overview.md"
+          ],
+          "retrieved_ids": [
+            "216eb262431a",
+            "fe9ff33182dc",
+            "981c8e1cb938",
+            "20d33b1109dd",
+            "e093939b41b5",
+            "edb247c866fb",
+            "f87cdc7ff8b9",
+            "47a24a581f87",
+            "ef09d7a8a48f",
+            "b0674607de24"
+          ],
+          "faithfulness": null,
+          "hallucination_rate": 0.0,
+          "context_recall": null,
+          "claim_verdicts": [],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer correctly states that the information cannot be found in the provided documents."
+        },
+        {
+          "id": "q12",
+          "question": "Does Nimbus offer GPU instances for machine learning workloads, and what GPU models are available?",
+          "answerable": false,
+          "answer": "I cannot answer this from the provided documents.",
+          "refused": true,
+          "cited_ids": [],
+          "context_ids": [
+            "216eb262431a",
+            "981c8e1cb938",
+            "edb247c866fb",
+            "fe9ff33182dc"
+          ],
+          "context_docs": [
+            "overview.md",
+            "architecture.md",
+            "architecture.md",
+            "cli-reference.md"
+          ],
+          "retrieved_ids": [
+            "216eb262431a",
+            "981c8e1cb938",
+            "edb247c866fb",
+            "fe9ff33182dc",
+            "20d33b1109dd",
+            "e093939b41b5",
+            "f87cdc7ff8b9",
+            "47a24a581f87",
+            "ef09d7a8a48f",
+            "8d68734bcd2c"
+          ],
+          "faithfulness": null,
+          "hallucination_rate": 0.0,
+          "context_recall": null,
+          "claim_verdicts": [],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer correctly states that the information cannot be found in the provided documents."
+        }
+      ]
+    },
+    "hybrid": {
+      "summary": {
+        "faithfulness": 1.0,
+        "hallucination_rate": 0.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "refusal_accuracy": 1.0,
+        "over_refusal_rate": 0.0,
+        "citation_coverage": 1.0
+      },
+      "results": [
+        {
+          "id": "q01",
+          "question": "What is the default build timeout in Nimbus, and what is the maximum it can be raised to?",
+          "answerable": true,
+          "answer": "The default build timeout is 15 minutes, and it can be raised to a maximum of 60 minutes [edb247c866fb, 47a24a581f87].",
+          "refused": false,
+          "cited_ids": [
+            "edb247c866fb",
+            "47a24a581f87"
+          ],
+          "context_ids": [
+            "edb247c866fb",
+            "47a24a581f87",
+            "fe9ff33182dc",
+            "f87cdc7ff8b9"
+          ],
+          "context_docs": [
+            "architecture.md",
+            "troubleshooting.md",
+            "cli-reference.md",
+            "cli-reference.md"
+          ],
+          "retrieved_ids": [
+            "edb247c866fb",
+            "47a24a581f87",
+            "fe9ff33182dc",
+            "f87cdc7ff8b9",
+            "20d33b1109dd",
+            "e093939b41b5",
+            "216eb262431a",
+            "b0674607de24",
+            "981c8e1cb938",
+            "8cc2417628b9"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "The default build timeout is 15 minutes.",
+              "supported": true,
+              "reason": "The context explicitly states that the default build timeout is 15 minutes."
+            },
+            {
+              "claim": "The build timeout can be raised to a maximum of 60 minutes.",
+              "supported": true,
+              "reason": "The context explicitly states it can be raised to a maximum of 60 minutes via build.timeout in nimbus.yaml."
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "The default build timeout is 15 minutes.",
+              "attributed": true
+            },
+            {
+              "sentence": "It can be raised to a maximum of 60 minutes via build.timeout in nimbus.yaml.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately provides the default build timeout and the maximum it can be raised to based on Nimbus documentation."
+        },
+        {
+          "id": "q02",
+          "question": "How much RAM does a free tier service instance get, and what happens when it has no traffic?",
+          "answerable": true,
+          "answer": "A free tier service instance gets 512 MB RAM [id: 8d68734bcd2c, id: 47a24a581f87]. When it has no traffic for 15 minutes, it sleeps [id: 8d68734bcd2c, id: ef09d7a8a48f].",
+          "refused": false,
+          "cited_ids": [
+            "8d68734bcd2c",
+            "47a24a581f87",
+            "ef09d7a8a48f"
+          ],
+          "context_ids": [
+            "8d68734bcd2c",
+            "47a24a581f87",
+            "ef09d7a8a48f",
+            "20d33b1109dd"
+          ],
+          "context_docs": [
+            "quotas-and-pricing.md",
+            "troubleshooting.md",
+            "troubleshooting.md",
+            "overview.md"
+          ],
+          "retrieved_ids": [
+            "8d68734bcd2c",
+            "47a24a581f87",
+            "ef09d7a8a48f",
+            "20d33b1109dd",
+            "981c8e1cb938",
+            "edb247c866fb",
+            "6eba104bded6",
+            "216eb262431a",
+            "fe9ff33182dc",
+            "b0674607de24"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "A free tier service instance gets 512 MB RAM.",
+              "supported": true,
+              "reason": "The context states '512 MB RAM and 0.5 vCPU per service instance' under the Free tier section."
+            },
+            {
+              "claim": "When a free tier service instance has no traffic for 15 minutes, it sleeps.",
+              "supported": true,
+              "reason": "The context states 'Services on the free tier sleep after 15 minutes without traffic' under the Free tier section."
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Free tier instances get 512 MB RAM.",
+              "attributed": true
+            },
+            {
+              "sentence": "They sleep after 15 minutes without traffic and cold-start in roughly 3 seconds.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            true,
+            true,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer accurately and completely addresses both parts of the question based on standard documentation details."
+        },
+        {
+          "id": "q03",
+          "question": "Which role is allowed to deploy to prod and manage secrets?",
+          "answerable": true,
+          "answer": "Only the `admin` role is allowed to deploy to `prod` or manage secrets [id: 8cc2417628b9].",
+          "refused": false,
+          "cited_ids": [
+            "8cc2417628b9"
+          ],
+          "context_ids": [
+            "8cc2417628b9",
+            "6eba104bded6",
+            "f87cdc7ff8b9",
+            "ef09d7a8a48f"
+          ],
+          "context_docs": [
+            "security.md",
+            "security.md",
+            "cli-reference.md",
+            "troubleshooting.md"
+          ],
+          "retrieved_ids": [
+            "8cc2417628b9",
+            "6eba104bded6",
+            "f87cdc7ff8b9",
+            "ef09d7a8a48f",
+            "20d33b1109dd",
+            "fe9ff33182dc",
+            "e093939b41b5",
+            "edb247c866fb",
+            "981c8e1cb938",
+            "216eb262431a"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "Only the admin role is allowed to deploy to prod",
+              "supported": true,
+              "reason": "The context states: 'Only `admin` can deploy to `prod` or manage secrets.'"
+            },
+            {
+              "claim": "Only the admin role is allowed to manage secrets",
+              "supported": true,
+              "reason": "The context states: 'Only `admin` can deploy to `prod` or manage secrets.'"
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Only the admin role can deploy to prod or manage secrets.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately addresses the question using the provided context."
+        },
+        {
+          "id": "q04",
+          "question": "How does the Gateway handle retries on 5xx responses?",
+          "answerable": true,
+          "answer": "The Gateway performs up to 2 automatic retries on 5xx responses with a 250 ms backoff [id: 981c8e1cb938].",
+          "refused": false,
+          "cited_ids": [
+            "981c8e1cb938"
+          ],
+          "context_ids": [
+            "981c8e1cb938",
+            "47a24a581f87",
+            "8cc2417628b9",
+            "20d33b1109dd"
+          ],
+          "context_docs": [
+            "architecture.md",
+            "troubleshooting.md",
+            "security.md",
+            "overview.md"
+          ],
+          "retrieved_ids": [
+            "981c8e1cb938",
+            "47a24a581f87",
+            "8cc2417628b9",
+            "20d33b1109dd",
+            "b0674607de24",
+            "edb247c866fb",
+            "e093939b41b5",
+            "8d68734bcd2c",
+            "ef09d7a8a48f",
+            "6eba104bded6"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "The Gateway performs up to 2 automatic retries on 5xx responses",
+              "supported": true,
+              "reason": "The context states: 'The Gateway performs automatic retries: up to 2 retries on 5xx responses with a 250 ms backoff'"
+            },
+            {
+              "claim": "The Gateway uses a 250 ms backoff for automatic retries",
+              "supported": true,
+              "reason": "The context states: 'The Gateway performs automatic retries: up to 2 retries on 5xx responses with a 250 ms backoff'"
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "The Gateway retries up to 2 times on 5xx responses with a 250 ms backoff.",
+              "attributed": true
+            },
+            {
+              "sentence": "It never retries non-idempotent methods like POST and PATCH.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately addresses the question based on the provided text."
+        },
+        {
+          "id": "q05",
+          "question": "What command rolls back a prod service to a specific revision, and how many revisions are kept?",
+          "answerable": true,
+          "answer": "To roll back a prod service to a specific revision, use the command `nimbus rollback --env prod --to <revision>` [fe9ff33182dc]. Rollbacks keep the last 10 revisions [fe9ff33182dc].",
+          "refused": false,
+          "cited_ids": [
+            "fe9ff33182dc"
+          ],
+          "context_ids": [
+            "fe9ff33182dc",
+            "f87cdc7ff8b9",
+            "ef09d7a8a48f",
+            "20d33b1109dd"
+          ],
+          "context_docs": [
+            "cli-reference.md",
+            "cli-reference.md",
+            "troubleshooting.md",
+            "overview.md"
+          ],
+          "retrieved_ids": [
+            "fe9ff33182dc",
+            "f87cdc7ff8b9",
+            "ef09d7a8a48f",
+            "20d33b1109dd",
+            "6eba104bded6",
+            "981c8e1cb938",
+            "8d68734bcd2c",
+            "edb247c866fb",
+            "8cc2417628b9",
+            "e093939b41b5"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "To roll back a prod service to a specific revision, use the command `nimbus rollback --env prod --to <revision>`",
+              "supported": true,
+              "reason": "The context explicitly states: 'nimbus rollback --env prod --to <revision> rolls back to a specific revision.'"
+            },
+            {
+              "claim": "Rollbacks keep the last 10 revisions",
+              "supported": true,
+              "reason": "The context explicitly states: 'Rollbacks keep the last 10 revisions; older revisions are garbage-collected.'"
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Use nimbus rollback --env prod --to <revision>.",
+              "attributed": true
+            },
+            {
+              "sentence": "The platform keeps the last 10 revisions.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly provides the command to roll back a prod service to a specific revision and states how many revisions are kept, matching the provided document reference."
+        },
+        {
+          "id": "q06",
+          "question": "How long are audit logs retained, and where can they be exported?",
+          "answerable": true,
+          "answer": "Audit logs are retained for 90 days and can be exported to S3 [id: 6eba104bded6].",
+          "refused": false,
+          "cited_ids": [
+            "6eba104bded6"
+          ],
+          "context_ids": [
+            "6eba104bded6",
+            "8cc2417628b9",
+            "e093939b41b5",
+            "edb247c866fb"
+          ],
+          "context_docs": [
+            "security.md",
+            "security.md",
+            "release-notes.md",
+            "architecture.md"
+          ],
+          "retrieved_ids": [
+            "6eba104bded6",
+            "8cc2417628b9",
+            "e093939b41b5",
+            "edb247c866fb",
+            "f87cdc7ff8b9",
+            "20d33b1109dd",
+            "fe9ff33182dc",
+            "ef09d7a8a48f",
+            "8d68734bcd2c",
+            "47a24a581f87"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "Audit logs are retained for 90 days",
+              "supported": true,
+              "reason": "The context explicitly states that audit logs are retained for 90 days."
+            },
+            {
+              "claim": "Audit logs can be exported to S3",
+              "supported": true,
+              "reason": "The context explicitly states that audit logs are exportable to S3."
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Audit logs are retained for 90 days.",
+              "attributed": true
+            },
+            {
+              "sentence": "They can be exported to S3.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately addresses both parts of the question (retention period and export destination) based on the provided text."
+        },
+        {
+          "id": "q07",
+          "question": "What changed in release v2.4.0 regarding build nodes and canary deployments?",
+          "answerable": true,
+          "answer": "In release v2.4.0:\n- ARM64 build nodes became available in all regions (selectable with `build.arch: arm64`) [id: e093939b41b5].\n- Canary deployments became generally available, routing 10% traffic for 5 minutes [id: e093939b41b5].",
+          "refused": false,
+          "cited_ids": [
+            "e093939b41b5"
+          ],
+          "context_ids": [
+            "e093939b41b5",
+            "edb247c866fb",
+            "981c8e1cb938",
+            "47a24a581f87"
+          ],
+          "context_docs": [
+            "release-notes.md",
+            "architecture.md",
+            "architecture.md",
+            "troubleshooting.md"
+          ],
+          "retrieved_ids": [
+            "e093939b41b5",
+            "edb247c866fb",
+            "981c8e1cb938",
+            "47a24a581f87",
+            "8d68734bcd2c",
+            "ef09d7a8a48f",
+            "b0674607de24",
+            "20d33b1109dd",
+            "216eb262431a",
+            "f87cdc7ff8b9"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "In release v2.4.0, ARM64 build nodes became available in all regions.",
+              "supported": true,
+              "reason": "The release notes for v2.4.0 state that ARM64 build nodes are now available in all regions."
+            },
+            {
+              "claim": "ARM64 build nodes are selectable with build.arch: arm64.",
+              "supported": true,
+              "reason": "The release notes for v2.4.0 mention selecting them with `build.arch: arm64`."
+            },
+            {
+              "claim": "Canary deployments became generally available in release v2.4.0.",
+              "supported": true,
+              "reason": "The release notes for v2.4.0 state that canary deployments are generally available."
+            },
+            {
+              "claim": "Canary deployments route 10% traffic for 5 minutes.",
+              "supported": true,
+              "reason": "The release notes for v2.4.0 specify (10% traffic for 5 minutes) for canary deployments."
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "In v2.4.0, ARM64 build nodes became available in all regions, selectable with build.arch: arm64.",
+              "attributed": true
+            },
+            {
+              "sentence": "Canary deployments became generally available with 10% traffic for 5 minutes.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer accurately and completely addresses the question based on the provided text, mentioning both the availability of ARM64 build nodes and the general availability of canary deployments with their specific traffic routing and duration."
+        },
+        {
+          "id": "q08",
+          "question": "My service returns 502 after deploy and my build times out. What should I check and which setting helps the build?",
+          "answerable": true,
+          "answer": "For the 502 error after deploy, check:\n1. The service listens on the port declared in `nimbus.yaml` (`port`, default 8080) [id: 47a24a581f87].\n2. Health checks pass (the Scheduler probes `/healthz` every 10 seconds and restarts after 3 consecutive failures) [id: 47a24a581f87].\n3. The instance is not out of memory (free tier instances only have 512 MB RAM) [id: 47a24a581f87].\n\nFor the build timeout, raise the timeout with `build.timeout` in `nimbus.yaml` (up to a maximum of 60 minutes), and for large monorepos, enable the shared layer cache by setting `build.cache: true` [id: 47a24a581f87].",
+          "refused": false,
+          "cited_ids": [
+            "47a24a581f87"
+          ],
+          "context_ids": [
+            "47a24a581f87",
+            "edb247c866fb",
+            "b0674607de24",
+            "ef09d7a8a48f"
+          ],
+          "context_docs": [
+            "troubleshooting.md",
+            "architecture.md",
+            "quotas-and-pricing.md",
+            "troubleshooting.md"
+          ],
+          "retrieved_ids": [
+            "47a24a581f87",
+            "edb247c866fb",
+            "b0674607de24",
+            "ef09d7a8a48f",
+            "e093939b41b5",
+            "8d68734bcd2c",
+            "981c8e1cb938",
+            "20d33b1109dd",
+            "216eb262431a",
+            "fe9ff33182dc"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "The service must listen on the port declared in `nimbus.yaml`.",
+              "supported": true,
+              "reason": "The context states: 'The service listens on the port declared in nimbus.yaml'."
+            },
+            {
+              "claim": "The default port in `nimbus.yaml` is 8080.",
+              "supported": true,
+              "reason": "The context states: '(`port`, default 8080)'."
+            },
+            {
+              "claim": "The Scheduler probes `/healthz` every 10 seconds.",
+              "supported": true,
+              "reason": "The context states: 'the Scheduler probes `/healthz` every 10 seconds'."
+            },
+            {
+              "claim": "The Scheduler restarts the instance after 3 consecutive health check failures.",
+              "supported": true,
+              "reason": "The context states: 'and restarts after 3 consecutive failures.'"
+            },
+            {
+              "claim": "Free tier instances have 512 MB RAM.",
+              "supported": true,
+              "reason": "The context states: 'free tier instances only have 512 MB RAM.'"
+            },
+            {
+              "claim": "Build timeout can be raised using `build.timeout` in `nimbus.yaml`.",
+              "supported": true,
+              "reason": "The context states: 'Raise it with `build.timeout` in `nimbus.yaml`.'"
+            },
+            {
+              "claim": "The maximum build timeout is 60 minutes.",
+              "supported": true,
+              "reason": "The context states: '(maximum 60 minutes).'"
+            },
+            {
+              "claim": "For large monorepos, the shared layer cache can be enabled by setting `build.cache: true`.",
+              "supported": true,
+              "reason": "The context states: 'Large monorepos should enable the shared layer cache by setting `build.cache: true`.'"
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "For 502 errors, check that the service listens on the declared port (default 8080), that /healthz health checks pass, and that the instance is not out of memory.",
+              "attributed": true
+            },
+            {
+              "sentence": "For build timeouts, raise build.timeout in nimbus.yaml, up to 60 minutes.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly addresses both parts of the question (502 error and build timeout) and provides specific settings from the source to resolve them."
+        },
+        {
+          "id": "q09",
+          "question": "How much does the Pro tier cost and how many builds per month does it include?",
+          "answerable": true,
+          "answer": "The Pro tier costs $29 per user per month and includes 2,000 builds per month [id: 8d68734bcd2c].",
+          "refused": false,
+          "cited_ids": [
+            "8d68734bcd2c"
+          ],
+          "context_ids": [
+            "8d68734bcd2c",
+            "b0674607de24",
+            "ef09d7a8a48f",
+            "47a24a581f87"
+          ],
+          "context_docs": [
+            "quotas-and-pricing.md",
+            "quotas-and-pricing.md",
+            "troubleshooting.md",
+            "troubleshooting.md"
+          ],
+          "retrieved_ids": [
+            "8d68734bcd2c",
+            "b0674607de24",
+            "ef09d7a8a48f",
+            "47a24a581f87",
+            "e093939b41b5",
+            "6eba104bded6",
+            "edb247c866fb",
+            "f87cdc7ff8b9",
+            "fe9ff33182dc",
+            "20d33b1109dd"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "The Pro tier costs $29 per user per month.",
+              "supported": true,
+              "reason": "The context explicitly states 'Pro tier — $29 per user per month'."
+            },
+            {
+              "claim": "The Pro tier includes 2,000 builds per month.",
+              "supported": true,
+              "reason": "The context explicitly states '2,000 builds per month' under the Pro tier."
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Pro costs $29 per user per month.",
+              "attributed": true
+            },
+            {
+              "sentence": "It includes 2,000 builds per month, then $0.01 per additional build.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately addresses the question using the provided context."
+        },
+        {
+          "id": "q10",
+          "question": "Where are application secrets stored, and what must happen for a rotated secret to take effect?",
+          "answerable": true,
+          "answer": "Application secrets are stored in HashiCorp Vault [id: 8cc2417628b9]. Rotating a secret requires a redeploy to take effect [id: 8cc2417628b9].",
+          "refused": false,
+          "cited_ids": [
+            "8cc2417628b9"
+          ],
+          "context_ids": [
+            "8cc2417628b9",
+            "6eba104bded6",
+            "f87cdc7ff8b9",
+            "ef09d7a8a48f"
+          ],
+          "context_docs": [
+            "security.md",
+            "security.md",
+            "cli-reference.md",
+            "troubleshooting.md"
+          ],
+          "retrieved_ids": [
+            "8cc2417628b9",
+            "6eba104bded6",
+            "f87cdc7ff8b9",
+            "ef09d7a8a48f",
+            "edb247c866fb",
+            "e093939b41b5",
+            "981c8e1cb938",
+            "fe9ff33182dc",
+            "20d33b1109dd",
+            "216eb262431a"
+          ],
+          "faithfulness": 1.0,
+          "hallucination_rate": 0.0,
+          "claim_verdicts": [
+            {
+              "claim": "Application secrets are stored in HashiCorp Vault",
+              "supported": true,
+              "reason": "The context explicitly states that application secrets are stored in HashiCorp Vault."
+            },
+            {
+              "claim": "Rotating a secret requires a redeploy to take effect",
+              "supported": true,
+              "reason": "The context explicitly states that rotating a secret requires a redeploy to take effect."
+            }
+          ],
+          "context_recall": 1.0,
+          "recall_verdicts": [
+            {
+              "sentence": "Secrets are stored in HashiCorp Vault and injected as environment variables at container startup.",
+              "attributed": true
+            },
+            {
+              "sentence": "Rotating a secret requires a redeploy to take effect.",
+              "attributed": true
+            }
+          ],
+          "context_precision": 1.0,
+          "context_relevant_flags": [
+            true,
+            false,
+            false,
+            false
+          ],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer directly and accurately addresses where application secrets are stored (HashiCorp Vault) and what must happen for a rotated secret to take effect (a redeploy), based on the provided text."
+        },
+        {
+          "id": "q11",
+          "question": "Who is the CEO of Nimbus Deploy and what is their background?",
+          "answerable": false,
+          "answer": "I cannot answer this from the provided documents.",
+          "refused": true,
+          "cited_ids": [],
+          "context_ids": [
+            "216eb262431a",
+            "20d33b1109dd",
+            "981c8e1cb938",
+            "fe9ff33182dc"
+          ],
+          "context_docs": [
+            "overview.md",
+            "overview.md",
+            "architecture.md",
+            "cli-reference.md"
+          ],
+          "retrieved_ids": [
+            "216eb262431a",
+            "20d33b1109dd",
+            "981c8e1cb938",
+            "fe9ff33182dc",
+            "edb247c866fb",
+            "47a24a581f87",
+            "f87cdc7ff8b9",
+            "e093939b41b5",
+            "ef09d7a8a48f",
+            "8cc2417628b9"
+          ],
+          "faithfulness": null,
+          "hallucination_rate": 0.0,
+          "context_recall": null,
+          "claim_verdicts": [],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer correctly states that the information cannot be found in the provided documents."
+        },
+        {
+          "id": "q12",
+          "question": "Does Nimbus offer GPU instances for machine learning workloads, and what GPU models are available?",
+          "answerable": false,
+          "answer": "I cannot answer this from the provided documents.",
+          "refused": true,
+          "cited_ids": [],
+          "context_ids": [
+            "981c8e1cb938",
+            "216eb262431a",
+            "e093939b41b5",
+            "fe9ff33182dc"
+          ],
+          "context_docs": [
+            "architecture.md",
+            "overview.md",
+            "release-notes.md",
+            "cli-reference.md"
+          ],
+          "retrieved_ids": [
+            "981c8e1cb938",
+            "216eb262431a",
+            "e093939b41b5",
+            "fe9ff33182dc",
+            "edb247c866fb",
+            "20d33b1109dd",
+            "ef09d7a8a48f",
+            "47a24a581f87",
+            "6eba104bded6",
+            "f87cdc7ff8b9"
+          ],
+          "faithfulness": null,
+          "hallucination_rate": 0.0,
+          "context_recall": null,
+          "claim_verdicts": [],
+          "answer_relevancy": 1.0,
+          "relevancy_reason": "The answer correctly states that the information cannot be answered from the provided documents, which is the appropriate response when context is missing."
+        }
+      ]
+    }
+  }
+}

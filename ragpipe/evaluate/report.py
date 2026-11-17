@@ -1,0 +1,71 @@
+METRIC_LABELS = [
+    ("faithfulness", "Faithfulness"),
+    ("hallucination_rate", "Hallucination rate"),
+    ("answer_relevancy", "Answer relevancy"),
+    ("context_precision", "Context precision"),
+    ("context_recall", "Context recall"),
+    ("refusal_accuracy", "Refusal accuracy (unanswerable)"),
+    ("over_refusal_rate", "Over-refusal rate"),
+    ("citation_coverage", "Citation coverage"),
+]
+
+
+def _fmt(value) -> str:
+    return f"{value:.3f}" if isinstance(value, (int, float)) else "n/a"
+
+
+def write_markdown_report(report: dict) -> str:
+    lines = [
+        "# RAG Evaluation Report",
+        "",
+        f"- **Generated:** {report['timestamp']}",
+        f"- **LLM:** `{report['llm_model']}`  |  **Embeddings:** `{report['embed_model']}`",
+        f"- **Questions:** {report['num_questions']}",
+        "",
+        "## Variant comparison",
+        "",
+        "| Metric | " + " | ".join(report["variants"]) + " |",
+        "|---" * (len(report["variants"]) + 1) + "|",
+    ]
+    summaries = {name: v["summary"] for name, v in report["variants"].items()}
+    for key, label in METRIC_LABELS:
+        row = " | ".join(_fmt(s.get(key)) for s in summaries.values())
+        lines.append(f"| {label} | {row} |")
+
+    for name, variant in report["variants"].items():
+        lines += ["", f"## Details: `{name}`", "",
+                  "| # | Question | Faithful | Halluc. | Relevancy | Ctx Prec | Ctx Recall | Refused |",
+                  "|---|---|---|---|---|---|---|---|"]
+        for i, r in enumerate(variant["results"], 1):
+            q = r["question"][:60] + ("..." if len(r["question"]) > 60 else "")
+            lines.append(
+                f"| {i} | {q} | {_fmt(r.get('faithfulness'))} | "
+                f"{_fmt(r.get('hallucination_rate'))} | {_fmt(r.get('answer_relevancy'))} | "
+                f"{_fmt(r.get('context_precision'))} | {_fmt(r.get('context_recall'))} | "
+                f"{'yes' if r['refused'] else 'no'} |"
+            )
+
+        unsupported = [
+            (r["id"], v)
+            for r in variant["results"]
+            for v in r.get("claim_verdicts", [])
+            if not v["supported"]
+        ]
+        if unsupported:
+            lines += ["", "### Unsupported claims (hallucination audit)", ""]
+            for qid, v in unsupported:
+                lines.append(f"- **{qid}**: \"{v['claim']}\"")
+                if v.get("reason"):
+                    lines.append(f"  - Judge: {v['reason']}")
+
+    lines += [
+        "", "## Metric definitions", "",
+        "- **Faithfulness** — fraction of atomic answer claims supported by retrieved context (claim extraction + per-claim LLM verification).",
+        "- **Hallucination rate** — `1 - faithfulness` for answerable questions; for unanswerable questions, 1 if the model fabricated an answer instead of refusing.",
+        "- **Answer relevancy** — LLM-judged alignment of the answer with the question (0–1).",
+        "- **Context precision** — rank-weighted (average-precision style) relevance of retrieved passages; uses reranker grades when available.",
+        "- **Context recall** — fraction of reference-answer sentences attributable to retrieved context.",
+        "- **Refusal accuracy** — correct refusals on unanswerable questions; **Over-refusal** — wrong refusals on answerable ones.",
+        "",
+    ]
+    return "\n".join(lines)

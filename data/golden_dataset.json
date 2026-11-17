@@ -1,0 +1,77 @@
+{
+  "description": "Golden QA dataset for the Nimbus Deploy documentation corpus. 'answerable: false' items test hallucination resistance — the correct behavior is refusal.",
+  "items": [
+    {
+      "id": "q01",
+      "question": "What is the default build timeout in Nimbus, and what is the maximum it can be raised to?",
+      "ground_truth": "The default build timeout is 15 minutes. It can be raised to a maximum of 60 minutes via build.timeout in nimbus.yaml.",
+      "answerable": true
+    },
+    {
+      "id": "q02",
+      "question": "How much RAM does a free tier service instance get, and what happens when it has no traffic?",
+      "ground_truth": "Free tier instances get 512 MB RAM. They sleep after 15 minutes without traffic and cold-start in roughly 3 seconds.",
+      "answerable": true
+    },
+    {
+      "id": "q03",
+      "question": "Which role is allowed to deploy to prod and manage secrets?",
+      "ground_truth": "Only the admin role can deploy to prod or manage secrets.",
+      "answerable": true
+    },
+    {
+      "id": "q04",
+      "question": "How does the Gateway handle retries on 5xx responses?",
+      "ground_truth": "The Gateway retries up to 2 times on 5xx responses with a 250 ms backoff. It never retries non-idempotent methods like POST and PATCH.",
+      "answerable": true
+    },
+    {
+      "id": "q05",
+      "question": "What command rolls back a prod service to a specific revision, and how many revisions are kept?",
+      "ground_truth": "Use nimbus rollback --env prod --to <revision>. The platform keeps the last 10 revisions.",
+      "answerable": true
+    },
+    {
+      "id": "q06",
+      "question": "How long are audit logs retained, and where can they be exported?",
+      "ground_truth": "Audit logs are retained for 90 days. They can be exported to S3.",
+      "answerable": true
+    },
+    {
+      "id": "q07",
+      "question": "What changed in release v2.4.0 regarding build nodes and canary deployments?",
+      "ground_truth": "In v2.4.0, ARM64 build nodes became available in all regions, selectable with build.arch: arm64. Canary deployments became generally available with 10% traffic for 5 minutes.",
+      "answerable": true
+    },
+    {
+      "id": "q08",
+      "question": "My service returns 502 after deploy and my build times out. What should I check and which setting helps the build?",
+      "ground_truth": "For 502 errors, check that the service listens on the declared port (default 8080), that /healthz health checks pass, and that the instance is not out of memory. For build timeouts, raise build.timeout in nimbus.yaml, up to 60 minutes.",
+      "answerable": true
+    },
+    {
+      "id": "q09",
+      "question": "How much does the Pro tier cost and how many builds per month does it include?",
+      "ground_truth": "Pro costs $29 per user per month. It includes 2,000 builds per month, then $0.01 per additional build.",
+      "answerable": true
+    },
+    {
+      "id": "q10",
+      "question": "Where are application secrets stored, and what must happen for a rotated secret to take effect?",
+      "ground_truth": "Secrets are stored in HashiCorp Vault and injected as environment variables at container startup. Rotating a secret requires a redeploy to take effect.",
+      "answerable": true
+    },
+    {
+      "id": "q11",
+      "question": "Who is the CEO of Nimbus Deploy and what is their background?",
+      "ground_truth": "",
+      "answerable": false
+    },
+    {
+      "id": "q12",
+      "question": "Does Nimbus offer GPU instances for machine learning workloads, and what GPU models are available?",
+      "ground_truth": "",
+      "answerable": false
+    }
+  ]
+}
