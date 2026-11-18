@@ -44,6 +44,8 @@ class AdversarialCase(BaseModel):
     mutation_type: str = "original"
     pair_id: str = ""
     provenance: str = "synthetic-author-reviewed"
+    reviewer_id: str = ""
+    review_date: str = ""
 
     def expected_for(self, index: int) -> str:
         if self.expected_statuses:
@@ -63,4 +65,13 @@ def load_adversarial(path: Path | None = None) -> list[AdversarialCase]:
             raise ValueError(f"{case.id}: no claims")
         if not case.context:
             raise ValueError(f"{case.id}: empty context")
+        if case.provenance not in ("synthetic-author-reviewed",
+                                   "independent-human-reviewed"):
+            raise ValueError(f"{case.id}: unknown provenance {case.provenance!r}")
+        if case.provenance == "independent-human-reviewed" and not (
+                case.reviewer_id and case.review_date):
+            raise ValueError(
+                f"{case.id}: independent-human-reviewed requires reviewer_id "
+                f"and review_date; never claim independent validation without "
+                f"external reviewers")
     return cases

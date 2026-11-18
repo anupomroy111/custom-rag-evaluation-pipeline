@@ -1203,6 +1203,401 @@
       "mutation_type": "negation_insertion",
       "pair_id": "F10-negation_insertion",
       "provenance": "synthetic-author-reviewed"
+    },
+    {
+      "id": "F21-01",
+      "category": "scope_ambiguity",
+      "difficulty": "hard",
+      "context": [
+        "The gateway retries up to 2 times on 5xx responses."
+      ],
+      "generated_answer": "The gateway does not retry only on 5xx responses.",
+      "claims": [
+        "The gateway does not retry only on 5xx responses."
+      ],
+      "expected_status": "UNCERTAIN",
+      "expected_reason": "scope_ambiguity mutation of family F21",
+      "probe_question": "The gateway does not retry only on 5xx responses?",
+      "scenario_family": "F21",
+      "mutation_type": "scope_ambiguity",
+      "pair_id": "F21-scope_ambiguity",
+      "provenance": "synthetic-author-reviewed"
+    },
+    {
+      "id": "F21-02",
+      "category": "scope_ambiguity",
+      "difficulty": "hard",
+      "context": [
+        "The gateway retries up to 2 times on 5xx responses."
+      ],
+      "generated_answer": "The gateway may not be unavailable for retries.",
+      "claims": [
+        "The gateway may not be unavailable for retries."
+      ],
+      "expected_status": "UNCERTAIN",
+      "expected_reason": "scope_ambiguity mutation of family F21",
+      "probe_question": "The gateway may not be unavailable for retries?",
+      "scenario_family": "F21",
+      "mutation_type": "scope_ambiguity",
+      "pair_id": "F21-scope_ambiguity",
+      "provenance": "synthetic-author-reviewed"
+    },
+    {
+      "id": "F21-03",
+      "category": "scope_ambiguity",
+      "difficulty": "hard",
+      "context": [
+        "The gateway retries up to 2 times on 5xx responses."
+      ],
+      "generated_answer": "The gateway retries not merely on 5xx responses.",
+      "claims": [
+        "The gateway retries not merely on 5xx responses."
+      ],
+      "expected_status": "UNCERTAIN",
+      "expected_reason": "scope_ambiguity mutation of family F21",
+      "probe_question": "The gateway retries not merely on 5xx responses?",
+      "scenario_family": "F21",
+      "mutation_type": "scope_ambiguity",
+      "pair_id": "F21-scope_ambiguity",
+      "provenance": "synthetic-author-reviewed"
+    },
+    {
+      "id": "F21-04",
+      "category": "scope_ambiguity",
+      "difficulty": "easy",
+      "context": [
+        "The gateway retries up to 2 times on 5xx responses."
+      ],
+      "generated_answer": "The gateway retries up to 2 times on 5xx responses.",
+      "claims": [
+        "The gateway retries up to 2 times on 5xx responses."
+      ],
+      "expected_status": "SUPPORTED",
+      "expected_reason": "supported_control mutation of family F21",
+      "probe_question": "The gateway retries up to 2 times on 5xx responses?",
+      "scenario_family": "F21",
+      "mutation_type": "supported_control",
+      "pair_id": "F21-base",
+      "provenance": "synthetic-author-reviewed"
+    },
+    {
+      "id": "F21-05",
+      "category": "negation_flip",
+      "difficulty": "hard",
+      "context": [
+        "The gateway retries up to 2 times on 5xx responses."
+      ],
+      "generated_answer": "It is not true that the gateway does not retry on 5xx responses.",
+      "claims": [
+        "It is not true that the gateway does not retry on 5xx responses."
+      ],
+      "expected_status": "SUPPORTED",
+      "expected_reason": "double_negation mutation of family F21",
+      "probe_question": "It is not true that the gateway does not retry on 5xx responses?",
+      "scenario_family": "F21",
+      "mutation_type": "double_negation",
+      "pair_id": "F21-double_negation",
+      "provenance": "synthetic-author-reviewed"
+    },
+    {
+      "id": "F22-01",
+      "category": "paraphrase_equivalence",
+      "difficulty": "medium",
+      "context": [
+        "The Scheduler probes /healthz every 10 seconds.",
+        "It restarts services after 3 consecutive failures."
+      ],
+      "generated_answer": "The Scheduler restarts services after 3 consecutive failures.",
+      "claims": [
+        "The Scheduler restarts services after 3 consecutive failures."
+      ],
+      "expected_status": "SUPPORTED",
+      "expected_reason": "paraphrase_equivalent mutation of family F22",
+      "probe_question": "The Scheduler restarts services after 3 consecutive failures?",
+      "scenario_family": "F22",
+      "mutation_type": "paraphrase_equivalent",
+      "pair_id": "F22-paraphrase_equivalent",
+      "provenance": "synthetic-author-reviewed"
+    },
+    {
+      "id": "F22-02",
+      "category": "entity_attribution",
+      "difficulty": "medium",
+      "context": [
+        "The Scheduler probes /healthz every 10 seconds.",
+        "It restarts services after 3 consecutive failures."
+      ],
+      "generated_answer": "The Gateway restarts services after 3 consecutive failures.",
+      "claims": [
+        "The Gateway restarts services after 3 consecutive failures."
+      ],
+      "expected_status": "NOT_SUPPORTED",
+      "expected_reason": "entity_substitution mutation of family F22",
+      "probe_question": "The Gateway restarts services after 3 consecutive failures?",
+      "scenario_family": "F22",
+      "mutation_type": "entity_substitution",
+      "pair_id": "F22-entity_substitution",
+      "provenance": "synthetic-author-reviewed"
+    },
+    {
+      "id": "F22-03",
+      "category": "paraphrase_equivalence",
+      "difficulty": "medium",
+      "context": [
+        "The Scheduler probes /healthz every 10 seconds.",
+        "It restarts services after 3 consecutive failures."
+      ],
+      "generated_answer": "It probes /healthz every 10 seconds.",
+      "claims": [
+        "It probes /healthz every 10 seconds."
+      ],
+      "expected_status": "SUPPORTED",
+      "expected_reason": "paraphrase_equivalent mutation of family F22",
+      "probe_question": "It probes /healthz every 10 seconds?",
+      "scenario_family": "F22",
+      "mutation_type": "paraphrase_equivalent",
+      "pair_id": "F22-paraphrase_equivalent",
+      "provenance": "synthetic-author-reviewed"
+    },
+    {
+      "id": "F22-04",
+      "category": "negation_flip",
+      "difficulty": "easy",
+      "context": [
+        "The Scheduler probes /healthz every 10 seconds.",
+        "It restarts services after 3 consecutive failures."
+      ],
+      "generated_answer": "The Scheduler does not restart services after 3 consecutive failures.",
+      "claims": [
+        "The Scheduler does not restart services after 3 consecutive failures."
+      ],
+      "expected_status": "CONTRADICTED",
+      "expected_reason": "negation_insertion mutation of family F22",
+      "probe_question": "The Scheduler does not restart services after 3 consecutive failures?",
+      "scenario_family": "F22",
+      "mutation_type": "negation_insertion",
+      "pair_id": "F22-negation_insertion",
+      "provenance": "synthetic-author-reviewed"
+    },
+    {
+      "id": "F22-05",
+      "category": "entity_attribution",
+      "difficulty": "hard",
+      "context": [
+        "The Scheduler probes /healthz every 10 seconds.",
+        "It restarts services after 3 consecutive failures."
+      ],
+      "generated_answer": "They restart services after 3 consecutive failures.",
+      "claims": [
+        "They restart services after 3 consecutive failures."
+      ],
+      "expected_status": "UNCERTAIN",
+      "expected_reason": "coreference_ambiguity mutation of family F22",
+      "probe_question": "They restart services after 3 consecutive failures?",
+      "scenario_family": "F22",
+      "mutation_type": "coreference_ambiguity",
+      "pair_id": "F22-coreference_ambiguity",
+      "provenance": "synthetic-author-reviewed"
+    },
+    {
+      "id": "F23-01",
+      "category": "multi_hop",
+      "difficulty": "hard",
+      "context": [
+        "Service A depends on service B.",
+        "Service B depends on service C."
+      ],
+      "generated_answer": "Service A depends on service C.",
+      "claims": [
+        "Service A depends on service C."
+      ],
+      "expected_status": "SUPPORTED",
+      "expected_reason": "multi_hop_true mutation of family F23",
+      "probe_question": "Service A depends on service C?",
+      "scenario_family": "F23",
+      "mutation_type": "multi_hop_true",
+      "pair_id": "F23-multi_hop_true",
+      "provenance": "synthetic-author-reviewed"
+    },
+    {
+      "id": "F23-02",
+      "category": "multi_hop",
+      "difficulty": "hard",
+      "context": [
+        "Service A depends on service B.",
+        "Service B depends on service C."
+      ],
+      "generated_answer": "Service C depends on service A.",
+      "claims": [
+        "Service C depends on service A."
+      ],
+      "expected_status": "CONTRADICTED",
+      "expected_reason": "multi_hop_false mutation of family F23",
+      "probe_question": "Service C depends on service A?",
+      "scenario_family": "F23",
+      "mutation_type": "multi_hop_false",
+      "pair_id": "F23-multi_hop_false",
+      "provenance": "synthetic-author-reviewed"
+    },
+    {
+      "id": "F23-03",
+      "category": "multi_hop",
+      "difficulty": "medium",
+      "context": [
+        "Service A depends on service B.",
+        "Service B depends on service C."
+      ],
+      "generated_answer": "Service A depends on service D.",
+      "claims": [
+        "Service A depends on service D."
+      ],
+      "expected_status": "NOT_SUPPORTED",
+      "expected_reason": "multi_hop_false mutation of family F23",
+      "probe_question": "Service A depends on service D?",
+      "scenario_family": "F23",
+      "mutation_type": "multi_hop_false",
+      "pair_id": "F23-multi_hop_false",
+      "provenance": "synthetic-author-reviewed"
+    },
+    {
+      "id": "F23-04",
+      "category": "role_reversal",
+      "difficulty": "medium",
+      "context": [
+        "Service A depends on service B.",
+        "Service B depends on service C."
+      ],
+      "generated_answer": "Service B depends on service A.",
+      "claims": [
+        "Service B depends on service A."
+      ],
+      "expected_status": "CONTRADICTED",
+      "expected_reason": "agent_patient_swap mutation of family F23",
+      "probe_question": "Service B depends on service A?",
+      "scenario_family": "F23",
+      "mutation_type": "agent_patient_swap",
+      "pair_id": "F23-agent_patient_swap",
+      "provenance": "synthetic-author-reviewed"
+    },
+    {
+      "id": "F23-05",
+      "category": "multi_hop",
+      "difficulty": "easy",
+      "context": [
+        "Service A depends on service B.",
+        "Service B depends on service C."
+      ],
+      "generated_answer": "Service A depends on service B.",
+      "claims": [
+        "Service A depends on service B."
+      ],
+      "expected_status": "SUPPORTED",
+      "expected_reason": "supported_control mutation of family F23",
+      "probe_question": "Service A depends on service B?",
+      "scenario_family": "F23",
+      "mutation_type": "supported_control",
+      "pair_id": "F23-base",
+      "provenance": "synthetic-author-reviewed"
+    },
+    {
+      "id": "F24-01",
+      "category": "entity_attribution",
+      "difficulty": "medium",
+      "context": [
+        "The platform team authored the security policy.",
+        "Vault stores application secrets."
+      ],
+      "generated_answer": "The sales team authored the security policy.",
+      "claims": [
+        "The sales team authored the security policy."
+      ],
+      "expected_status": "CONTRADICTED",
+      "expected_reason": "wrong_attribution mutation of family F24",
+      "probe_question": "The sales team authored the security policy?",
+      "scenario_family": "F24",
+      "mutation_type": "wrong_attribution",
+      "pair_id": "F24-wrong_attribution",
+      "provenance": "synthetic-author-reviewed"
+    },
+    {
+      "id": "F24-02",
+      "category": "entity_attribution",
+      "difficulty": "hard",
+      "context": [
+        "The platform team authored the security policy.",
+        "Vault stores application secrets."
+      ],
+      "generated_answer": "The platform team owns application secrets.",
+      "claims": [
+        "The platform team owns application secrets."
+      ],
+      "expected_status": "NOT_SUPPORTED",
+      "expected_reason": "wrong_ownership mutation of family F24",
+      "probe_question": "The platform team owns application secrets?",
+      "scenario_family": "F24",
+      "mutation_type": "wrong_ownership",
+      "pair_id": "F24-wrong_ownership",
+      "provenance": "synthetic-author-reviewed"
+    },
+    {
+      "id": "F24-03",
+      "category": "entity_attribution",
+      "difficulty": "easy",
+      "context": [
+        "The platform team authored the security policy.",
+        "Vault stores application secrets."
+      ],
+      "generated_answer": "Vault stores application secrets.",
+      "claims": [
+        "Vault stores application secrets."
+      ],
+      "expected_status": "SUPPORTED",
+      "expected_reason": "supported_control mutation of family F24",
+      "probe_question": "Vault stores application secrets?",
+      "scenario_family": "F24",
+      "mutation_type": "supported_control",
+      "pair_id": "F24-base",
+      "provenance": "synthetic-author-reviewed"
+    },
+    {
+      "id": "F24-04",
+      "category": "paraphrase_equivalence",
+      "difficulty": "medium",
+      "context": [
+        "The platform team authored the security policy.",
+        "Vault stores application secrets."
+      ],
+      "generated_answer": "The security policy was authored by the platform team.",
+      "claims": [
+        "The security policy was authored by the platform team."
+      ],
+      "expected_status": "SUPPORTED",
+      "expected_reason": "paraphrase_equivalent mutation of family F24",
+      "probe_question": "The security policy was authored by the platform team?",
+      "scenario_family": "F24",
+      "mutation_type": "paraphrase_equivalent",
+      "pair_id": "F24-paraphrase_equivalent",
+      "provenance": "synthetic-author-reviewed"
+    },
+    {
+      "id": "F24-05",
+      "category": "entity_attribution",
+      "difficulty": "medium",
+      "context": [
+        "The platform team authored the security policy.",
+        "Vault stores application secrets."
+      ],
+      "generated_answer": "The sales team maintains the security policy.",
+      "claims": [
+        "The sales team maintains the security policy."
+      ],
+      "expected_status": "NOT_SUPPORTED",
+      "expected_reason": "wrong_attribution mutation of family F24",
+      "probe_question": "The sales team maintains the security policy?",
+      "scenario_family": "F24",
+      "mutation_type": "wrong_attribution",
+      "pair_id": "F24-wrong_attribution",
+      "provenance": "synthetic-author-reviewed"
     }
   ]
 }

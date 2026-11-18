@@ -83,4 +83,6 @@ def summarize_adversarial(records: list[dict]) -> dict:
         "per_category": per_category,
         "injection_flagged": sum(1 for r in records if r.get("injection_detected")),
         "injection_cases": sum(1 for r in records if r["category"] == "context_injection"),
+        "execution_modes": dict(Counter(
+            r.get("execution_mode") or "unlabeled-pre-hardening" for r in records)),
     }

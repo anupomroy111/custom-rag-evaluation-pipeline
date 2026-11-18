@@ -43,6 +43,7 @@ class GeminiClient:
         self._last_embed = 0.0
         self.use_cache = settings.llm_cache if use_cache is None else use_cache
         self.cache_dir = cache_dir or settings.index_dir / "llm_cache"
+        self.last_from_cache = False
         self.stats = {
             "generate_requests": 0, "embed_requests": 0, "cache_hits": 0,
             "prompt_tokens": 0, "output_tokens": 0, "latency_s": 0.0,
@@ -73,7 +74,9 @@ class GeminiClient:
         cache_path = self._cache_path(prompt, system, json_mode, temperature)
         if self.use_cache and cache_path.exists():
             self.stats["cache_hits"] += 1
+            self.last_from_cache = True
             return json.loads(cache_path.read_text(encoding="utf-8"))["text"]
+        self.last_from_cache = False
 
         config = types.GenerateContentConfig(
             temperature=temperature,

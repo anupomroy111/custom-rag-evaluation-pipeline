@@ -44,6 +44,7 @@ class AdversarialBenchmark:
                 "deterministic_flags": verdict.deterministic_flags,
                 "disagreement": verdict.disagreement,
                 "explanation": verdict.explanation,
+                "execution_mode": verdict.execution_mode,
                 "injection_detected": any(f.startswith("injection:")
                                           for f in verdict.deterministic_flags),
                 "errors": result.errors,

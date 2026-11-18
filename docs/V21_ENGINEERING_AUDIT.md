@@ -45,7 +45,8 @@ Fail-closed explicit states; support-aware deterministic checks (B16 fix);
 injection screening with untrusted-data framing; per-claim JSON audit trails;
 disk response cache (quota-free replays); pacing + transport retries + timeouts;
 empty-response detection; separate hallucination/fabrication populations;
-independent V2 precision judge; honest incident documentation; 98 passing tests.
+independent V2 precision judge; honest incident documentation; 98 passing tests
+at audit time (123 at V2.1 hardening release).
 
 ## 4. Remediation map (V2.1 sections)
 

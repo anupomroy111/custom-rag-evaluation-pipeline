@@ -26,7 +26,7 @@ from .schemas import (
     VerificationResult,
 )
 
-PROMPT_VERSION = "v2.1"
+PROMPT_VERSION = "v2.2"
 
 
 class JudgeClient(Protocol):
@@ -58,21 +58,38 @@ VERIFY_SYSTEM = (
     "For each claim return: claim_id, original_claim, normalized_claim (canonical "
     "restatement preserving negation and modality), subject, predicate, object, "
     "agent (semantic doer regardless of voice), patient (semantic receiver), "
-    "negation (bool), modality (possible|probable|assertive|definite), "
+    "negation (bool): the RESOLVED logical polarity of the claim after cancelling "
+    "double negations ('It is not true that X does not Y' → negation=false); "
+    "modality (possible|probable|assertive|definite), "
     "tense (past|present|future|unknown), aspect (simple|progressive|perfect|unknown), "
-    "voice (active|passive), entities (names), coreference (resolved pronoun referents), "
+    "voice (active|passive), entities (named entities only; resolve pronouns and "
+    "coreference first; never list dummy pronouns like 'it' or 'there'), "
+    "coreference (resolved pronoun referents), "
     "attributions (list of {relation, holder, target} for ownership/authorship/funding), "
     "status, confidence (0-1 ordinal, NOT a calibrated probability), explanation. "
     "Also return evidence_events: normalized event tuples extracted from the passages, "
     "each {event_id, agent, predicate, patient, negation, tense, aspect, modality, "
     "state (planned|completed|ongoing|unknown), entities, attributions, temporal_order "
     "(integer sequence if stated), temporal_cues (before/after/since/until/dates)}. "
-    "Normalize passive to active roles (agent = doer). Resolve pronouns. "
-    "status: SUPPORTED (directly entailed, including equivalent paraphrases), "
-    "CONTRADICTED (evidence asserts the opposite: negation flips, agent-patient swaps, "
-    "wrong attribution, wrong numbers/dates, completed-vs-planned reversal), "
-    "NOT_SUPPORTED (evidence silent, weaker modality, or unsupported inference), "
-    "UNCERTAIN (ambiguous scope or partially relevant evidence). "
+    "Normalize passive to active roles (agent = doer). Resolve pronouns in BOTH "
+    "claims and evidence (e.g. 'It restarts ...' following 'The Scheduler probes "
+    "...' has agent=The Scheduler). "
+    "For multi-hop claims, compose evidence events: a complete chain supports, "
+    "a reversed chain contradicts, a missing link is NOT_SUPPORTED. "
+    "A different relation about the same target (maintains vs authored) is "
+    "silence → NOT_SUPPORTED unless the evidence explicitly negates it. "
+    "status: SUPPORTED (directly entailed, including equivalent paraphrases and "
+    "complete multi-hop chains), "
+    "CONTRADICTED (evidence explicitly asserts the opposite: negation flips, "
+    "agent-patient swaps in the same event, wrong numbers/dates for the same "
+    "quantity, completed-vs-planned reversal, reversed dependency chains), "
+    "NOT_SUPPORTED (evidence is SILENT about the claim's subject/quantity: "
+    "attributing a property to entity B when evidence only mentions entity A "
+    "without exclusivity is NOT_SUPPORTED, not CONTRADICTED; weaker modality; "
+    "missing multi-hop link; unsupported inference), "
+    "UNCERTAIN (MANDATORY when negation/quantifier scope is ambiguous, e.g. "
+    "'not only', 'not merely', 'may not be unavailable'; or evidence partially "
+    "relevant). "
     "Lexical overlap alone is NOT entailment. Do not invent evidence or citations. "
     "Return ONLY JSON: {\"claims\": [ {...} ], \"evidence_events\": [ {...} ]}."
 )
@@ -89,6 +106,8 @@ DETERMINISTIC_FINAL = {
     "temporal: claim completed vs event planned": VerdictStatus.CONTRADICTED,
     "temporal: claim planned vs event completed": VerdictStatus.NOT_SUPPORTED,
     "temporal: planned/completed": VerdictStatus.NOT_SUPPORTED,
+    "multihop:": VerdictStatus.CONTRADICTED,
+    "multihop-support:": VerdictStatus.SUPPORTED,
     "modality": VerdictStatus.NOT_SUPPORTED,
     "entity": VerdictStatus.NOT_SUPPORTED,
 }
@@ -109,8 +128,8 @@ def _deterministic_analysis(claim_id: str, text: str) -> ClaimAnalysis:
         negation=bool(checks.negation_cues(text)),
         negation_cues=checks.negation_cues(text),
         modality=checks.modality_of(text),
-        entities=[re.sub(r"^(?:The|A|An)\s+", "", m) for m in
-                  re.findall(r"\b[A-Z][a-zA-Z0-9]+(?:\s+[A-Z][a-zA-Z0-9]+)*\b", text)],
+        entities=checks.clean_entities(re.findall(
+            r"\b[A-Z][a-zA-Z0-9]+(?:\s+[A-Z][a-zA-Z0-9]+)*\b", text)),
         numerical_values=checks.extract_numbers(text),
         temporal_references=checks.extract_dates(text),
     )
@@ -137,6 +156,7 @@ def _deterministic_flags(analysis: ClaimAnalysis, context: str,
         flags += checks.role_consistency(analysis, events)
         flags += checks.attribution_consistency(analysis, events)
         flags += checks.temporal_consistency(analysis, events)
+        flags += checks.transitive_chain_flags(analysis, events)
         if checks.tuple_equivalence(analysis, events):
             # normalized tuples match: surface word-order flags are paraphrase noise
             flags = [f for f in flags if not f.startswith("role_reversal:")]
@@ -145,14 +165,15 @@ def _deterministic_flags(analysis: ClaimAnalysis, context: str,
 
 def _resolve(analysis: ClaimAnalysis, flags: list[str],
              semantic: ClaimVerdict | None, mode: str, context: str = "") -> ClaimVerdict:
+    if any(f.startswith("negation-scope:") for f in flags):
+        return ClaimVerdict(
+            claim_id=analysis.claim_id, status=VerdictStatus.UNCERTAIN,
+            confidence=0.0,
+            explanation="negation/quantifier scope ambiguous; abstaining in all modes",
+            deterministic_flags=flags, citation_ids=analysis.citation_ids,
+        )
     if mode == "deterministic":
         status = VerdictStatus.UNCERTAIN
-        if any(f.startswith("negation-scope:") for f in flags):
-            return ClaimVerdict(
-                claim_id=analysis.claim_id, status=VerdictStatus.UNCERTAIN,
-                confidence=0.0, explanation="negation scope ambiguous; refusing to guess",
-                deterministic_flags=flags, citation_ids=analysis.citation_ids,
-            )
         for flag in flags:
             resolved = _flag_status(flag)
             if resolved is not None:
@@ -181,13 +202,20 @@ def _resolve(analysis: ClaimAnalysis, flags: list[str],
 
     status, disagreement = semantic.status, False
     evidence_flags = [f for f in flags if not f.startswith("injection:")]
-    if evidence_flags and semantic.status == VerdictStatus.SUPPORTED:
+    reliable = [f for f in evidence_flags
+                if f.startswith(("numerical:", "role:", "attribution:", "multihop:"))]
+    reliable_support = [f for f in evidence_flags if f.startswith("multihop-support:")]
+    if reliable:
+        # structural facts from normalized tuples / exact arithmetic override
+        # the judge; disagreement is recorded for review
+        status = VerdictStatus.CONTRADICTED
+        disagreement = semantic.status != VerdictStatus.CONTRADICTED
+    elif reliable_support:
+        status = VerdictStatus.SUPPORTED
+        disagreement = semantic.status != VerdictStatus.SUPPORTED
+    elif evidence_flags and semantic.status == VerdictStatus.SUPPORTED:
         disagreement = True
-        if any(f.startswith("numerical:") for f in evidence_flags):
-            # exact value conflicts are reliable deterministic evidence
-            status = VerdictStatus.CONTRADICTED
-        else:
-            status = VerdictStatus.UNCERTAIN
+        status = VerdictStatus.UNCERTAIN
     return ClaimVerdict(
         claim_id=analysis.claim_id, status=status, confidence=semantic.confidence,
         explanation=semantic.explanation, deterministic_flags=flags,
@@ -255,12 +283,16 @@ class VerificationEngine:
         semantic_map: dict[str, ClaimVerdict] = {}
         secondary_map: dict[str, ClaimVerdict] = {}
         events: list = []
+        sem_cached = False
+        sem_mocked = False
 
         if mode == "semantic":
             if self.client is None:
                 raise ValueError("semantic verification requires a GeminiClient")
             try:
                 analyses, semantic_map, events = self._semantic_stage(analyses, context_text)
+                sem_cached = bool(getattr(self.client, "last_from_cache", False))
+                sem_mocked = not hasattr(self.client, "last_from_cache")
             except (ValidationError, ValueError, EmptyResponseError) as e:
                 errors.append(f"semantic verification failed: {e}")
             if self.secondary is not None:
@@ -286,6 +318,10 @@ class VerificationEngine:
             # injection can hide in ANY retrieved passage, not just mapped ones
             flags += [f"injection: {m}" for m in checks.injection_flags(context_text)]
             verdict = _resolve(a, flags, semantic_map.get(a.claim_id), mode, mapped)
+            verdict.execution_mode = (
+                "deterministic" if mode == "deterministic"
+                else "mocked" if sem_mocked
+                else "cached-live" if sem_cached else "fresh-live")
             if self.secondary is not None and mode == "semantic":
                 sec = secondary_map.get(a.claim_id)
                 verdict.secondary_status = sec.status if sec else None
@@ -332,10 +368,10 @@ class VerificationEngine:
             a.tense, a.aspect, a.voice = extra.tense, extra.aspect, extra.voice
             a.coreference = extra.coreference
             a.attributions = extra.attributions
-            a.negation = extra.negation or a.negation
+            a.negation = extra.negation
             a.modality = extra.modality if extra.modality in checks.MODALITY_RANK else a.modality
-            a.entities = list(dict.fromkeys(
-                a.entities + [re.sub(r"^(?:The|A|An)\s+", "", e) for e in extra.entities]))
+            a.entities = checks.clean_entities(list(dict.fromkeys(
+                a.entities + [re.sub(r"^(?:The|A|An)\s+", "", e) for e in extra.entities])))
             semantic_map[a.claim_id] = ClaimVerdict(
                 claim_id=a.claim_id, status=extra.status,
                 confidence=max(0.0, min(1.0, extra.confidence)),

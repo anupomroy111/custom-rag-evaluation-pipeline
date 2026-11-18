@@ -145,6 +145,7 @@ class ClaimVerdict(BaseModel):
     disagreement: bool = False
     three_way_disagreement: bool = False
     citation_ids: list[str] = Field(default_factory=list)
+    execution_mode: str = "deterministic"
 
 
 class ExtractionModel(BaseModel):

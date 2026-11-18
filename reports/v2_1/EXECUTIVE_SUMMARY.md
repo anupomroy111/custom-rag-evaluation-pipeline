@@ -69,10 +69,18 @@ Per-category (held-out, live):
 
 - Pairs 22, passed 22, rate 1.000
 
+## Prompt v2.2 hardening (NEW dev families F21-F24 only)
+
+- Exact 0.950, FAR 0.000, FRR 0.000
+- Execution modes: {'cached-live': 20}
+- Disagreements recorded: 4
+- Held-out re-measurement with v2.2: BLOCKED_BY_QUOTA; held-out numbers above correspond to prompt v2.1.
+- Root causes and label disputes: docs/FAILURE_ANALYSIS.md
+
 ## Deterministic floor (104 fixtures, zero judge calls)
 
-- Detection 0.583, FAR 0.000 n/a, FRR 0.000
-- Exact 0.317, uncertain 0.596
+- Detection 0.250, FAR 0.000 [0.000, 0.324], FRR 0.125
+- Exact 0.250, uncertain 0.800
 
 ## Failure analysis & limitations
 

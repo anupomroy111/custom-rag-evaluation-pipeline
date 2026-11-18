@@ -208,6 +208,48 @@ def numerical_support(claim: str, context: str) -> bool:
     return False
 
 
+DUMMY_PRONOUNS = {"it", "there", "this", "that", "they", "he", "she", "them"}
+
+
+def clean_entities(entities: list[str]) -> list[str]:
+    """Drop dummy pronouns; coreference must be resolved to named entities."""
+    return [e for e in entities if e.lower() not in DUMMY_PRONOUNS]
+
+
+def transitive_chain_flags(claim, events: list) -> list[str]:
+    """Multi-hop composition for transitive predicates: a complete evidence
+    chain supports the claim; a reversed chain contradicts it; a missing link
+    yields no flag (abstain)."""
+    transitive = {"depend", "depends", "owned", "contains"}
+    cl = lemma(claim.predicate.split()[0]) if claim.predicate else ""
+    if cl not in {"depend"} or not (claim.agent and claim.patient):
+        return []
+    edges = {(e.agent.lower(), e.patient.lower()) for e in events
+             if e.predicate and lemma(e.predicate.split()[0]) == cl
+             and e.agent and e.patient}
+    a, b = claim.agent.lower(), claim.patient.lower()
+    if (a, b) in edges:
+        return []
+
+    def reachable(src: str, dst: str) -> bool:
+        seen, stack = {src}, [src]
+        while stack:
+            cur = stack.pop()
+            for (x, y) in edges:
+                if x == cur and y not in seen:
+                    if y == dst:
+                        return True
+                    seen.add(y)
+                    stack.append(y)
+        return False
+
+    if reachable(a, b):
+        return [f"multihop-support: complete chain for '{claim.original_claim[:60]}'"]
+    if reachable(b, a):
+        return [f"multihop: reversed dependency chain for '{claim.original_claim[:60]}'"]
+    return []
+
+
 def negation_consistency(claim, events: list) -> list[str]:
     """Semantic negation comparison over normalized event tuples (LLM-resolved
     double negation / scope), matched by predicate + shared entities."""
@@ -379,10 +421,13 @@ def normalize_date(text: str) -> tuple[int, int, int] | None:
 
 
 def negation_scope_ambiguous(text: str) -> bool:
-    """Embedded negation scopes the cue-parity heuristic cannot parse."""
+    """Embedded negation/quantifier scopes the cue-parity heuristic cannot parse."""
     return bool(re.search(
         r"\b(?:not (?:unlikely|impossible|uncommon|without)|failed to (?:deny|reject)|"
-        r"no reason to (?:doubt|believe)|not (?:just|only|merely)|"
+        r"no reason to (?:doubt|believe)|"
+        r"not\b[^.]{0,40}\b(?:only|merely|just)\b|"
+        r"\b(?:only|merely|just)\b[^.]{0,40}\bnot\b|"
+        r"\b(?:may|might|could)\s+not\s+be\s+(?:un|in|im|ir)[a-z]+|"
         r"doesn't (?:mean|imply)|cannot (?:rule out|exclude))\b", text, re.IGNORECASE))
 
 
@@ -405,14 +450,25 @@ def role_consistency(claim, events: list) -> list[str]:
     return flags
 
 
+FUNCTIONAL_RELATIONS = {"own", "owns", "owned", "author", "authored", "maintain",
+                        "maintains", "store", "stores", "develop", "developed",
+                        "fund", "funded"}
+
+
 def attribution_consistency(claim, events: list) -> list[str]:
+    """Holder mismatch contradicts only for functional relations (single-holder
+    by convention, documented in docs/BENCHMARK_METHODOLOGY.md). Different
+    relations or non-functional relations (locations, enforcement) are silence
+    → left to the semantic judge's NOT_SUPPORTED rule."""
     flags = []
     for ca in claim.attributions:
         if not (ca.relation and ca.holder and ca.target):
             continue
+        if lemma(ca.relation) not in FUNCTIONAL_RELATIONS:
+            continue
         for ev in events:
             for ea in ev.attributions:
-                if (ea.relation.lower() == ca.relation.lower()
+                if (lemma(ea.relation) == lemma(ca.relation)
                         and ea.target.lower() == ca.target.lower()
                         and ea.holder.lower() != ca.holder.lower()):
                     flags.append(

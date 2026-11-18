@@ -44,7 +44,7 @@ def prf(counts: dict) -> dict:
 def macro_micro(per_category: dict[str, list[dict]], positive: str) -> dict:
     pooled = [r for records in per_category.values() for r in records]
     micro = prf(binary_counts(pooled, positive))
-    macros = {"precision": [], "recall": [], "f1": []}
+    macros: dict[str, list[float]] = {"precision": [], "recall": [], "f1": []}
     for records in per_category.values():
         c = prf(binary_counts(records, positive))
         for key in macros:

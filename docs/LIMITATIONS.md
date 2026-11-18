@@ -60,3 +60,14 @@
 15. This framework evaluates document-grounded QA on a small fictional corpus
     plus synthetic adversarial fixtures. It is not evidence of production
     robustness on open-domain or multilingual workloads.
+16. Evidence-internal pronoun coreference ("It restarts services…" after a named
+    subject) still produces judge UNCERTAIN in some cases (dev F22-01).
+    Abstention, not false acceptance; unresolved.
+17. Two held-out labels are disputable under the silence-vs-contradiction
+    convention (F19-12, F15-12; see docs/FAILURE_ANALYSIS.md §5). Held-out is
+    frozen; adjudication is reserved for the independent review split.
+    Held-out exact accuracy is therefore a lower bound under current labels.
+18. The v2.2 prompt hardening was measured on NEW development families only
+    (F21–F24, exact 0.950, FAR/FRR 0.000). Held-out re-measurement with v2.2 is
+    BLOCKED_BY_QUOTA (daily generate cap); until it runs, held-out numbers in
+    reports correspond to prompt v2.1 and are labeled as such.

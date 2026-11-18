@@ -85,10 +85,18 @@ def cmd_redteam(args: argparse.Namespace) -> int:
 
 def cmd_adversarial(args: argparse.Namespace) -> int:
     from .adversarial import AdversarialBenchmark, load_adversarial
+    from .adversarial.dataset import (
+        ADVERSARIAL_PATH, DEVELOPMENT_PATH, HELDOUT_PATH,
+    )
 
-    cases = load_adversarial()
+    paths = {"adversarial": ADVERSARIAL_PATH, "development": DEVELOPMENT_PATH,
+             "heldout": HELDOUT_PATH}
+    cases = load_adversarial(paths[args.split])
     if args.category:
         cases = [c for c in cases if c.category == args.category]
+    if args.family:
+        fams = set(args.family.split(","))
+        cases = [c for c in cases if c.scenario_family in fams]
     if args.limit:
         cases = cases[:args.limit]
     client = GeminiClient() if args.mode == "semantic" else None
@@ -154,7 +162,10 @@ def main(argv: list[str] | None = None) -> int:
 
     p_adv = sub.add_parser("adversarial", help="Adversarial verification benchmark")
     p_adv.add_argument("--mode", choices=["deterministic", "semantic"], default="deterministic")
+    p_adv.add_argument("--split", choices=["adversarial", "development", "heldout"],
+                       default="adversarial")
     p_adv.add_argument("--category", help="Restrict to one category")
+    p_adv.add_argument("--family", help="Restrict to scenario families (comma-separated)")
     p_adv.add_argument("--limit", type=int, default=None)
     p_adv.set_defaults(func=cmd_adversarial)
 

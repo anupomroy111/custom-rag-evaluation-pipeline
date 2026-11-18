@@ -6,7 +6,7 @@
 |---|---|---|---|
 | original | data/original/golden_dataset.json | 12 | V1 end-to-end benchmark (unchanged) |
 | adversarial | data/adversarial/adversarial_golden_dataset.json | 104 | V2 fixture benchmark (unchanged) |
-| development | data/development/dev_fixtures.json | 60 | tuning/iteration only |
+| development | data/development/dev_fixtures.json | 80 | tuning/iteration only (F01–F10 + hardening F21–F24) |
 | heldout | data/heldout/heldout_fixtures.json | 140 | reporting benchmark, unseen during development |
 | regression | data/regression/regression_cases.json | 14 pins | CI gate references (no duplicated content) |
 
@@ -25,6 +25,31 @@ performed and none is claimed.
   construction (documented in commit history); it runs in CI on every push.
 - Held-out results are reported separately; development numbers are never
   presented as held-out performance.
+
+## Label conventions
+
+- **Silence vs contradiction:** evidence attributing a property to entity A
+  does not contradict the same property for entity B unless exclusivity is
+  stated → NOT_SUPPORTED. CONTRADICTED requires an explicit opposite assertion
+  (negation, role swap in the same event, different value for the same
+  quantity, state reversal, reversed chain).
+- **Functional relations:** owns / authored / maintains / stores / developed /
+  funded are treated as single-holder by convention; a different holder for the
+  same relation+target contradicts. Non-functional relations (locations,
+  enforcement) and different-relation claims are silence.
+- **Scope ambiguity:** "not only/merely/just", gapped negation…only, and modal
+  stacks ("may not be unavailable") force UNCERTAIN in every execution mode.
+- Disputable held-out labels are documented in docs/FAILURE_ANALYSIS.md and
+  reserved for independent adjudication; held-out files are frozen.
+
+## Execution modes (per record and per summary)
+
+`fresh-live` (new API call), `cached-live` (replayed cached live response),
+`deterministic` (no judge), `mocked` (scripted judge, tests only),
+`quota-blocked` / `BLOCKED_BY_QUOTA` (run stopped, resumable),
+`unlabeled-pre-hardening` (records produced before mode labeling existed).
+Summaries carry an `execution_modes` count table; modes are never pooled into
+a single benchmark number without the breakdown.
 
 ## Case schema
 

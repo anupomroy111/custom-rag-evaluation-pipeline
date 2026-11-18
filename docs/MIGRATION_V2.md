@@ -46,7 +46,7 @@ docs/{V2_AUDIT_REPORT,ARCHITECTURE_V2,ADVERSARIAL_BENCHMARK,EVALUATION_METHODOLO
 ## Upgrade checklist
 
 1. `python -m pip install -r requirements.txt` (pydantic arrives via google-genai).
-2. `python -m pytest tests/ -q` — 98 tests, zero API calls.
+2. `python -m pytest tests/ -q` — 123 tests at V2.1 hardening release, zero API calls.
 3. `python -m ragpipe.cli adversarial --mode deterministic` — quota-free floor.
 4. `python -m ragpipe.cli adversarial --mode semantic` — live judge benchmark.
 5. `python -m ragpipe.cli probes-v2` — retrieval-variant evidence probes.

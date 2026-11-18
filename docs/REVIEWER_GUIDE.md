@@ -18,7 +18,7 @@ python -m venv .venv
 python -m pytest tests/ -q
 ```
 
-Expect 114 passing tests: V1 regression, V2 fail-closed states, V2.1 statistical
+Expect 123 passing tests: V1 regression, V2 fail-closed states, V2.1 statistical
 hygiene, semantic tuple checks, red-team metamorphic pairs, mocked-judge
 integration, public API, manifest provenance.
 
@@ -73,10 +73,19 @@ abstention/error separation, macro/micro rules and Wilson intervals.
 
 ## 8. Identify known limitations
 
-`docs/LIMITATIONS.md` lists 15 concrete limitations, including synthetic
+`docs/LIMITATIONS.md` lists 18 concrete limitations, including synthetic
 single-author labels, small-sample uncertainty bounds, judge fallibility,
 quota-blocked stages and environment constraints. Anything not executed is
 labeled `not-run` / `BLOCKED_BY_QUOTA` — never silently mocked.
+`docs/FAILURE_ANALYSIS.md` gives root causes for every held-out miss category
+and lists the two held-out label disputes reserved for independent adjudication.
+
+## 8b. Independent validation status
+
+No independent human validation exists yet. `docs/INDEPENDENT_VALIDATION_PROTOCOL.md`
+defines how external reviewers contribute labeled cases under
+`data/independent/`; the loader enforces reviewer metadata for that provenance
+level. All current numbers are synthetic-author-reviewed.
 
 ## 9. Check the gates yourself
 

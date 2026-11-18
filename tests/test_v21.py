@@ -197,6 +197,79 @@ def test_schema_normalizes_judge_output_quirks():
                                       "coreference": 42})
 
 
+def test_scope_ambiguity_forces_uncertain_in_semantic_mode():
+    class YesJudge:
+        def generate_json(self, prompt, system=None, temperature=0.0):
+            return {"claims": [{"claim_id": "c1", "original_claim": "x",
+                                "status": "SUPPORTED", "confidence": 0.9,
+                                "explanation": "judge says yes"}],
+                    "evidence_events": []}
+
+    engine = VerificationEngine(YesJudge())
+    result = engine.verify_claims(
+        ["The gateway does not retry only on 5xx responses."],
+        [("p0", "The gateway retries up to 2 times on 5xx responses.")],
+        mode="semantic")
+    assert result.verdicts[0].status.value == "UNCERTAIN"
+
+
+def test_dummy_pronouns_not_entities():
+    assert checks.clean_entities(["It", "The Scheduler", "There"]) == ["The Scheduler"]
+
+
+def test_transitive_chain_support_and_reversal():
+    events = [EventTuple(event_id="e1", agent="Service A", predicate="depends on",
+                         patient="Service B"),
+              EventTuple(event_id="e2", agent="Service B", predicate="depends on",
+                         patient="Service C")]
+    fwd = ClaimAnalysis(claim_id="c1", original_claim="Service A depends on service C.",
+                        agent="Service A", patient="Service C", predicate="depends on")
+    rev = ClaimAnalysis(claim_id="c2", original_claim="Service C depends on service A.",
+                        agent="Service C", patient="Service A", predicate="depends on")
+    assert any(f.startswith("multihop-support:")
+               for f in checks.transitive_chain_flags(fwd, events))
+    assert any(f.startswith("multihop:")
+               for f in checks.transitive_chain_flags(rev, events))
+
+
+def test_attribution_non_functional_relation_is_silence():
+    claim = ClaimAnalysis(
+        claim_id="c1", original_claim="TLS 1.3 is enforced at the scheduler.",
+        attributions=[Attribution(relation="enforced at", holder="scheduler",
+                                  target="gateway")])
+    events = [EventTuple(event_id="e1", attributions=[
+        Attribution(relation="enforced at", holder="gateway", target="gateway")])]
+    assert checks.attribution_consistency(claim, events) == []
+
+
+def test_provenance_gate_rejects_independent_without_reviewer(tmp_path):
+    from ragpipe.adversarial.dataset import load_adversarial
+    p = tmp_path / "bad.json"
+    p.write_text(json.dumps({"cases": [{
+        "id": "X-01", "category": "negation_flip", "context": ["c"],
+        "claims": ["c"], "expected_status": "SUPPORTED",
+        "provenance": "independent-human-reviewed"}]}), encoding="utf-8")
+    with pytest.raises(ValueError):
+        load_adversarial(p)
+
+
+def test_execution_mode_labels():
+    det = VerificationEngine().verify_claims(
+        ["Company A acquired Company B."],
+        [("p0", "Company A did not acquire Company B.")], mode="deterministic")
+    assert det.verdicts[0].execution_mode == "deterministic"
+
+    class YesJudge:
+        def generate_json(self, prompt, system=None, temperature=0.0):
+            return {"claims": [{"claim_id": "c1", "original_claim": "x",
+                                "status": "SUPPORTED", "confidence": 0.9,
+                                "explanation": "mock"}], "evidence_events": []}
+
+    mocked = VerificationEngine(YesJudge()).verify_claims(
+        ["anything"], [("p0", "evidence")], mode="semantic")
+    assert mocked.verdicts[0].execution_mode == "mocked"
+
+
 def test_splits_family_disjoint():
     from ragpipe.adversarial.dataset import DEVELOPMENT_PATH, HELDOUT_PATH, load_adversarial
     dev = load_adversarial(DEVELOPMENT_PATH)

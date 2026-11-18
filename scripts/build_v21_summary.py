@@ -117,6 +117,23 @@ def main():
         lines += ["## Red-team metamorphic (deterministic)", "",
                   f"- Pairs {rt['n_pairs']}, passed {rt['passed']}, "
                   f"rate {f(rt['pass_rate'])}", ""]
+    hard = None
+    for p in sorted(glob.glob(str(ROOT / "reports" / "v2" /
+                                  "adversarial_semantic_live_*.json")), reverse=True):
+        r = json.loads(Path(p).read_text(encoding="utf-8"))
+        if r["records"] and r["records"][0]["id"].startswith(("F21", "F22", "F23", "F24")):
+            hard = r
+            break
+    if hard:
+        s = hard["summary"]
+        lines += ["## Prompt v2.2 hardening (NEW dev families F21-F24 only)", "",
+                  f"- Exact {f(s['exact_status_accuracy'])}, FAR "
+                  f"{f(s['false_acceptance_rate'])}, FRR {f(s['false_rejection_rate'])}",
+                  f"- Execution modes: {s['execution_modes']}",
+                  f"- Disagreements recorded: {s['deterministic_semantic_disagreements']}",
+                  "- Held-out re-measurement with v2.2: BLOCKED_BY_QUOTA; held-out "
+                  "numbers above correspond to prompt v2.1.",
+                  "- Root causes and label disputes: docs/FAILURE_ANALYSIS.md", ""]
     if det:
         s = det["summary"]
         lines += ["## Deterministic floor (104 fixtures, zero judge calls)", "",

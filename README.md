@@ -42,7 +42,9 @@ and offline CI with benchmark regression gates. Start here:
 [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md),
 [docs/RED_TEAM_RESULTS.md](docs/RED_TEAM_RESULTS.md),
 [docs/OPEN_SOURCE_USAGE.md](docs/OPEN_SOURCE_USAGE.md),
-[docs/LIMITATIONS.md](docs/LIMITATIONS.md).
+[docs/LIMITATIONS.md](docs/LIMITATIONS.md),
+[docs/FAILURE_ANALYSIS.md](docs/FAILURE_ANALYSIS.md) and
+[docs/INDEPENDENT_VALIDATION_PROTOCOL.md](docs/INDEPENDENT_VALIDATION_PROTOCOL.md).
 
 Built with pure-Python retrieval (no native dependencies) and the Gemini API for
 embeddings, generation, and LLM-as-judge evaluation.
@@ -239,7 +241,7 @@ dataset.
 ## Tests
 
 ```bash
-python -m pytest tests/ -q    # 114 tests, no API calls needed
+python -m pytest tests/ -q    # 123 tests, no API calls needed
 ```
 
 Covers chunking, BM25, RRF fusion math, reranker grade handling, citation
@@ -289,7 +291,7 @@ data/regression/   # CI gate pins
 docs/              # V2 + V2.1 audits, methodology, metrics, reviewer guide
 examples/          # offline external-usage example
 scripts/           # leakage gate, regression gate, dataset/report builders
-tests/             # 114 tests
+tests/             # 123 tests
 reports/           # V1 evaluation reports (immutable history)
 reports/v2/        # V2 benchmark reports
 reports/v2_1/      # V2.1 grids, red-team, executive summary

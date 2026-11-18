@@ -43,7 +43,7 @@ partial report, and exits cleanly; resuming continues where it stopped.
 
 ```bash
 python -m venv .venv && .venv/Scripts/python -m pip install -r requirements.txt
-python -m pytest tests/ -q                     # 114 tests, no API
+python -m pytest tests/ -q                     # 123 tests, no API
 python scripts/check_leakage.py                # dataset integrity gate
 python scripts/regression_gate.py              # pins + FAR/detection gates
 python -m ragpipe.cli redteam                  # metamorphic pairs, no API

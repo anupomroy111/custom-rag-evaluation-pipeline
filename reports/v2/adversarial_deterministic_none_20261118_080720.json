@@ -1,0 +1,504 @@
+{
+  "timestamp": "2026-11-18 08:07:20",
+  "mode": "deterministic",
+  "judge": "none",
+  "llm_model": null,
+  "provenance": "synthetic-author-reviewed fixtures; no independent human validation",
+  "n_cases": 20,
+  "summary": {
+    "n_cases": 20,
+    "n_resolved": 20,
+    "evaluation_error_rate": 0.0,
+    "adversarial_detection_rate": 0.25,
+    "adversarial_detection_ci": [
+      0.0715,
+      0.5907
+    ],
+    "false_acceptance_rate": 0.0,
+    "false_acceptance_ci": [
+      0.0,
+      0.3244
+    ],
+    "false_acceptance_counts": {
+      "accepted": 0,
+      "adversarial_n": 8
+    },
+    "false_rejection_rate": 0.125,
+    "false_rejection_ci": [
+      0.0224,
+      0.4709
+    ],
+    "false_rejection_counts": {
+      "rejected": 1,
+      "positive_n": 8
+    },
+    "exact_status_accuracy": 0.25,
+    "exact_status_accuracy_ci": [
+      0.1119,
+      0.4687
+    ],
+    "uncertain_rate": 0.8,
+    "deterministic_semantic_disagreements": 0,
+    "contradiction_detection": {
+      "tp": 1,
+      "fp": 1,
+      "fn": 3,
+      "tn": 15,
+      "precision": 0.5,
+      "recall": 0.25,
+      "f1": 0.3333,
+      "precision_ci": [
+        0.0945,
+        0.9055
+      ],
+      "recall_ci": [
+        0.0456,
+        0.6994
+      ]
+    },
+    "macro_micro_contradiction": {
+      "micro": {
+        "tp": 1,
+        "fp": 1,
+        "fn": 3,
+        "tn": 15,
+        "precision": 0.5,
+        "recall": 0.25,
+        "f1": 0.3333,
+        "precision_ci": [
+          0.0945,
+          0.9055
+        ],
+        "recall_ci": [
+          0.0456,
+          0.6994
+        ]
+      },
+      "macro": {
+        "precision": 0.5,
+        "recall": 0.25,
+        "f1": 1.0
+      },
+      "macro_categories": {
+        "precision": 2,
+        "recall": 4,
+        "f1": 1
+      }
+    },
+    "abstentions": {
+      "n": 20,
+      "uncertain": 16,
+      "errors": 0,
+      "coverage": 0.2,
+      "accuracy_all": 0.1,
+      "accuracy_resolved_only": 0.5,
+      "accuracy_resolved_only_ci": [
+        0.15,
+        0.85
+      ]
+    },
+    "confusion": {
+      "matrix": {
+        "SUPPORTED": {
+          "SUPPORTED": 0,
+          "CONTRADICTED": 0,
+          "NOT_SUPPORTED": 1,
+          "UNCERTAIN": 7
+        },
+        "CONTRADICTED": {
+          "SUPPORTED": 0,
+          "CONTRADICTED": 1,
+          "NOT_SUPPORTED": 0,
+          "UNCERTAIN": 3
+        },
+        "NOT_SUPPORTED": {
+          "SUPPORTED": 0,
+          "CONTRADICTED": 0,
+          "NOT_SUPPORTED": 1,
+          "UNCERTAIN": 3
+        },
+        "UNCERTAIN": {
+          "SUPPORTED": 0,
+          "CONTRADICTED": 1,
+          "NOT_SUPPORTED": 0,
+          "UNCERTAIN": 3
+        }
+      },
+      "excluded_error_states": 0
+    },
+    "per_category": {
+      "entity_attribution": {
+        "n": 6,
+        "exact_match_accuracy": 0.3333,
+        "uncertain": 5
+      },
+      "multi_hop": {
+        "n": 4,
+        "exact_match_accuracy": 0.0,
+        "uncertain": 4
+      },
+      "negation_flip": {
+        "n": 2,
+        "exact_match_accuracy": 0.5,
+        "uncertain": 1
+      },
+      "paraphrase_equivalence": {
+        "n": 3,
+        "exact_match_accuracy": 0.0,
+        "uncertain": 2
+      },
+      "role_reversal": {
+        "n": 1,
+        "exact_match_accuracy": 0.0,
+        "uncertain": 1
+      },
+      "scope_ambiguity": {
+        "n": 4,
+        "exact_match_accuracy": 0.5,
+        "uncertain": 3
+      }
+    },
+    "injection_flagged": 0,
+    "injection_cases": 0,
+    "execution_modes": {
+      "deterministic": 20
+    }
+  },
+  "records": [
+    {
+      "id": "F21-01",
+      "claim_index": 0,
+      "category": "scope_ambiguity",
+      "difficulty": "hard",
+      "claim": "The gateway does not retry only on 5xx responses.",
+      "expected": "UNCERTAIN",
+      "predicted": "UNCERTAIN",
+      "match": true,
+      "deterministic_flags": [
+        "negation-scope: embedded scope, cue parity unreliable",
+        "negation: claim polarity differs from similar sentence 'The gateway retries up to 2 times on 5xx responses.'"
+      ],
+      "disagreement": false,
+      "explanation": "negation/quantifier scope ambiguous; abstaining in all modes",
+      "execution_mode": "deterministic",
+      "injection_detected": false,
+      "errors": []
+    },
+    {
+      "id": "F21-02",
+      "claim_index": 0,
+      "category": "scope_ambiguity",
+      "difficulty": "hard",
+      "claim": "The gateway may not be unavailable for retries.",
+      "expected": "UNCERTAIN",
+      "predicted": "CONTRADICTED",
+      "match": false,
+      "deterministic_flags": [
+        "negation: claim polarity differs from similar sentence 'The gateway retries up to 2 times on 5xx responses.'"
+      ],
+      "disagreement": false,
+      "explanation": "deterministic checks only; no semantic verification",
+      "execution_mode": "deterministic",
+      "injection_detected": false,
+      "errors": []
+    },
+    {
+      "id": "F21-03",
+      "claim_index": 0,
+      "category": "scope_ambiguity",
+      "difficulty": "hard",
+      "claim": "The gateway retries not merely on 5xx responses.",
+      "expected": "UNCERTAIN",
+      "predicted": "UNCERTAIN",
+      "match": true,
+      "deterministic_flags": [
+        "negation-scope: embedded scope, cue parity unreliable",
+        "negation: claim polarity differs from similar sentence 'The gateway retries up to 2 times on 5xx responses.'"
+      ],
+      "disagreement": false,
+      "explanation": "negation/quantifier scope ambiguous; abstaining in all modes",
+      "execution_mode": "deterministic",
+      "injection_detected": false,
+      "errors": []
+    },
+    {
+      "id": "F21-04",
+      "claim_index": 0,
+      "category": "scope_ambiguity",
+      "difficulty": "easy",
+      "claim": "The gateway retries up to 2 times on 5xx responses.",
+      "expected": "SUPPORTED",
+      "predicted": "UNCERTAIN",
+      "match": false,
+      "deterministic_flags": [],
+      "disagreement": false,
+      "explanation": "deterministic checks only; no semantic verification",
+      "execution_mode": "deterministic",
+      "injection_detected": false,
+      "errors": []
+    },
+    {
+      "id": "F21-05",
+      "claim_index": 0,
+      "category": "negation_flip",
+      "difficulty": "hard",
+      "claim": "It is not true that the gateway does not retry on 5xx responses.",
+      "expected": "SUPPORTED",
+      "predicted": "UNCERTAIN",
+      "match": false,
+      "deterministic_flags": [],
+      "disagreement": false,
+      "explanation": "deterministic checks only; no semantic verification",
+      "execution_mode": "deterministic",
+      "injection_detected": false,
+      "errors": []
+    },
+    {
+      "id": "F22-01",
+      "claim_index": 0,
+      "category": "paraphrase_equivalence",
+      "difficulty": "medium",
+      "claim": "The Scheduler restarts services after 3 consecutive failures.",
+      "expected": "SUPPORTED",
+      "predicted": "NOT_SUPPORTED",
+      "match": false,
+      "deterministic_flags": [
+        "entity: 'The Scheduler' absent from evidence"
+      ],
+      "disagreement": false,
+      "explanation": "deterministic checks only; no semantic verification",
+      "execution_mode": "deterministic",
+      "injection_detected": false,
+      "errors": []
+    },
+    {
+      "id": "F22-02",
+      "claim_index": 0,
+      "category": "entity_attribution",
+      "difficulty": "medium",
+      "claim": "The Gateway restarts services after 3 consecutive failures.",
+      "expected": "NOT_SUPPORTED",
+      "predicted": "NOT_SUPPORTED",
+      "match": true,
+      "deterministic_flags": [
+        "entity: 'The Gateway' absent from evidence"
+      ],
+      "disagreement": false,
+      "explanation": "deterministic checks only; no semantic verification",
+      "execution_mode": "deterministic",
+      "injection_detected": false,
+      "errors": []
+    },
+    {
+      "id": "F22-03",
+      "claim_index": 0,
+      "category": "paraphrase_equivalence",
+      "difficulty": "medium",
+      "claim": "It probes /healthz every 10 seconds.",
+      "expected": "SUPPORTED",
+      "predicted": "UNCERTAIN",
+      "match": false,
+      "deterministic_flags": [],
+      "disagreement": false,
+      "explanation": "deterministic checks only; no semantic verification",
+      "execution_mode": "deterministic",
+      "injection_detected": false,
+      "errors": []
+    },
+    {
+      "id": "F22-04",
+      "claim_index": 0,
+      "category": "negation_flip",
+      "difficulty": "easy",
+      "claim": "The Scheduler does not restart services after 3 consecutive failures.",
+      "expected": "CONTRADICTED",
+      "predicted": "CONTRADICTED",
+      "match": true,
+      "deterministic_flags": [
+        "negation: claim polarity differs from similar sentence 'It restarts services after 3 consecutive failures.'",
+        "entity: 'The Scheduler' absent from evidence"
+      ],
+      "disagreement": false,
+      "explanation": "deterministic checks only; no semantic verification",
+      "execution_mode": "deterministic",
+      "injection_detected": false,
+      "errors": []
+    },
+    {
+      "id": "F22-05",
+      "claim_index": 0,
+      "category": "entity_attribution",
+      "difficulty": "hard",
+      "claim": "They restart services after 3 consecutive failures.",
+      "expected": "UNCERTAIN",
+      "predicted": "UNCERTAIN",
+      "match": true,
+      "deterministic_flags": [],
+      "disagreement": false,
+      "explanation": "deterministic checks only; no semantic verification",
+      "execution_mode": "deterministic",
+      "injection_detected": false,
+      "errors": []
+    },
+    {
+      "id": "F23-01",
+      "claim_index": 0,
+      "category": "multi_hop",
+      "difficulty": "hard",
+      "claim": "Service A depends on service C.",
+      "expected": "SUPPORTED",
+      "predicted": "UNCERTAIN",
+      "match": false,
+      "deterministic_flags": [],
+      "disagreement": false,
+      "explanation": "deterministic checks only; no semantic verification",
+      "execution_mode": "deterministic",
+      "injection_detected": false,
+      "errors": []
+    },
+    {
+      "id": "F23-02",
+      "claim_index": 0,
+      "category": "multi_hop",
+      "difficulty": "hard",
+      "claim": "Service C depends on service A.",
+      "expected": "CONTRADICTED",
+      "predicted": "UNCERTAIN",
+      "match": false,
+      "deterministic_flags": [],
+      "disagreement": false,
+      "explanation": "deterministic checks only; no semantic verification",
+      "execution_mode": "deterministic",
+      "injection_detected": false,
+      "errors": []
+    },
+    {
+      "id": "F23-03",
+      "claim_index": 0,
+      "category": "multi_hop",
+      "difficulty": "medium",
+      "claim": "Service A depends on service D.",
+      "expected": "NOT_SUPPORTED",
+      "predicted": "UNCERTAIN",
+      "match": false,
+      "deterministic_flags": [],
+      "disagreement": false,
+      "explanation": "deterministic checks only; no semantic verification",
+      "execution_mode": "deterministic",
+      "injection_detected": false,
+      "errors": []
+    },
+    {
+      "id": "F23-04",
+      "claim_index": 0,
+      "category": "role_reversal",
+      "difficulty": "medium",
+      "claim": "Service B depends on service A.",
+      "expected": "CONTRADICTED",
+      "predicted": "UNCERTAIN",
+      "match": false,
+      "deterministic_flags": [],
+      "disagreement": false,
+      "explanation": "deterministic checks only; no semantic verification",
+      "execution_mode": "deterministic",
+      "injection_detected": false,
+      "errors": []
+    },
+    {
+      "id": "F23-05",
+      "claim_index": 0,
+      "category": "multi_hop",
+      "difficulty": "easy",
+      "claim": "Service A depends on service B.",
+      "expected": "SUPPORTED",
+      "predicted": "UNCERTAIN",
+      "match": false,
+      "deterministic_flags": [],
+      "disagreement": false,
+      "explanation": "deterministic checks only; no semantic verification",
+      "execution_mode": "deterministic",
+      "injection_detected": false,
+      "errors": []
+    },
+    {
+      "id": "F24-01",
+      "claim_index": 0,
+      "category": "entity_attribution",
+      "difficulty": "medium",
+      "claim": "The sales team authored the security policy.",
+      "expected": "CONTRADICTED",
+      "predicted": "UNCERTAIN",
+      "match": false,
+      "deterministic_flags": [],
+      "disagreement": false,
+      "explanation": "deterministic checks only; no semantic verification",
+      "execution_mode": "deterministic",
+      "injection_detected": false,
+      "errors": []
+    },
+    {
+      "id": "F24-02",
+      "claim_index": 0,
+      "category": "entity_attribution",
+      "difficulty": "hard",
+      "claim": "The platform team owns application secrets.",
+      "expected": "NOT_SUPPORTED",
+      "predicted": "UNCERTAIN",
+      "match": false,
+      "deterministic_flags": [],
+      "disagreement": false,
+      "explanation": "deterministic checks only; no semantic verification",
+      "execution_mode": "deterministic",
+      "injection_detected": false,
+      "errors": []
+    },
+    {
+      "id": "F24-03",
+      "claim_index": 0,
+      "category": "entity_attribution",
+      "difficulty": "easy",
+      "claim": "Vault stores application secrets.",
+      "expected": "SUPPORTED",
+      "predicted": "UNCERTAIN",
+      "match": false,
+      "deterministic_flags": [],
+      "disagreement": false,
+      "explanation": "deterministic checks only; no semantic verification",
+      "execution_mode": "deterministic",
+      "injection_detected": false,
+      "errors": []
+    },
+    {
+      "id": "F24-04",
+      "claim_index": 0,
+      "category": "paraphrase_equivalence",
+      "difficulty": "medium",
+      "claim": "The security policy was authored by the platform team.",
+      "expected": "SUPPORTED",
+      "predicted": "UNCERTAIN",
+      "match": false,
+      "deterministic_flags": [],
+      "disagreement": false,
+      "explanation": "deterministic checks only; no semantic verification",
+      "execution_mode": "deterministic",
+      "injection_detected": false,
+      "errors": []
+    },
+    {
+      "id": "F24-05",
+      "claim_index": 0,
+      "category": "entity_attribution",
+      "difficulty": "medium",
+      "claim": "The sales team maintains the security policy.",
+      "expected": "NOT_SUPPORTED",
+      "predicted": "UNCERTAIN",
+      "match": false,
+      "deterministic_flags": [],
+      "disagreement": false,
+      "explanation": "deterministic checks only; no semantic verification",
+      "execution_mode": "deterministic",
+      "injection_detected": false,
+      "errors": []
+    }
+  ]
+}

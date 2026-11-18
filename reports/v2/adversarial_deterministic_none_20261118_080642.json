@@ -1,0 +1,108 @@
+{
+  "timestamp": "2026-11-18 08:06:42",
+  "mode": "deterministic",
+  "judge": "none",
+  "llm_model": null,
+  "provenance": "synthetic-author-reviewed fixtures; no independent human validation",
+  "n_cases": 0,
+  "summary": {
+    "n_cases": 0,
+    "n_resolved": 0,
+    "evaluation_error_rate": null,
+    "adversarial_detection_rate": null,
+    "adversarial_detection_ci": null,
+    "false_acceptance_rate": null,
+    "false_acceptance_ci": null,
+    "false_acceptance_counts": {
+      "accepted": 0,
+      "adversarial_n": 0
+    },
+    "false_rejection_rate": null,
+    "false_rejection_ci": null,
+    "false_rejection_counts": {
+      "rejected": 0,
+      "positive_n": 0
+    },
+    "exact_status_accuracy": null,
+    "exact_status_accuracy_ci": null,
+    "uncertain_rate": null,
+    "deterministic_semantic_disagreements": 0,
+    "contradiction_detection": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 0,
+      "precision": null,
+      "recall": null,
+      "f1": null,
+      "precision_ci": null,
+      "recall_ci": null
+    },
+    "macro_micro_contradiction": {
+      "micro": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "tn": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "precision_ci": null,
+        "recall_ci": null
+      },
+      "macro": {
+        "precision": null,
+        "recall": null,
+        "f1": null
+      },
+      "macro_categories": {
+        "precision": 0,
+        "recall": 0,
+        "f1": 0
+      }
+    },
+    "abstentions": {
+      "n": 0,
+      "uncertain": 0,
+      "errors": 0,
+      "coverage": null,
+      "accuracy_all": null,
+      "accuracy_resolved_only": null,
+      "accuracy_resolved_only_ci": null
+    },
+    "confusion": {
+      "matrix": {
+        "SUPPORTED": {
+          "SUPPORTED": 0,
+          "CONTRADICTED": 0,
+          "NOT_SUPPORTED": 0,
+          "UNCERTAIN": 0
+        },
+        "CONTRADICTED": {
+          "SUPPORTED": 0,
+          "CONTRADICTED": 0,
+          "NOT_SUPPORTED": 0,
+          "UNCERTAIN": 0
+        },
+        "NOT_SUPPORTED": {
+          "SUPPORTED": 0,
+          "CONTRADICTED": 0,
+          "NOT_SUPPORTED": 0,
+          "UNCERTAIN": 0
+        },
+        "UNCERTAIN": {
+          "SUPPORTED": 0,
+          "CONTRADICTED": 0,
+          "NOT_SUPPORTED": 0,
+          "UNCERTAIN": 0
+        }
+      },
+      "excluded_error_states": 0
+    },
+    "per_category": {},
+    "injection_flagged": 0,
+    "injection_cases": 0,
+    "execution_modes": {}
+  },
+  "records": []
+}
