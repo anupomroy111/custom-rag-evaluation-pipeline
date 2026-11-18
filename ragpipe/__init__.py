@@ -1,3 +1,6 @@
 """Custom RAG & Evaluation Pipeline."""
 
-__version__ = "0.1.0"
+from .api import RAGEvaluator
+
+__version__ = "2.1.0"
+__all__ = ["RAGEvaluator"]

@@ -3,6 +3,7 @@ from dataclasses import dataclass, field
 
 from .llm import GeminiClient
 from .retrieval import RetrievedChunk
+from .verify.engine import JudgeClient
 
 ANSWER_SYSTEM = (
     "You are a precise documentation assistant. Answer the question using ONLY the "
@@ -50,7 +51,7 @@ def citation_attempts(text: str) -> list[str]:
     return list(dict.fromkeys(attempts))
 
 
-def generate_answer(query: str, contexts: list[RetrievedChunk], client: GeminiClient) -> Answer:
+def generate_answer(query: str, contexts: list[RetrievedChunk], client: JudgeClient) -> Answer:
     passages = "\n\n".join(
         f"[id: {c.chunk.id}] (source: {c.chunk.doc})\n{c.chunk.text}" for c in contexts
     )

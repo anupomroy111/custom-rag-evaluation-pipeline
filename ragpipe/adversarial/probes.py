@@ -26,17 +26,23 @@ VARIANTS = ["bm25", "dense", "hybrid"]
 
 
 class CachingEmbedClient:
-    """Delegates embeddings but memoizes query vectors across variants."""
+    """Delegates embeddings but memoizes query vectors across variants and
+    across processes (disk cache) so replays never repay embed quota."""
 
-    def __init__(self, inner: GeminiClient):
+    def __init__(self, inner: GeminiClient, cache_path: Path | None = None):
         self.inner = inner
+        self.cache_path = cache_path or settings.index_dir / "query_cache.json"
         self._cache: dict[str, list[float]] = {}
+        if self.cache_path.exists():
+            self._cache = json.loads(self.cache_path.read_text(encoding="utf-8"))
 
     def embed(self, texts: list[str]) -> list[list[float]]:
         missing = [t for t in texts if t not in self._cache]
         if missing:
             for t, vec in zip(missing, self.inner.embed(missing)):
                 self._cache[t] = vec
+            self.cache_path.parent.mkdir(parents=True, exist_ok=True)
+            self.cache_path.write_text(json.dumps(self._cache), encoding="utf-8")
         return [self._cache[t] for t in texts]
 
 

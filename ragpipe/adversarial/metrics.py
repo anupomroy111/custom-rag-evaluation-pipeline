@@ -6,6 +6,7 @@ Small-sample counts are always reported alongside rates.
 
 from collections import Counter
 
+from ..evalstats import abstentions, binary_counts, macro_micro, prf, rate, wilson
 from ..verify.schemas import VerdictStatus
 
 MATRIX_STATUSES = ["SUPPORTED", "CONTRADICTED", "NOT_SUPPORTED", "UNCERTAIN"]
@@ -13,7 +14,7 @@ ADVERSARIAL_EXPECTED = {"CONTRADICTED", "NOT_SUPPORTED"}
 
 
 def _rate(num: int, den: int) -> float | None:
-    return round(num / den, 4) if den else None
+    return rate(num, den)
 
 
 def confusion_matrix(records: list[dict]) -> dict:
@@ -29,15 +30,7 @@ def confusion_matrix(records: list[dict]) -> dict:
 
 
 def binary_prf(records: list[dict], positive: str) -> dict:
-    tp = sum(1 for r in records if r["expected"] == positive and r["predicted"] == positive)
-    fp = sum(1 for r in records if r["expected"] != positive and r["predicted"] == positive)
-    fn = sum(1 for r in records if r["expected"] == positive and r["predicted"] != positive)
-    precision = _rate(tp, tp + fp)
-    recall = _rate(tp, tp + fn)
-    f1 = (round(2 * precision * recall / (precision + recall), 4)
-          if precision and recall else None)
-    return {"tp": tp, "fp": fp, "fn": fn,
-            "precision": precision, "recall": recall, "f1": f1}
+    return prf(binary_counts(records, positive))
 
 
 def summarize_adversarial(records: list[dict]) -> dict:
@@ -70,12 +63,22 @@ def summarize_adversarial(records: list[dict]) -> dict:
         "n_resolved": len(resolved),
         "evaluation_error_rate": _rate(len(errors), total),
         "adversarial_detection_rate": _rate(detected, len(adversarial)),
+        "adversarial_detection_ci": wilson(detected, len(adversarial)),
         "false_acceptance_rate": _rate(accepted, len(adversarial)),
+        "false_acceptance_ci": wilson(accepted, len(adversarial)),
+        "false_acceptance_counts": {"accepted": accepted, "adversarial_n": len(adversarial)},
         "false_rejection_rate": _rate(rejected, len(positives)),
+        "false_rejection_ci": wilson(rejected, len(positives)),
+        "false_rejection_counts": {"rejected": rejected, "positive_n": len(positives)},
         "exact_status_accuracy": _rate(exact, len(resolved)),
+        "exact_status_accuracy_ci": wilson(exact, len(resolved)),
         "uncertain_rate": _rate(uncertain, len(resolved)),
         "deterministic_semantic_disagreements": disagreements,
         "contradiction_detection": binary_prf(resolved, "CONTRADICTED"),
+        "macro_micro_contradiction": macro_micro(
+            {cat: [r for r in resolved if r["category"] == cat]
+             for cat in sorted({r["category"] for r in resolved})}, "CONTRADICTED"),
+        "abstentions": abstentions(records),
         "confusion": confusion_matrix(resolved),
         "per_category": per_category,
         "injection_flagged": sum(1 for r in records if r.get("injection_detected")),

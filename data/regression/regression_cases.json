@@ -1,0 +1,23 @@
+{
+  "description": "V2.1 regression pins: expected deterministic-mode verdicts for referenced cases from other splits. CI gate fails if any pin flips or if false acceptance appears on the adversarial subset. References avoid duplicating fixture content.",
+  "pins": [
+    {"source": "original", "ref_id": "q01", "kind": "golden", "expected_answer_contains": "15 minutes"},
+    {"source": "original", "ref_id": "q03", "kind": "golden", "expected_answer_contains": "admin"},
+    {"source": "original", "ref_id": "q11", "kind": "golden", "expected_refusal": true},
+    {"source": "adversarial", "ref_id": "NEG-001", "kind": "verdict", "expected_status": "CONTRADICTED"},
+    {"source": "adversarial", "ref_id": "NEG-002", "kind": "verdict", "expected_status": "CONTRADICTED"},
+    {"source": "adversarial", "ref_id": "NUM-001", "kind": "verdict", "expected_status": "CONTRADICTED"},
+    {"source": "adversarial", "ref_id": "NUM-005", "kind": "verdict", "expected_status": "SUPPORTED"},
+    {"source": "adversarial", "ref_id": "ROLE-001", "kind": "verdict", "expected_status": "UNCERTAIN"},
+    {"source": "adversarial", "ref_id": "INJ-002", "kind": "verdict", "expected_status": "CONTRADICTED"},
+    {"source": "adversarial", "ref_id": "MOD-001", "kind": "verdict", "expected_status": "NOT_SUPPORTED"},
+    {"source": "development", "ref_id": "F01-02", "kind": "verdict", "expected_status": "CONTRADICTED"},
+    {"source": "development", "ref_id": "F03-04", "kind": "verdict", "expected_status": "SUPPORTED"},
+    {"source": "heldout", "ref_id": "F11-02", "kind": "verdict", "expected_status": "UNCERTAIN"},
+    {"source": "heldout", "ref_id": "F13-02", "kind": "verdict", "expected_status": "CONTRADICTED"}
+  ],
+  "gates": {
+    "adversarial_subset_false_acceptance": 0.0,
+    "adversarial_subset_detection_floor": 0.5
+  }
+}

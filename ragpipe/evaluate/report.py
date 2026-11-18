@@ -52,14 +52,17 @@ def write_markdown_report(report: dict) -> str:
             (r["id"], v)
             for r in variant["results"]
             for v in r.get("claim_verdicts", [])
-            if not v["supported"]
+            if not (v.get("supported") if "supported" in v
+                    else v.get("status") == "SUPPORTED")
         ]
         if unsupported:
             lines += ["", "### Unsupported claims (hallucination audit)", ""]
             for qid, v in unsupported:
-                lines.append(f"- **{qid}**: \"{v['claim']}\"")
-                if v.get("reason"):
-                    lines.append(f"  - Judge: {v['reason']}")
+                label = v.get("claim") or v.get("claim_id", "?")
+                lines.append(f"- **{qid}**: \"{label}\"")
+                reason = v.get("reason") or v.get("explanation")
+                if reason:
+                    lines.append(f"  - Judge: {reason}")
 
     lines += [
         "", "## Metric definitions", "",

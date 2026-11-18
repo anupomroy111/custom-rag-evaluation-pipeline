@@ -27,6 +27,23 @@ detection / false-acceptance / false-rejection rates. See
 [docs/EVALUATION_METHODOLOGY.md](docs/EVALUATION_METHODOLOGY.md) and
 [docs/MIGRATION_V2.md](docs/MIGRATION_V2.md).
 
+**V2.1 — Independent Validation & Research-Grade Evaluation:** scenario-family
+disjoint development/held-out splits (+200 fixtures, leakage-gated), Wilson
+confidence intervals and raw TP/FP/TN/FN for every proportion, abstention-aware
+accuracy, paired mutation + metamorphic red-team testing, normalized semantic
+event tuples (agent/patient/tense/aspect/attribution), optional secondary judge,
+run manifests (git commit, dataset/prompt hashes, dependency versions),
+resumable quota-blocked execution, a public `RAGEvaluator` API with adapters,
+and offline CI with benchmark regression gates. Start here:
+[docs/REVIEWER_GUIDE.md](docs/REVIEWER_GUIDE.md),
+[docs/V21_ENGINEERING_AUDIT.md](docs/V21_ENGINEERING_AUDIT.md),
+[docs/BENCHMARK_METHODOLOGY.md](docs/BENCHMARK_METHODOLOGY.md),
+[docs/METRIC_DEFINITIONS.md](docs/METRIC_DEFINITIONS.md),
+[docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md),
+[docs/RED_TEAM_RESULTS.md](docs/RED_TEAM_RESULTS.md),
+[docs/OPEN_SOURCE_USAGE.md](docs/OPEN_SOURCE_USAGE.md),
+[docs/LIMITATIONS.md](docs/LIMITATIONS.md).
+
 Built with pure-Python retrieval (no native dependencies) and the Gemini API for
 embeddings, generation, and LLM-as-judge evaluation.
 
@@ -136,6 +153,20 @@ python -m ragpipe.cli probes-v2
 
 # V2: end-to-end ablation with engine verification + independent precision judge
 python -m ragpipe.cli evaluate-v2 --variants bm25,dense,hybrid,hybrid+rerank
+python -m ragpipe.cli evaluate-v2 --resume          # continue after quota block
+
+# V2.1: leakage-gated splits, red-team, ablation grid, public API
+python scripts/check_leakage.py
+python scripts/regression_gate.py
+python -m ragpipe.cli redteam
+python -m ragpipe.cli grid-v21 --mode offline       # deterministic, judge-free
+python -m ragpipe.cli grid-v21 --mode mixed         # + live semantic on heldout
+```
+
+```python
+from ragpipe import RAGEvaluator
+evaluator = RAGEvaluator()
+result = evaluator.evaluate(question="...", context=["..."], answer="...")
 ```
 
 Reports land in `reports/` as JSON (full audit trail) and Markdown (comparison
@@ -208,7 +239,7 @@ dataset.
 ## Tests
 
 ```bash
-python -m pytest tests/ -q    # 98 tests, no API calls needed
+python -m pytest tests/ -q    # 114 tests, no API calls needed
 ```
 
 Covers chunking, BM25, RRF fusion math, reranker grade handling, citation
@@ -234,23 +265,34 @@ ragpipe/
     runner_v2.py   # V2 runner: engine verification + independent precision judge
     report.py      # Markdown report with claim audit
   verify/
-    schemas.py     # Pydantic claim/verdict models + explicit states
-    checks.py      # deterministic evidence checks (LLM-free)
-    engine.py      # multi-stage fail-closed verification engine
+    schemas.py     # Pydantic claim/event/verdict models + explicit states
+    checks.py      # deterministic evidence checks (LLM-free, support-aware)
+    engine.py      # multi-stage fail-closed verification engine (prompt v2.1)
   adversarial/
-    dataset.py     # 104-case synthetic fixture loader/validation
+    dataset.py     # split loaders + schema validation (12 categories)
     benchmark.py   # deterministic / semantic / mocked benchmark modes
-    metrics.py     # confusion matrices, detection/FAR/FRR, PRF
+    metrics.py     # confusion matrices, detection/FAR/FRR, PRF, Wilson CIs
     probes.py      # retrieval-variant evidence probes
-  cli.py           # ingest / ask / evaluate / evaluate-v2 / adversarial / probes-v2
-data/docs/         # sample corpus
-data/golden_dataset.json
-data/adversarial_golden_dataset.json
-docs/              # V2 audit, architecture, methodology, benchmark, migration
-tests/
+  evaluate/
+    ablation_v21.py # 4 variants x {adversarial, development, heldout} grid
+  evalstats.py     # Wilson intervals, TP/FP/TN/FN, macro/micro, abstentions
+  redteam.py       # paired mutation + metamorphic testing
+  manifest.py      # run provenance (commit, hashes, deps, API status)
+  api.py           # public RAGEvaluator + adapter protocols
+  cli.py           # ingest / ask / evaluate / evaluate-v2 / adversarial /
+                   # probes-v2 / grid-v21 / redteam
+data/original/     # V1 12-question golden set (unchanged)
+data/adversarial/  # V2 104 fixtures (unchanged)
+data/development/  # 60 tuning fixtures (families F01-F10)
+data/heldout/      # 140 unseen fixtures (families F11-F20)
+data/regression/   # CI gate pins
+docs/              # V2 + V2.1 audits, methodology, metrics, reviewer guide
+examples/          # offline external-usage example
+scripts/           # leakage gate, regression gate, dataset/report builders
+tests/             # 114 tests
 reports/           # V1 evaluation reports (immutable history)
 reports/v2/        # V2 benchmark reports
-scripts/           # report consolidation utilities
+reports/v2_1/      # V2.1 grids, red-team, executive summary
 ```
 
 ## License

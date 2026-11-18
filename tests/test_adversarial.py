@@ -15,8 +15,15 @@ def test_dataset_size_and_category_coverage():
     cases = load_adversarial()
     assert len(cases) >= 100
     counts = Counter(c.category for c in cases)
-    for cat in CATEGORIES:
+    original_eight = CATEGORIES[:8]
+    for cat in original_eight:
         assert counts[cat] >= 10, cat
+    # V2.1 splits must cover the extended category set
+    from ragpipe.adversarial.dataset import DEVELOPMENT_PATH, HELDOUT_PATH
+    extra = load_adversarial(DEVELOPMENT_PATH) + load_adversarial(HELDOUT_PATH)
+    extra_counts = Counter(c.category for c in extra)
+    for cat in CATEGORIES[8:]:
+        assert extra_counts[cat] >= 5, cat
 
 
 def test_dataset_provenance_and_labels():

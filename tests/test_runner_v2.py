@@ -78,6 +78,23 @@ def test_v2_summary_citation_validity_and_populations():
     assert s["hallucination_rate_answerable"] == 0.0
 
 
+def test_report_renderer_handles_v2_verdict_dicts():
+    """Regression: V2 verdicts carry 'status', not V1's 'supported' key."""
+    from ragpipe.evaluate.report import write_markdown_report
+    report = {
+        "timestamp": "t", "llm_model": "m", "embed_model": "e", "num_questions": 1,
+        "variants": {"hybrid+rerank": {"summary": {"faithfulness": 1.0}, "results": [{
+            "id": "q01", "question": "What?", "answerable": True, "refused": False,
+            "faithfulness": 1.0, "hallucination_rate": 0.0, "answer_relevancy": 1.0,
+            "context_precision": 1.0, "context_recall": 1.0,
+            "claim_verdicts": [{"claim_id": "c1", "status": "CONTRADICTED",
+                                "explanation": "x"}],
+        }]}},
+    }
+    md = write_markdown_report(report)
+    assert "CONTRADICTED" in md or "unsupported" in md.lower()
+
+
 def test_v1_summary_no_longer_mixes_populations():
     records = [
         {"answerable": True, "refused": False, "faithfulness": 1.0,

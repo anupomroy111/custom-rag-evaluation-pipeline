@@ -157,17 +157,71 @@ def _clauses(sent: str) -> list[str]:
 
 
 def negation_flip_flags(claim: str, context: str) -> list[str]:
-    """Clause-scoped, support-aware negation polarity comparison."""
+    """Clause-scoped, support-aware negation polarity comparison.
+
+    Polarity uses cue-count parity so simple double negations cancel; embedded
+    scopes are handled by negation_scope_ambiguous (UNCERTAIN), not guessed.
+    """
     flags = []
-    claim_neg = bool(negation_cues(claim))
+    claim_neg = len(negation_cues(claim)) % 2 == 1
     claim_tokens = content_tokens(claim)
     for sent in sentences(context):
         if overlap(claim_tokens, content_tokens(sent)) < 0.5:
             continue
         clause = max(_clauses(sent),
                      key=lambda c: overlap(claim_tokens, content_tokens(c)))
-        if claim_neg != bool(negation_cues(clause)):
+        if claim_neg != (len(negation_cues(clause)) % 2 == 1):
             flags.append(f"negation: claim polarity differs from similar sentence '{sent[:80]}'")
+    return flags
+
+
+def numerical_support(claim: str, context: str) -> bool:
+    """Positive deterministic evidence: a similar sentence carries the same
+    normalized value (unit conversions included) AND the same quantity context
+    (core tokens match). Used only to affirm numeric claims in deterministic
+    mode; never affirms non-numeric claims."""
+    claim_nums = [n for n in extract_numbers(claim) if n.dimension]
+    if not claim_nums:
+        return False
+
+    def core(text: str) -> set[str]:
+        nums = extract_numbers(text)
+        drop = set()
+        for n in nums:
+            drop.update(content_tokens(n.raw))
+        # keep function words: extra causal/temporal/scope material ("from",
+        # "because", "since") must block affirmation, not be filtered away
+        return {t for t in re.findall(r"[a-z0-9_]+", text.lower())
+                if t not in drop and not t.isdigit()}
+
+    claim_core = core(claim)
+    for sent in sentences(context):
+        sent_core = core(sent)
+        # the claim's entire core content must be covered by the evidence
+        # sentence; extra causal/temporal/scope material blocks affirmation
+        if not claim_core or not claim_core <= sent_core:
+            continue
+        sent_nums = extract_numbers(sent)
+        if all(any(sn.dimension == cn.dimension and abs(sn.value - cn.value) <= 1e-9
+                   for sn in sent_nums) for cn in claim_nums):
+            return True
+    return False
+
+
+def negation_consistency(claim, events: list) -> list[str]:
+    """Semantic negation comparison over normalized event tuples (LLM-resolved
+    double negation / scope), matched by predicate + shared entities."""
+    flags = []
+    cl = lemma(claim.predicate)
+    claim_ents = {e.lower() for e in claim.entities}
+    for ev in events:
+        if lemma(ev.predicate) != cl:
+            continue
+        ev_ents = {e.lower() for e in ev.entities}
+        if claim_ents and ev_ents and not (claim_ents & ev_ents):
+            continue
+        if claim.negation != ev.negation:
+            flags.append(f"negation: claim polarity differs from event '{ev.event_id}'")
     return flags
 
 
@@ -296,3 +350,105 @@ def map_citations(claim_tokens: set[str], entities: list[str],
             scored.append((score, pid))
     scored.sort(reverse=True)
     return [pid for _, pid in scored[:2]]
+
+
+MONTHS = {m: i + 1 for i, m in enumerate(
+    ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"])}
+
+
+def lemma(predicate: str) -> str:
+    p = predicate.lower().strip().replace("'s", "")
+    for suffix in ("ing", "ed", "s"):
+        if p.endswith(suffix) and len(p) > len(suffix) + 2:
+            return p[:-len(suffix)]
+    return p
+
+
+def normalize_date(text: str) -> tuple[int, int, int] | None:
+    text = text.strip().lower()
+    m = re.match(r"(\d{4})-(\d{2})-(\d{2})", text)
+    if m:
+        return int(m.group(1)), int(m.group(2)), int(m.group(3))
+    m = re.match(r"([a-z]{3})[a-z]*\.?\s+(\d{4})", text)
+    if m and m.group(1) in MONTHS:
+        return int(m.group(2)), MONTHS[m.group(1)], 1
+    m = re.match(r"(\d{1,2})\s+([a-z]{3})[a-z]*\.?\s+(\d{4})", text)
+    if m and m.group(2) in MONTHS:
+        return int(m.group(3)), MONTHS[m.group(2)], int(m.group(1))
+    return None
+
+
+def negation_scope_ambiguous(text: str) -> bool:
+    """Embedded negation scopes the cue-parity heuristic cannot parse."""
+    return bool(re.search(
+        r"\b(?:not (?:unlikely|impossible|uncommon|without)|failed to (?:deny|reject)|"
+        r"no reason to (?:doubt|believe)|not (?:just|only|merely)|"
+        r"doesn't (?:mean|imply)|cannot (?:rule out|exclude))\b", text, re.IGNORECASE))
+
+
+def role_consistency(claim, events: list) -> list[str]:
+    """Agent-patient / subject-object swap detection over normalized tuples."""
+    flags = []
+    ca, cp = claim.agent.lower(), claim.patient.lower()
+    if not (ca and cp and claim.predicate):
+        return flags
+    cl = lemma(claim.predicate)
+    for ev in events:
+        if lemma(ev.predicate) != cl:
+            continue
+        ea, ep = ev.agent.lower(), ev.patient.lower()
+        if not (ea and ep):
+            continue
+        if ca == ep and cp == ea:
+            if {ca, cp} == {ea, ep} and (ca, cp) != (ea, ep):
+                flags.append(f"role: agent-patient swapped vs event '{ev.event_id}'")
+    return flags
+
+
+def attribution_consistency(claim, events: list) -> list[str]:
+    flags = []
+    for ca in claim.attributions:
+        if not (ca.relation and ca.holder and ca.target):
+            continue
+        for ev in events:
+            for ea in ev.attributions:
+                if (ea.relation.lower() == ca.relation.lower()
+                        and ea.target.lower() == ca.target.lower()
+                        and ea.holder.lower() != ca.holder.lower()):
+                    flags.append(
+                        f"attribution: {ca.relation} holder '{ca.holder}' vs evidence "
+                        f"'{ea.holder}' for '{ca.target}'")
+    return flags
+
+
+def temporal_consistency(claim, events: list) -> list[str]:
+    flags = []
+    cc = temporal_cues(claim.original_claim)
+    for ev in events:
+        ec = {c.lower() for c in ev.temporal_cues}
+        if cc["before"] and "after" in ec or cc["after"] and "before" in ec:
+            flags.append(f"temporal: before/after reversal vs event '{ev.event_id}'")
+        if cc["planned"] and ev.state == "completed":
+            flags.append(f"temporal: claim planned vs event completed '{ev.event_id}'")
+        if cc["completed"] and ev.state == "planned":
+            flags.append(f"temporal: claim completed vs event planned '{ev.event_id}'")
+    cd = [normalize_date(d) for d in claim.temporal_references]
+    cd = [d for d in cd if d]
+    ed = [normalize_date(d) for ev in events for d in ev.temporal_cues
+          if normalize_date(d)]
+    if cd and ed and set(cd) != set(ed) and not set(cd) <= set(ed):
+        flags.append(f"temporal: normalized dates {cd} vs evidence {ed}")
+    return flags
+
+
+def tuple_equivalence(claim, events: list) -> bool:
+    """Exact normalized-tuple match: strong paraphrase-equivalence signal."""
+    cl = lemma(claim.predicate)
+    for ev in events:
+        if (lemma(ev.predicate) == cl
+                and claim.agent.lower() == ev.agent.lower()
+                and claim.patient.lower() == ev.patient.lower()
+                and claim.negation == ev.negation
+                and MODALITY_RANK.get(claim.modality, 2) == MODALITY_RANK.get(ev.modality, 2)):
+            return True
+    return False

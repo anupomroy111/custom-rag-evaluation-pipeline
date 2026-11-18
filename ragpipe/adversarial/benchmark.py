@@ -13,13 +13,13 @@ from pathlib import Path
 from ..config import settings
 from ..llm import GeminiClient
 from ..verify import checks
-from ..verify.engine import VerificationEngine
+from ..verify.engine import JudgeClient, VerificationEngine
 from .dataset import AdversarialCase, load_adversarial
 from .metrics import summarize_adversarial
 
 
 class AdversarialBenchmark:
-    def __init__(self, client: GeminiClient | None = None, mode: str = "deterministic",
+    def __init__(self, client: JudgeClient | None = None, mode: str = "deterministic",
                  judge_label: str | None = None):
         if mode not in ("deterministic", "semantic"):
             raise ValueError(f"unknown benchmark mode {mode!r}")

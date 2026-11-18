@@ -24,13 +24,15 @@ class GeminiClient:
     disk response cache. Cache hits make benchmark re-runs quota-free."""
 
     def __init__(self, api_key: str | None = None, rpm: int | None = None,
-                 cache_dir: Path | None = None, use_cache: bool | None = None):
+                 cache_dir: Path | None = None, use_cache: bool | None = None,
+                 model: str | None = None):
         key = api_key or settings.api_key
         if not key or key == "your_api_key_here":
             raise RuntimeError(
                 "GEMINI_API_KEY is not set. Copy .env.example to .env and add your key "
                 "(free key at https://aistudio.google.com/apikey)."
             )
+        self.model = model or settings.llm_model
         self._client = genai.Client(
             api_key=key,
             http_options=types.HttpOptions(api_version="v1beta", timeout=120_000),
@@ -61,7 +63,7 @@ class GeminiClient:
     def _cache_path(self, prompt: str, system: str | None, json_mode: bool,
                     temperature: float) -> Path:
         key = hashlib.sha256(json.dumps({
-            "model": settings.llm_model, "prompt": prompt, "system": system,
+            "model": self.model, "prompt": prompt, "system": system,
             "json": json_mode, "temp": temperature,
         }, ensure_ascii=False).encode()).hexdigest()
         return self.cache_dir / f"{key}.json"
@@ -83,7 +85,7 @@ class GeminiClient:
             started = time.monotonic()
             try:
                 resp = self._client.models.generate_content(
-                    model=settings.llm_model, contents=prompt, config=config
+                    model=self.model, contents=prompt, config=config
                 )
             except errors.APIError as e:
                 self.stats["errors"] += 1

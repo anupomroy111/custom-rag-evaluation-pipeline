@@ -10,3 +10,5 @@ eval_ablation.log
 eval_v2.log
 reports/v2/checkpoint_v2.json
 assets/
+eval_v21.log
+eval_v21b.log

@@ -5,13 +5,24 @@ import json
 import time
 from pathlib import Path
 
+from google.genai import errors
+
 from ..config import settings
 from ..llm import GeminiClient
+from ..manifest import build_manifest
 from ..pipeline import RAGPipeline
 from ..verify import VerificationEngine
 from . import metrics
 from .report import write_markdown_report
 from .runner import Variant, _mean, load_golden, print_summary
+
+
+class QuotaBlockedError(RuntimeError):
+    """Daily free-tier quota exhausted; run must stop and stay resumable."""
+
+
+def _is_daily_quota(e: errors.APIError) -> bool:
+    return e.code == 429 and "per day" in str(e.message).lower()
 
 
 class EvalRunnerV2:
@@ -21,7 +32,14 @@ class EvalRunnerV2:
         self.engine = VerificationEngine(self.client)
 
     def evaluate_item(self, item: dict, variant: Variant) -> dict:
-        result = self.pipeline.run(item["question"], mode=variant.mode, rerank=variant.rerank)
+        t0 = time.monotonic()
+        try:
+            result = self.pipeline.run(item["question"], mode=variant.mode, rerank=variant.rerank)
+        except errors.APIError as e:
+            if _is_daily_quota(e):
+                raise QuotaBlockedError(str(e)) from e
+            raise
+        t_pipeline = time.monotonic() - t0
         answer = result.answer
         contexts = [(c.chunk.id, c.chunk.text) for c in result.contexts]
         context_texts = [t for _, t in contexts]
@@ -43,6 +61,7 @@ class EvalRunnerV2:
         verification = self.engine.verify_answer(
             answer.text, contexts, refused=answer.refused, mode="semantic"
         )
+        t_verify = time.monotonic() - t0 - t_pipeline
         record["answer_state"] = verification.answer_state.value
         record["faithfulness"] = verification.faithfulness
         record["hallucination_rate"] = verification.hallucination_rate
@@ -72,30 +91,74 @@ class EvalRunnerV2:
         relevancy = metrics.answer_relevancy(item["question"], answer.text, self.client)
         record["answer_relevancy"] = relevancy["score"]
         record["relevancy_reason"] = relevancy["reason"]
+        record["latency_s"] = {
+            "pipeline": round(t_pipeline, 3),
+            "verification": round(t_verify, 3),
+            "judges": round(time.monotonic() - t0 - t_pipeline - t_verify, 3),
+            "total": round(time.monotonic() - t0, 3),
+        }
         return record
 
-    def run(self, items: list[dict], variants: list[Variant]) -> dict:
+    def run(self, items: list[dict], variants: list[Variant],
+            resume: bool = False) -> dict:
         report = {
             "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
             "version": "v2",
             "llm_model": settings.llm_model,
             "embed_model": settings.embed_model,
             "num_questions": len(items),
+            "api_status": "live",
+            "pending": {},
             "variants": {},
         }
+        done: dict[str, dict[str, dict]] = {}
+        if resume:
+            cp = settings.reports_dir / "v2" / "checkpoint_v2.json"
+            if cp.exists():
+                old = json.loads(cp.read_text(encoding="utf-8"))
+                done = {name: {r["id"]: r for r in v["results"]}
+                        for name, v in old.get("variants", {}).items()}
         for variant in variants:
             print(f"\n=== V2 variant: {variant.name} ===", flush=True)
             records = []
+            skipped = 0
             for i, item in enumerate(items, 1):
+                prior = done.get(variant.name, {}).get(item.get("id"))
+                if resume and prior is not None:
+                    records.append(prior)
+                    skipped += 1
+                    continue
                 print(f"[{i}/{len(items)}] {item['question'][:70]}", flush=True)
-                records.append(self.evaluate_item(item, variant))
+                try:
+                    records.append(self.evaluate_item(item, variant))
+                except QuotaBlockedError as e:
+                    report["api_status"] = "BLOCKED_BY_QUOTA"
+                    report["quota_error"] = str(e)[:300]
+                    report["pending"][variant.name] = [
+                        it.get("id") for it in items[i - 1:]
+                    ]
+                    print(f"BLOCKED_BY_QUOTA at {variant.name} item {i}; "
+                          f"resume later with --resume", flush=True)
+                    break
                 report["variants"][variant.name] = {
                     "summary": summarize_v2(records),
                     "results": records,
                 }
                 self._checkpoint(report)
+            if variant.name not in report["variants"] and records:
+                report["variants"][variant.name] = {
+                    "summary": summarize_v2(records), "results": records}
+            if skipped:
+                print(f"resumed {skipped} cached items for {variant.name}", flush=True)
+            if report["api_status"] == "BLOCKED_BY_QUOTA":
+                break
             print_summary(variant.name, report["variants"][variant.name]["summary"])
         report["api_stats"] = dict(self.client.stats)
+        report["manifest"] = build_manifest(
+            {"original_golden": settings.golden_path},
+            api_status=report["api_status"],
+            extra={"resume": resume},
+        )
         return report
 
     def _checkpoint(self, report: dict) -> None:

@@ -1,4 +1,5 @@
 import argparse
+import json
 import sys
 from pathlib import Path
 
@@ -52,10 +53,34 @@ def cmd_evaluate_v2(args: argparse.Namespace) -> int:
     if args.limit:
         items = items[:args.limit]
     runner = EvalRunnerV2(RAGPipeline())
-    report = runner.run(items, variants)
+    report = runner.run(items, variants, resume=args.resume)
     json_path, md_path = runner.save(report)
     print(f"\nReports written:\n  {json_path}\n  {md_path}")
     return 0
+
+
+def cmd_grid_v21(args: argparse.Namespace) -> int:
+    from .evaluate.ablation_v21 import run_grid, save_grid
+
+    report = run_grid(mode=args.mode)
+    json_path, md_path = save_grid(report)
+    print(f"\nReports written:\n  {json_path}\n  {md_path}")
+    return 0
+
+
+def cmd_redteam(args: argparse.Namespace) -> int:
+    from .redteam import run_redteam
+    from .verify.engine import VerificationEngine
+
+    client = GeminiClient() if args.mode == "semantic" else None
+    report = run_redteam(VerificationEngine(client), mode=args.mode)
+    out = settings.reports_dir / "v2_1"
+    out.mkdir(parents=True, exist_ok=True)
+    path = out / f"redteam_{args.mode}.json"
+    path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"red-team pairs={report['n_pairs']} passed={report['passed']} "
+          f"rate={report['pass_rate']} -> {path}")
+    return 0 if report["passed"] == report["n_pairs"] else 1
 
 
 def cmd_adversarial(args: argparse.Namespace) -> int:
@@ -114,8 +139,18 @@ def main(argv: list[str] | None = None) -> int:
     p_eval2 = sub.add_parser("evaluate-v2", help="V2 end-to-end eval (engine verification)")
     p_eval2.add_argument("--variants", default="hybrid+rerank")
     p_eval2.add_argument("--limit", type=int, default=None)
+    p_eval2.add_argument("--resume", action="store_true",
+                         help="Reuse completed items from checkpoint_v2.json")
     p_eval2.add_argument("--golden", help="Path to golden dataset JSON")
     p_eval2.set_defaults(func=cmd_evaluate_v2)
+
+    p_grid = sub.add_parser("grid-v21", help="V2.1 ablation grid: variants x datasets")
+    p_grid.add_argument("--mode", choices=["offline", "mixed"], default="offline")
+    p_grid.set_defaults(func=cmd_grid_v21)
+
+    p_rt = sub.add_parser("redteam", help="Paired mutation + metamorphic red-team suite")
+    p_rt.add_argument("--mode", choices=["deterministic", "semantic"], default="deterministic")
+    p_rt.set_defaults(func=cmd_redteam)
 
     p_adv = sub.add_parser("adversarial", help="Adversarial verification benchmark")
     p_adv.add_argument("--mode", choices=["deterministic", "semantic"], default="deterministic")

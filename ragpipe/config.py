@@ -21,7 +21,7 @@ class Settings:
 
     docs_dir: Path = PROJECT_ROOT / "data" / "docs"
     index_dir: Path = PROJECT_ROOT / "index"
-    golden_path: Path = PROJECT_ROOT / "data" / "golden_dataset.json"
+    golden_path: Path = PROJECT_ROOT / "data" / "original" / "golden_dataset.json"
     reports_dir: Path = PROJECT_ROOT / "reports"
 
     chunk_size: int = 900

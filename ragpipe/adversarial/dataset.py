@@ -16,9 +16,17 @@ CATEGORIES = [
     "modality",
     "multi_hop",
     "context_injection",
+    "paraphrase_equivalence",
+    "scope_ambiguity",
+    "citation_manipulation",
+    "causal_inference",
 ]
 
-ADVERSARIAL_PATH = settings.golden_path.parent / "adversarial_golden_dataset.json"
+DATA_ROOT = settings.golden_path.parent.parent
+ADVERSARIAL_PATH = DATA_ROOT / "adversarial" / "adversarial_golden_dataset.json"
+DEVELOPMENT_PATH = DATA_ROOT / "development" / "dev_fixtures.json"
+HELDOUT_PATH = DATA_ROOT / "heldout" / "heldout_fixtures.json"
+REGRESSION_PATH = DATA_ROOT / "regression" / "regression_cases.json"
 
 
 class AdversarialCase(BaseModel):
@@ -32,6 +40,9 @@ class AdversarialCase(BaseModel):
     expected_reason: str = ""
     expected_statuses: list[str] = Field(default_factory=list)
     probe_question: str = ""
+    scenario_family: str = ""
+    mutation_type: str = "original"
+    pair_id: str = ""
     provenance: str = "synthetic-author-reviewed"
 
     def expected_for(self, index: int) -> str:

@@ -1,0 +1,206 @@
+{
+  "mode": "deterministic",
+  "n_pairs": 22,
+  "passed": 22,
+  "pass_rate": 1.0,
+  "records": [
+    {
+      "scenario": 0,
+      "mutation": "negation_flip",
+      "relation": "contradicts",
+      "base_status": "UNCERTAIN",
+      "mutated_status": "CONTRADICTED",
+      "pass": true,
+      "claim": "Company A acquired Company B."
+    },
+    {
+      "scenario": 0,
+      "mutation": "modality_escalation",
+      "relation": "unsupported",
+      "base_status": "UNCERTAIN",
+      "mutated_status": "UNCERTAIN",
+      "pass": true,
+      "claim": "Company A will definitely not acquire Company B."
+    },
+    {
+      "scenario": 1,
+      "mutation": "negation_flip",
+      "relation": "contradicts",
+      "base_status": "UNCERTAIN",
+      "mutated_status": "CONTRADICTED",
+      "pass": true,
+      "claim": "Alice did not approved Bob's request."
+    },
+    {
+      "scenario": 1,
+      "mutation": "modality_escalation",
+      "relation": "unsupported",
+      "base_status": "UNCERTAIN",
+      "mutated_status": "UNCERTAIN",
+      "pass": true,
+      "claim": "Alice will definitely approve Bob's request."
+    },
+    {
+      "scenario": 2,
+      "mutation": "negation_flip",
+      "relation": "contradicts",
+      "base_status": "SUPPORTED",
+      "mutated_status": "CONTRADICTED",
+      "pass": true,
+      "claim": "The gateway did not stored the session cache 2 MB."
+    },
+    {
+      "scenario": 2,
+      "mutation": "number_manipulation",
+      "relation": "contradicts",
+      "base_status": "SUPPORTED",
+      "mutated_status": "CONTRADICTED",
+      "pass": true,
+      "claim": "The gateway stored the session cache 9 MB."
+    },
+    {
+      "scenario": 2,
+      "mutation": "unit_manipulation",
+      "relation": "contradicts",
+      "base_status": "SUPPORTED",
+      "mutated_status": "CONTRADICTED",
+      "pass": true,
+      "claim": "The gateway stored the session cache 2 GB."
+    },
+    {
+      "scenario": 2,
+      "mutation": "modality_escalation",
+      "relation": "unsupported",
+      "base_status": "SUPPORTED",
+      "mutated_status": "UNCERTAIN",
+      "pass": true,
+      "claim": "The gateway will definitely store the session cache 2 MB."
+    },
+    {
+      "scenario": 3,
+      "mutation": "negation_flip",
+      "relation": "contradicts",
+      "base_status": "SUPPORTED",
+      "mutated_status": "CONTRADICTED",
+      "pass": true,
+      "claim": "The scheduler did not maintained the health probes 10 seconds."
+    },
+    {
+      "scenario": 3,
+      "mutation": "number_manipulation",
+      "relation": "contradicts",
+      "base_status": "SUPPORTED",
+      "mutated_status": "CONTRADICTED",
+      "pass": true,
+      "claim": "The scheduler maintained the health probes 17 seconds."
+    },
+    {
+      "scenario": 3,
+      "mutation": "unit_manipulation",
+      "relation": "contradicts",
+      "base_status": "SUPPORTED",
+      "mutated_status": "CONTRADICTED",
+      "pass": true,
+      "claim": "The scheduler maintained the health probes 10 minutes."
+    },
+    {
+      "scenario": 3,
+      "mutation": "modality_escalation",
+      "relation": "unsupported",
+      "base_status": "SUPPORTED",
+      "mutated_status": "UNCERTAIN",
+      "pass": true,
+      "claim": "The scheduler will definitely maintain the health probes 10 seconds."
+    },
+    {
+      "scenario": 4,
+      "mutation": "negation_flip",
+      "relation": "contradicts",
+      "base_status": "SUPPORTED",
+      "mutated_status": "CONTRADICTED",
+      "pass": true,
+      "claim": "The platform did not shipped the audit export 90 days."
+    },
+    {
+      "scenario": 4,
+      "mutation": "number_manipulation",
+      "relation": "contradicts",
+      "base_status": "SUPPORTED",
+      "mutated_status": "CONTRADICTED",
+      "pass": true,
+      "claim": "The platform shipped the audit export 97 days."
+    },
+    {
+      "scenario": 4,
+      "mutation": "unit_manipulation",
+      "relation": "contradicts",
+      "base_status": "SUPPORTED",
+      "mutated_status": "CONTRADICTED",
+      "pass": true,
+      "claim": "The platform shipped the audit export 90 hours."
+    },
+    {
+      "scenario": 4,
+      "mutation": "modality_escalation",
+      "relation": "unsupported",
+      "base_status": "SUPPORTED",
+      "mutated_status": "NOT_SUPPORTED",
+      "pass": true,
+      "claim": "The platform will definitely ship the audit export 90 days."
+    },
+    {
+      "scenario": 5,
+      "mutation": "negation_flip",
+      "relation": "contradicts",
+      "base_status": "UNCERTAIN",
+      "mutated_status": "CONTRADICTED",
+      "pass": true,
+      "claim": "Vault did not stored application secrets."
+    },
+    {
+      "scenario": 5,
+      "mutation": "modality_escalation",
+      "relation": "unsupported",
+      "base_status": "UNCERTAIN",
+      "mutated_status": "UNCERTAIN",
+      "pass": true,
+      "claim": "Vault will definitely store application secrets."
+    },
+    {
+      "scenario": 6,
+      "mutation": "negation_flip",
+      "relation": "contradicts",
+      "base_status": "UNCERTAIN",
+      "mutated_status": "CONTRADICTED",
+      "pass": true,
+      "claim": "The migration may not cause brief downtime."
+    },
+    {
+      "scenario": 6,
+      "mutation": "modality_escalation",
+      "relation": "unsupported",
+      "base_status": "UNCERTAIN",
+      "mutated_status": "NOT_SUPPORTED",
+      "pass": true,
+      "claim": "The migration will definitely cause brief downtime."
+    },
+    {
+      "scenario": 7,
+      "mutation": "negation_flip",
+      "relation": "contradicts",
+      "base_status": "UNCERTAIN",
+      "mutated_status": "CONTRADICTED",
+      "pass": true,
+      "claim": "Team Alpha did not reviewed Team Beta's code."
+    },
+    {
+      "scenario": 7,
+      "mutation": "modality_escalation",
+      "relation": "unsupported",
+      "base_status": "UNCERTAIN",
+      "mutated_status": "UNCERTAIN",
+      "pass": true,
+      "claim": "Team Alpha will definitely review Team Beta's code."
+    }
+  ]
+}
